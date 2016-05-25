@@ -1,0 +1,306 @@
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/css/bootstrap.min.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/css/bootstrap-responsive.min.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/css/style-metro.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/css/default.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/css/uniform.default.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/css/font-awesome.min.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/css/jquery.gritter.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/css/daterangepicker.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/css/style-responsive.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/css/style.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/css/jqvmap.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery-migrate-1.2.1.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/css/jquery.easy-pie-chart.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery-1.10.1.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/css/fullcalendar.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery-ui-1.10.1.custom.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery.slimscroll.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/bootstrap.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery.blockui.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery.cookie.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery.uniform.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery.vmap.russia.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery.vmap.world.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery.vmap.usa.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery.vmap.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery.vmap.europe.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery.vmap.germany.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery.vmap.sampledata.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/date.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery.pulsate.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery.flot.resize.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery.flot.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery.gritter.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/fullcalendar.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/daterangepicker.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery.sparkline.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/jquery.easy-pie-chart.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/index.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/image/logo.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/js/app.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/image/menu-toggler.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/image/avatar2.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/image/avatar1_small.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/image/avatar3.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/image/loading.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/image/avatar1.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:24+08:00 ] 127.0.0.1 /media/image/avatar.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:45:25+08:00 ] 127.0.0.1 /media/image/favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:Media
+
+[ 2016-04-19T23:46:13+08:00 ] 127.0.0.1 /assets/img/avatar1.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:Assets
+
+[ 2016-04-19T23:46:19+08:00 ] 127.0.0.1 /assets/img/avatar1.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:Assets
+
+[ 2016-04-19T23:49:13+08:00 ] 127.0.0.1 /charts.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Charts
+

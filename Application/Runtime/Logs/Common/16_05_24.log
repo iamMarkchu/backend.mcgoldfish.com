@@ -1,0 +1,6 @@
+[ 2016-05-24T23:53:01+08:00 ] 192.168.56.1 /Public/own-js/Index.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000202s ]
+ERR: 无法加载模块:Public
+

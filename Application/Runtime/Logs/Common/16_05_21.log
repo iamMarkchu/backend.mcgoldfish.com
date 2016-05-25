@@ -1,0 +1,30 @@
+[ 2016-05-21T08:38:09+08:00 ] 192.168.56.1 /Public/own-js/Index.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000164s ]
+ERR: 无法加载模块:Public
+
+[ 2016-05-21T08:44:57+08:00 ] 192.168.56.1 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000048s ]
+ERR: 无法加载模块:Favicon
+
+[ 2016-05-21T11:52:41+08:00 ] 192.168.56.1 /Customer
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000058s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000151s ]
+ERR: 无法加载模块:Customer
+
+[ 2016-05-21T11:57:36+08:00 ] 192.168.56.1 /Customer
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000050s ]
+ERR: 无法加载模块:Customer
+
+[ 2016-05-21T12:00:11+08:00 ] 192.168.56.1 /Customer
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000060s ]
+ERR: 无法加载模块:Customer
+

@@ -1,0 +1,18 @@
+[ 2016-05-23T20:17:29+08:00 ] 192.168.56.1 /Public/own-js/Index.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001222s ]
+ERR: 无法加载模块:Public
+
+[ 2016-05-23T20:34:33+08:00 ] 192.168.56.1 /Public/own-js/Index.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000156s ]
+ERR: 无法加载模块:Public
+
+[ 2016-05-23T20:34:55+08:00 ] 192.168.56.1 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000006s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000048s ]
+ERR: 无法加载模块:Favicon
+

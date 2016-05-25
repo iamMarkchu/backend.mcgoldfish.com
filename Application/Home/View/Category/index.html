@@ -1,0 +1,105 @@
+<!-- BEGIN SEARCHBAR-->
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-plus"></i>搜索栏
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+            </div>
+            <div class="portlet-body form" >
+                <div class="row-fluid">
+                    <!--BEGIN SEARCH-->
+                    <div class="span3">
+                        <div class="controls">
+                            <input type="text" id="search_companyname" name="search_companyname" class="m-wrap medium" placeholder="请输入集装箱所属公司名称" />
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <div class="controls">
+                            <input type="text" id="search_containername" name="search_containername" class="m-wrap medium" placeholder="请输入集装箱名称" />
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <div class="controls">
+                            <input type="text" id="search_yard" name="search_yard" class="m-wrap medium" placeholder="请输入堆场号" />
+                            <input type="text" id="search_region" name="search_region" class="m-wrap medium" placeholder="请输入区域号" />
+                        </div> 
+                    </div>
+               <div class="span3" style="margin-top:10px;margin-left:0 !important;">
+                        <div class="controls">
+                              <select id="selectstatus" class="m-wrap medium" placeholder="状态选择">
+                                  <option value="-2" selected="selected"></option>
+                                  <option value="0">未进场</option>
+                                  <option value="1">在场中</option>
+                                  <option value="-1">已出场</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="span2" style="margin-top:10px;">
+                        <div class="btn-group">
+                            <button class="btn blue" id="searchbutton"><i class="icon-plus"></i>搜索</button>
+                        </div>
+                    </div>
+                    <!--END SEARCH-->
+                <div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END SEARCHBAR-->
+<!-- BEGIN CONTENT-->
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-plus"></i>链接列表
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row-fluid">
+                    <div class="span12">
+                         <div class="btn-group">
+                            <button class="btn green" id="addbutton"><i class="icon-plus"></i>新增链接</button>
+                         </div>
+                    </div>
+                </div>
+                <table class="display" id="tblist">
+                    <thead>
+                        <tr>
+                            <th>
+                                id
+                            </th>
+                            <th>
+                                displayname
+                            </th>
+                            <th>
+                                parentcategoryid
+                            </th>
+                            <th>
+                                addtime
+                            </th>
+                            <th>
+                                lastchangetime
+                            </th>
+                            <th>
+                                displayorder
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END CONTENT-->

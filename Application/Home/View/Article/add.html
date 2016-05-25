@@ -1,0 +1,95 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-plus"></i>新增文章
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="tab-pane">
+                            <!-- BEGIN FORM-->
+                            <form action="{:U('/Home/Article/insert')}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                                <div class="control-group">
+                                    <label class="control-label">文章标题</label>
+                                    <div class="controls">
+                                        <input type="text" placeholder="文章标题" class="m-wrap large"  name="title" />
+                                        <span class="help-inline">不能为空</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">文章封面</label>
+                                    <div class="controls">
+                                        <input type="file" name="imgFile" />
+                                        <span class="help-inline"></span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">文章来源</label>
+                                    <div class="controls">
+                                        <select name="articlesource">
+                                            <option value="原创">原创</option>
+                                            <option value="转载">转载</option>
+                                        </select>
+                                        <span class="help-inline"></span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">文章内容</label>
+                                    <div class="controls">
+                                            <textarea id="articleContent" name="content" style="width:90%;height:400px;"></textarea>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">维护等级</label>
+                                    <div class="controls">
+                                        <input type="text" placeholder="维护等级" class="m-wrap small" id="maintainorder" name="maintainorder" />
+                                        <span class="help-inline">按什么顺序排序</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                        <label class="control-label">网页H1</label>
+                                    <div class="controls">
+                                        <input type="text" placeholder="网页H1" class="m-wrap medium" id="manager" name="pageh1" />
+                                        <span class="help-inline">与seo有关的网页h1</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                        <label class="control-label">网页title</label>
+                                    <div class="controls">
+                                        <input type="text" placeholder="pagetitle" class="m-wrap medium" id="manager" name="pagetitle" />
+                                        <span class="help-inline">与seo有关的keyword</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                        <label class="control-label">网页keyword</label>
+                                    <div class="controls">
+                                        <input type="text" placeholder="pagekeyword" class="m-wrap medium" name="pagekeyword" />
+                                        <span class="help-inline">与seo有关的keyword</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                        <label class="control-label">网页description</label>
+                                    <div class="controls">
+                                        <input type="text" placeholder="pagedescription" class="m-wrap medium" name="pagedescription" />
+                                        <span class="help-inline">与seo有关的keyword</span>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn blue"><i class="icon-ok"></i>保存</button>
+                                    <a href="{:U('/Home/Article/index')}" class="btn">取消</a>
+                                </div>
+                            </form>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
