@@ -2,13 +2,10 @@
 /**
  * 批量导入类别,并生成对应url
  */
-function dump($data){
-	echo "<pre>";
-	print_r($data);
-}
 include_once(dirname(dirname(__FILE__))."/etc/const.php");
 include_once(INCLUDE_ROOT."lib/Class.MyException.php");
 include_once(INCLUDE_ROOT."lib/Class.Mysql.php");
+include_once(INCLUDE_ROOT."func/function.php");
 define("MARK_DEBUG", false);
 //定义类别数组
 echo "----------开始----------".date("Y-m-d H:i:s")."----------";

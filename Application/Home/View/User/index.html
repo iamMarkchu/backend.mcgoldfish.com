@@ -1,1 +1,120 @@
-i am user
+<!-- BEGIN SEARCHBAR-->
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-plus"></i>搜索栏
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+            </div>
+            <div class="portlet-body form" >
+                <div class="row-fluid">
+                    <!--BEGIN SEARCH-->
+                    <input type="hidden" id="noAjax" value="{$noAjax}"/>
+                    <div class="span3">
+                        <div class="controls">
+                            <input type="text" id="search_id_or_title" name="search_id_or_title" class="m-wrap medium" placeholder="请输入文章id或者title" />
+                        </div>
+                    </div>
+                    <div class="span2">
+                        <div class="controls">
+                              <select id="selectarticlesource" class="m-wrap small" placeholder="文章来源">
+                                  <option value="-1">文章来源</option>
+                                  <option value="原创">原创</option>
+                                  <option value="转载">转载</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="span2">
+                        <div class="controls">
+                              <select id="selectstatus" class="m-wrap small" placeholder="文章状态">
+                                  <option value="-1">文章状态</option>
+                                  <option value="active">active</option>
+                                  <option value="deleted">deleted</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="span2">
+                        <div class="controls">
+                              <select id="selectorderby" class="m-wrap small" placeholder="文章排序">
+                                  <option value="-1">文章排序</option>
+                                  <option value="id">by id asc</option>
+                                  <option value="id">by id desc</option>
+                                  <option value="maintainorder asc">by maintainorder asc</option>
+                                  <option value="maintainorder desc">by maintainorder desc</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="span2">
+                        <div class="btn-group">
+                            <button class="btn blue" id="searchbutton"><i class="icon-plus"></i>搜索</button>
+                        </div>
+                    </div>
+                    <!--END SEARCH-->
+                <div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END SEARCHBAR-->
+<!-- BEGIN CONTENT-->
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-plus"></i>文章列表
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row-fluid">
+                    <div class="span12">
+                         <div class="btn-group">
+                            <button class="btn green" id="add"><i class="icon-plus"></i>新增用户</button>
+                         </div>
+                    </div>
+                </div>
+                <table class="display" id="tbList">
+                    <thead>
+                        <tr>
+                            <th>
+                                id
+                            </th>
+                            <th>
+                                account
+                            </th>
+                            <th>
+                                nickname
+                            </th>
+                            <th>
+                                last_login_time
+                            </th>
+                            <th>
+                                last_login_ip
+                            </th>
+                             <th>
+                                login_count
+                            </th>
+                            <th>
+                                email
+                            </th>
+                            <th>
+                                remark
+                            </th>
+                            <th>
+                                status
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END CONTENT-->

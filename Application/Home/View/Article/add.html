@@ -53,6 +53,21 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
+                                    <label class="control-label">分类选择</label>
+                                    <div class="controls">
+                                        <select data-placeholder="分类选择" class="chosen span6 chzn-done" tabindex="-1" id="selOY2" name="categoryid" style="display: none;">
+                                            <option></option>
+                                            <volist name="AllcateInfo" id="vo">
+                                                <optgroup label="{$vo.displayname}">
+                                                    <volist name="vo.child" id="vovo">
+                                                        <option value='{$vovo.id}' >{$vovo.displayname}</option>
+                                                    </volist>
+                                                </optgroup>    
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
                                         <label class="control-label">网页H1</label>
                                     <div class="controls">
                                         <input type="text" placeholder="网页H1" class="m-wrap medium" id="manager" name="pageh1" />

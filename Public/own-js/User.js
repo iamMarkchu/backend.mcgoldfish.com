@@ -1,11 +1,11 @@
 (function () {
-    var ArticleManager = {
+    var UserManager = {
         //初始化
         init: function () {
             var that = this;
-            that.currentTable = kxxBase.kxxDT('#tbartilceList', {
+            that.currentTable = kxxBase.kxxDT('#tbList', {
                 "ajax": {
-                    "url": '/Home/Article/QueryData/',
+                    "url": '/Home/User/QueryData/',
                     "type": 'POST'
                 },
                 "columns": [
@@ -15,18 +15,18 @@
                             //return '<a href="/Home/Article/edit/id/'+data+'" class="edit" articleid="' + data + '">编辑</a><a href="/Home/Article/delete/id/'+data+'" class="delete" articleid="' + data + '">删除</a>'; 
                         }
                     },
-                    { "data": "title" },
-                    { "data": "status" },
-                    { "data": "pageh1" },
-                    { "data": "addtime",
+                    { "data": "account" },
+                    { "data": "nickname" },
+                    { "data": "last_login_time" },
+                    { "data": "last_login_ip",
                      "render": function(data, type,row){
                         return data;
                      }
                     },
-                    { "data": "lastupdatetime" },
-                    { "data": "articlesource"},
-                    { "data": "maintainorder" },
-                    { "data": "addeditor" }
+                    { "data": "login_count" },
+                    { "data": "email"},
+                    { "data": "remark" },
+                    { "data": "status" }
                 ]
             });
             that.bindEvent();
@@ -35,8 +35,8 @@
         bindEvent: function () {
             var that = this;    
             //绑定新增文章点击事件
-            $('#addArticle').click(function(e){
-                window.location.href="/Home/Article/add/";
+            $('#add').click(function(e){
+                window.location.href="/Home/User/add/";
             });
             $('#selOY2').select2();
             //绑定搜索按钮事件
@@ -73,6 +73,6 @@
         }
     };
     $(function () {
-        ArticleManager.init();
+        UserManager.init();
     });
 })(window);

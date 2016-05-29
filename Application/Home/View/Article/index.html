@@ -13,33 +13,42 @@
             <div class="portlet-body form" >
                 <div class="row-fluid">
                     <!--BEGIN SEARCH-->
+                    <input type="hidden" id="noAjax" value="{$noAjax}"/>
                     <div class="span3">
                         <div class="controls">
-                            <input type="text" id="search_companyname" name="search_companyname" class="m-wrap medium" placeholder="请输入集装箱所属公司名称" />
+                            <input type="text" id="search_id_or_title" name="search_id_or_title" class="m-wrap medium" placeholder="请输入文章id或者title" />
                         </div>
                     </div>
-                    <div class="span3">
+                    <div class="span2">
                         <div class="controls">
-                            <input type="text" id="search_containername" name="search_containername" class="m-wrap medium" placeholder="请输入集装箱名称" />
-                        </div>
-                    </div>
-                    <div class="span6">
-                        <div class="controls">
-                            <input type="text" id="search_yard" name="search_yard" class="m-wrap medium" placeholder="请输入堆场号" />
-                            <input type="text" id="search_region" name="search_region" class="m-wrap medium" placeholder="请输入区域号" />
-                        </div> 
-                    </div>
-               <div class="span3" style="margin-top:10px;margin-left:0 !important;">
-                        <div class="controls">
-                              <select id="selectstatus" class="m-wrap medium" placeholder="状态选择">
-                                  <option value="-2" selected="selected"></option>
-                                  <option value="0">未进场</option>
-                                  <option value="1">在场中</option>
-                                  <option value="-1">已出场</option>
+                              <select id="selectarticlesource" class="m-wrap small" placeholder="文章来源">
+                                  <option value="-1">文章来源</option>
+                                  <option value="原创">原创</option>
+                                  <option value="转载">转载</option>
                               </select>
                         </div>
                     </div>
-                    <div class="span2" style="margin-top:10px;">
+                    <div class="span2">
+                        <div class="controls">
+                              <select id="selectstatus" class="m-wrap small" placeholder="文章状态">
+                                  <option value="-1">文章状态</option>
+                                  <option value="active">active</option>
+                                  <option value="deleted">deleted</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="span2">
+                        <div class="controls">
+                              <select id="selectorderby" class="m-wrap small" placeholder="文章排序">
+                                  <option value="-1">文章排序</option>
+                                  <option value="id">by id asc</option>
+                                  <option value="id">by id desc</option>
+                                  <option value="maintainorder asc">by maintainorder asc</option>
+                                  <option value="maintainorder desc">by maintainorder desc</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="span2">
                         <div class="btn-group">
                             <button class="btn blue" id="searchbutton"><i class="icon-plus"></i>搜索</button>
                         </div>
@@ -100,9 +109,6 @@
                             </th>
                             <th>
                                 addeditor
-                            </th>
-                            <th>
-                                操作
                             </th>
                         </tr>
                     </thead>
