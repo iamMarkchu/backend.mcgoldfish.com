@@ -11,7 +11,7 @@
                 "columns": [
                     { "data": "id",
                       "render": function (data, type, row) {
-                            return '<div class="btn-group"><a class="btn purple" href="#" data-toggle="dropdown">'+data+'</a><ul class="dropdown-menu"><li><a href="/Home/Article/edit/id/'+data+'"><i class="icon-trash"></i> Edit</a></li><li><a href="/Home/Article/delete/id/'+data+'"><i class="icon-remove"></i> Delete</a></li></ul></div>';
+                            return '<div class="btn-group"><a class="btn purple" href="#" data-toggle="dropdown">'+data+'</a><ul class="dropdown-menu"><li><a href="/Home/User/edit/id/'+data+'"><i class="icon-trash"></i> Edit</a></li><li><a href="/Home/User/delete/id/'+data+'"><i class="icon-remove"></i> Delete</a></li></ul></div>';
                             //return '<a href="/Home/Article/edit/id/'+data+'" class="edit" articleid="' + data + '">编辑</a><a href="/Home/Article/delete/id/'+data+'" class="delete" articleid="' + data + '">删除</a>'; 
                         }
                     },
@@ -38,26 +38,17 @@
             $('#add').click(function(e){
                 window.location.href="/Home/User/add/";
             });
-            $('#selOY2').select2();
+            $('#selectrole').select2();
             //绑定搜索按钮事件
             $('#searchbutton').click(function (e) {
-                var titleOrId,selectarticlesource,selectstatus,selectorderby;
+                var selectrole;
                 //如果select2中的值不为空,获取select2中的data中
-                if($('#search_id_or_title').val() != ''){
-                    titleOrId = $('#search_id_or_title').val();
-                }
-                if ($('#selectarticlesource').val() != '-1') {
-                    selectarticlesource = $('#selectarticlesource').val();
-                }
-                if ($('#selectstatus').val() != '-1') {
-                    selectstatus = $('#selectstatus').val();
-                }
-                if ($('#selectorderby').val() != '-1') {
-                    selectorderby = $('#selectorderby').val();
+                if ($('#selectrole').val() != '-1') {
+                    selectrole = $('#selectrole').val();
                 }
                 //ajax 前端与后台沟通参数
-                var url = "/Home/Article/btn_Search";
-                var sendData = { titleOrId: titleOrId, selectarticlesource: selectarticlesource, selectstatus: selectstatus, selectorderby: selectorderby };
+                var url = "/Home/User/btn_Search";
+                var sendData = { selectrole: selectrole};
                 $.ajax({
                     url: url,
                     data: sendData,

@@ -3,6 +3,8 @@ namespace Home\Controller;
 use Think\Controller;
 class ArticleController extends CommonController {
 	public function _before_index(){
+        $searchArray = session('articleSearch');
+        $this->assign('searchArray',$searchArray);
         $this->assign('noAjax',1);
         $this->assign('isSelect2',1);
         //定义需要引入的page level js css
@@ -17,7 +19,6 @@ class ArticleController extends CommonController {
     public function QueryData(){
     	$start = $_POST['start'];
     	$length = $_POST['length'];
-        session('articleSearch','');
     	$searchArray = session('articleSearch');
         if(isset($searchArray['where'])) $map = $searchArray['where'];
         if(isset($searchArray['order'])) $order = $searchArray['order'];

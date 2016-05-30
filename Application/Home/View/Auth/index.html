@@ -19,14 +19,33 @@
                             <input type="text" id="search_id_or_title" name="search_id_or_title" class="m-wrap medium" placeholder="请输入文章id或者title" />
                         </div>
                     </div>
-                    <div class="span6">
+                    <div class="span2">
                         <div class="controls">
-                            <select data-placeholder="组别选择" class="chosen span3 chzn-done" tabindex="-1" id="selectrole" name="role_id" placeholder="组别选择" style="display: none;">
-                                <option value="-1"></option>
-                                <volist name="allRoleInfo" id="vo">
-                                    <option value='{$vo.id}' <eq name="vo.id" value="$role_id">selected="true"</eq>>{$vo.name}</option>
-                                </volist>
-                            </select>
+                              <select id="selectarticlesource" class="m-wrap small" placeholder="文章来源">
+                                  <option value="-1">文章来源</option>
+                                  <option value="原创">原创</option>
+                                  <option value="转载">转载</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="span2">
+                        <div class="controls">
+                              <select id="selectstatus" class="m-wrap small" placeholder="文章状态">
+                                  <option value="-1">文章状态</option>
+                                  <option value="active">active</option>
+                                  <option value="deleted">deleted</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="span2">
+                        <div class="controls">
+                              <select id="selectorderby" class="m-wrap small" placeholder="文章排序">
+                                  <option value="-1">文章排序</option>
+                                  <option value="id">by id asc</option>
+                                  <option value="id">by id desc</option>
+                                  <option value="maintainorder asc">by maintainorder asc</option>
+                                  <option value="maintainorder desc">by maintainorder desc</option>
+                              </select>
                         </div>
                     </div>
                     <div class="span2">
@@ -47,7 +66,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="icon-plus"></i>文章列表
+                    <i class="icon-plus"></i>权限列表
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse"></a>
@@ -57,7 +76,7 @@
                 <div class="row-fluid">
                     <div class="span12">
                          <div class="btn-group">
-                            <button class="btn green" id="add"><i class="icon-plus"></i>新增用户</button>
+                            <button class="btn green" id="add"><i class="icon-plus"></i>新增组别</button>
                          </div>
                     </div>
                 </div>
@@ -68,28 +87,22 @@
                                 id
                             </th>
                             <th>
-                                account
-                            </th>
-                            <th>
-                                nickname
-                            </th>
-                            <th>
-                                last_login_time
-                            </th>
-                            <th>
-                                last_login_ip
-                            </th>
-                             <th>
-                                login_count
-                            </th>
-                            <th>
-                                email
-                            </th>
-                            <th>
-                                remark
+                                name
                             </th>
                             <th>
                                 status
+                            </th>
+                            <th>
+                                pid
+                            </th>
+                            <th>
+                                addtime
+                            </th>
+                             <th>
+                                lastupdatetime
+                            </th>
+                            <th>
+                                remark
                             </th>
                         </tr>
                     </thead>

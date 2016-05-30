@@ -14,88 +14,40 @@
                     <div class="span12">
                         <div class="tab-pane">
                             <!-- BEGIN FORM-->
-                            <form action="{:U('/Home/Article/update')}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                            <form action="{:U('/Home/User/update')}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                                 <div class="hidden">
                                     <input type="hidden" value="{$result.id}" name="id" />
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">文章标题</label>
+                                    <label class="control-label">用户账号</label>
                                     <div class="controls">
-                                        <input type="text" placeholder="文章标题" class="m-wrap large"  name="title" value="{$result.title}" />
+                                        <input type="text" placeholder="用户账号" class="m-wrap large"  name="account" value="{$result.account}"/>
                                         <span class="help-inline">不能为空</span>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">文章封面</label>
+                                    <label class="control-label">用户昵称</label>
                                     <div class="controls">
-                                        <input type="file" name="imgFile" />
-                                        <span class="help-inline"></span>
+                                        <input type="text" placeholder="用户昵称" class="m-wrap large"  name="nickname" value="{$result.nickname}"/>
+                                        <span class="help-inline">不能为空</span>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">文章来源</label>
+                                    <label class="control-label">用户邮箱</label>
                                     <div class="controls">
-                                        <select name="articlesource">
-                                            <option value="原创" <eq name="result.articlesource" value="原创">selected="true"</eq>>原创</option>
-                                            <option value="转载" <eq name="result.articlesource" value="转载">selected="true"</eq>>转载</option>
-                                        </select>
-                                        <span class="help-inline"></span>
+                                        <input type="text" placeholder="用户邮箱" class="m-wrap large"  name="email" value="{$result.email}"/>
+                                        <span class="help-inline">不能为空</span>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">文章内容</label>
+                                    <label class="control-label">指定用户组别</label>
                                     <div class="controls">
-                                            <textarea id="articleContent" name="content" style="width:90%;height:400px;">{$result.content}</textarea>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">维护等级</label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="维护等级" class="m-wrap small" id="maintainorder" name="maintainorder"  value="{$result.maintainorder}"/>
-                                        <span class="help-inline">按什么顺序排序</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">分类选择</label>
-                                    <div class="controls">
-                                        <select data-placeholder="分类选择" class="chosen span6 chzn-done" tabindex="-1" id="selOY2" name="categoryid" style="display: none;">
+                                        <select data-placeholder="组别选择" class="chosen span3 chzn-done" tabindex="-1" id="selectrole" name="role_id" style="display: none;">
                                             <option></option>
-                                            <volist name="AllcateInfo" id="vo">
-                                                <optgroup label="{$vo.displayname}">
-                                                    <volist name="vo.child" id="vovo">
-                                                        <option value='{$vovo.id}' <eq name="vovo.id" value="$categoryid">selected="true"</eq> >{$vovo.displayname}</option>
-                                                    </volist>
-                                                </optgroup>    
+                                            <volist name="allRoleInfo" id="vo">
+                                                <option value='{$vo.id}' <eq name="vo.id" value="$roleInfo.role_id">selected="true"</eq>>{$vo.name}</option>
                                             </volist>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                        <label class="control-label">网页H1</label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="网页H1" class="m-wrap medium" id="manager" name="pageh1" value="{$result.pageh1}"/>
-                                        <span class="help-inline">与seo有关的网页h1</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                        <label class="control-label">网页title</label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="pagetitle" class="m-wrap medium" id="manager" name="pagetitle" value="{$pageMetaInfo.pagetitle}"/>
-                                        <span class="help-inline">与seo有关的keyword</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                        <label class="control-label">网页keyword</label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="pagekeyword" class="m-wrap medium" name="pagekeyword" value="{$pageMetaInfo.pagekeyword}"/>
-                                        <span class="help-inline">与seo有关的keyword</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                        <label class="control-label">网页description</label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="pagedescription" class="m-wrap medium" name="pagedescription" value="{$pageMetaInfo.pagekeyword}"/>
-                                        <span class="help-inline">与seo有关的keyword</span>
                                     </div>
                                 </div>
                                 <div class="form-actions">

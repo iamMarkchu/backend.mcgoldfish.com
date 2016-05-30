@@ -1,0 +1,53 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-plus"></i>新增组别
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="tab-pane">
+                            <!-- BEGIN FORM-->
+                            <form action="{:U('/Home/Auth/insert')}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                                <div class="control-group">
+                                    <label class="control-label">组别名称</label>
+                                    <div class="controls">
+                                        <input type="text" placeholder="组别名称" class="m-wrap large"  name="name" />
+                                        <span class="help-inline">不能为空</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">组别状态</label>
+                                    <div class="controls">
+                                        <select name="status">
+                                            <option value="active">启用</option>
+                                            <option value="inactive">禁用</option>
+                                        </select>
+                                        <span class="help-inline"></span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">备注</label>
+                                    <div class="controls">
+                                        <textarea name="remark"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn blue"><i class="icon-ok"></i>保存</button>
+                                    <a href="{:U('/Home/Auth/index')}" class="btn">取消</a>
+                                </div>
+                            </form>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

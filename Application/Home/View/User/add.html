@@ -36,9 +36,20 @@
                                         <span class="help-inline">不能为空</span>
                                     </div>
                                 </div>
+                                <div class="control-group">
+                                    <label class="control-label">指定用户组别</label>
+                                    <div class="controls">
+                                        <select data-placeholder="组别选择" class="chosen span3 chzn-done" tabindex="-1" id="selectrole" name="role_id" style="display: none;">
+                                            <option></option>
+                                            <volist name="allRoleInfo" id="vo">
+                                                <option value='{$vo.id}' >{$vo.name}</option>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-actions">
                                     <button type="submit" class="btn blue"><i class="icon-ok"></i>保存</button>
-                                    <a href="{:U('/Home/Article/index')}" class="btn">取消</a>
+                                    <a href="{:U('/Home/User/index')}" class="btn">取消</a>
                                 </div>
                             </form>
                             <!-- END FORM-->
