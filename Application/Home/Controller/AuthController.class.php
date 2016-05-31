@@ -47,4 +47,8 @@ class AuthController extends CommonController {
         $role->save();
         $this->success("编辑成功","/Home/Auth/index");
     }
+    public function giveAuth(){
+        //获得所有节点的名称和node_id
+        
+    }
 }

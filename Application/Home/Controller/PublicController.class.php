@@ -44,7 +44,7 @@ class PublicController extends Controller {
 		$r = new \Org\Util\Rbac();
         $authInfo = $r->authenticate($map);
         //使用用户名、密码和状态的方式进行认证
-        if(false === $authInfo) {
+        if(empty($authInfo)) {
             $this->error('帐号不存在或已禁用！');
         }else {
             if($authInfo['password'] != md5($_POST['password'])) {
@@ -103,5 +103,18 @@ class PublicController extends Controller {
 		}else{
 			$this->error('资料修改失败!');
 		}
+	}
+	public function register(){
+		$user = D('user');
+		$user->create();
+		$user->account = trim($_POST['account']);
+		$user->addtime = date("Y-m-d H:i:s");
+		if($_POST['password'] == $_POST['rpassword']){
+			$user->password = md5($_POST['password']);
+		}
+		$user->status = 'inactive';
+		$user->remark = '新用户';
+		$user->add();
+		$this->success('注册成功!等待管理员验证');
 	}
 }

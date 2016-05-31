@@ -132,7 +132,7 @@
 		</form>
 		<!-- END FORGOT PASSWORD FORM -->
 		<!-- BEGIN REGISTRATION FORM -->
-		<form class="form-vertical register-form" action="">
+		<form class="form-vertical register-form" action="{:U('Public/register')}">
 			<h3 class="">注册</h3>
 			<p>填写你的账号详情:</p>
 			<div class="control-group">
@@ -158,7 +158,7 @@
 				<div class="controls">
 					<div class="input-icon left">
 						<i class="icon-lock"></i>
-						<input class="m-wrap placeholder-no-fix" type="password" id="register_password" placeholder="Password" name="password"/>
+						<input class="m-wrap placeholder-no-fix" type="password" id="register_password" placeholder="密码" name="password"/>
 					</div>
 				</div>
 			</div>
@@ -167,17 +167,17 @@
 				<div class="controls">
 					<div class="input-icon left">
 						<i class="icon-ok"></i>
-						<input class="m-wrap placeholder-no-fix" type="password" placeholder="Re-type Your Password" name="rpassword"/>
+						<input class="m-wrap placeholder-no-fix" type="password" placeholder="再次输入密码" name="rpassword"/>
 					</div>
 				</div>
 			</div>
 			<div class="control-group">
 				<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-				<label class="control-label visible-ie8 visible-ie9">Email</label>
+				<label class="control-label visible-ie8 visible-ie9">电子邮件</label>
 				<div class="controls">
 					<div class="input-icon left">
 						<i class="icon-envelope"></i>
-						<input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email"/>
+						<input class="m-wrap placeholder-no-fix" type="text" placeholder="电子邮件" name="email"/>
 					</div>
 				</div>
 			</div>
