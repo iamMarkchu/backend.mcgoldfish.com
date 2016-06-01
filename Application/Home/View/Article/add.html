@@ -78,7 +78,7 @@
                                         <label class="control-label">网页title</label>
                                     <div class="controls">
                                         <input type="text" placeholder="pagetitle" class="m-wrap medium" id="manager" name="pagetitle" />
-                                        <span class="help-inline">与seo有关的keyword</span>
+                                        <span class="help-inline">与seo有关的title</span>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -92,12 +92,12 @@
                                         <label class="control-label">网页description</label>
                                     <div class="controls">
                                         <input type="text" placeholder="pagedescription" class="m-wrap medium" name="pagedescription" />
-                                        <span class="help-inline">与seo有关的keyword</span>
+                                        <span class="help-inline">与seo有关的description</span>
                                     </div>
                                 </div>
                                 <div class="form-actions">
-                                    <button type="submit" class="btn blue"><i class="icon-ok"></i>保存</button>
-                                    <a href="{:U('/Home/Article/index')}" class="btn">取消</a>
+                                    <button type="submit" class="btn blue"><i class="icon-ok"></i>{$Think.config.SAVE_BUTTON}</button>
+                                    <a href="{:U('/Home/Article/index')}" class="btn">{$Think.config.CANCEL_BUTTON}</a>
                                 </div>
                             </form>
                             <!-- END FORM-->

@@ -29,6 +29,11 @@ return array(
     'RBAC_NODE_TABLE'=>'node',
     'URL_MODEL' => '2',
     'URL_HTML_SUFFIX'       =>  'html',
-
+    /*图片路径*/
     'IMG_SAVE_PATH' => './uploads/fengmian',
+    /*按钮文字*/
+    'SAVE_BUTTON'  => '&nbsp保存',
+    'CANCEL_BUTTON'  => '&nbsp取消',
+    /*提示文字*/
+    'NEW_ARTICLE_MESSAGE' =>'新文章待审核!'
 );

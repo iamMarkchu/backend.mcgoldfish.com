@@ -48,7 +48,15 @@ class AuthController extends CommonController {
         $this->success("编辑成功","/Home/Auth/index");
     }
     public function giveAuth(){
-        //获得所有节点的名称和node_id
-        
+        $role_id = $_REQUEST['role_id'];
+        $node = D('node');
+        $nodeInfo = $node->getAllNode();
+        $role = D('role');
+        $roleInfo = $role->find($role_id);
+        $this->assign('roleInfo',$roleInfo);
+        $this->assign('nodeInfo',$nodeInfo);
+        $this->assign('isMutiSelect',1);
+        $this->assign('isSelect2',1);
+        $this->display();
     }
 }

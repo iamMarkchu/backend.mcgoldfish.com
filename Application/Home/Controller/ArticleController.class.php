@@ -35,8 +35,8 @@ class ArticleController extends CommonController {
         $article = D('article');
         $article->create();
         $article->content = addslashes($_POST['content']);
-        $article->addeditor = "admin";
-        $article->tip = "新文章";
+        $article->addeditor = $_SESSION['loginUserName'];
+        $article->tip = C('NEW_ARTICLE_MESSAGE');
         $article->addtime = date("Y-m-d H:i:s");
         if(!empty($_FILES['imgFile']['name'])){
             $imgFile = $this->upload();
