@@ -9,24 +9,45 @@
                     "type": 'POST'
                 },
                 "columns": [
-                    { "data": "id",
-                      "render": function (data, type, row) {
-                            return '<div class="btn-group"><a class="btn purple" href="#" data-toggle="dropdown">'+data+'</a><ul class="dropdown-menu"><li><a href="/Home/Article/edit/id/'+data+'"><i class="icon-trash"></i> Edit</a></li><li><a href="/Home/Article/delete/id/'+data+'"><i class="icon-remove"></i> Delete</a></li></ul></div>';
-                            //return '<a href="/Home/Article/edit/id/'+data+'" class="edit" articleid="' + data + '">编辑</a><a href="/Home/Article/delete/id/'+data+'" class="delete" articleid="' + data + '">删除</a>'; 
+                    { "data": "id"},
+                    { "data": "title",
+                        "render": function(data,type,row){
+                            return '<a href="http://mcgoldfish.com'+row.requestpath+'" title="查看文章">'+data+'</a>'  
                         }
                     },
-                    { "data": "title" },
-                    { "data": "status" },
-                    { "data": "pageh1" },
-                    { "data": "addtime",
-                     "render": function(data, type,row){
-                        return data;
-                     }
+                    { "data": "status",
+                        "render": function(data,type,row){
+                            if(data == 'active'){
+                                return '<span style="color:green;">'+data+'</span>';
+                            }else if(data == 'republish'){
+                                return '<span style="color:red;">'+data+'</span>';
+                            }else{
+                                return data;
+                            }
+                        }
                     },
-                    { "data": "lastupdatetime" },
+                    { "data": "displayname",
+                        "render": function(data,type,row){
+                            if(data == null){
+                                return '<span style="color:red;">无类别</span>';
+                            }else{
+                                return data;
+                            }
+                        }
+                    },
                     { "data": "articlesource"},
                     { "data": "maintainorder" },
-                    { "data": "addeditor" }
+                    { "data": "addeditor" },
+                    { "data": "addtime",
+                        "render": function(data,type,row){
+                          return data+"<br/>"+row.lastupdatetime;
+                        }
+                    },
+                    {"data": "id",
+                        "render": function (data, type, row) {
+                            return '<a href="/Home/Article/edit/id/'+data+'">编辑</a>|<a href="/Home/Article/edit/id/'+data+'">发布</a>|<a href="/Home/Article/edit/id/'+data+'">编辑链接</a>|<a href="/Home/Article/delete/id/'+data+'">删除</a>';
+                        }
+                    }
                 ]
             });
             that.bindEvent();

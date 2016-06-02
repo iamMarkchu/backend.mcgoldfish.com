@@ -23,8 +23,8 @@ class ArticleController extends CommonController {
         if(isset($searchArray['where'])) $map = $searchArray['where'];
         if(isset($searchArray['order'])) $order = $searchArray['order'];
     	$article = D('article');
-    	$result = $article->where($map)->order($order)->limit($start,$length)->select();
-    	$count = $article->where($map)->count();
+    	$result = $article->getArticleListForPage($start,$length,$map,$order);
+    	$count = $article->getArticleListForPageCount($map,$order);
     	$jsonBack = array();
     	$jsonBack['data'] = $result;
     	$jsonBack['recordsFiltered'] = $count;
@@ -39,7 +39,7 @@ class ArticleController extends CommonController {
         $article->tip = C('NEW_ARTICLE_MESSAGE');
         $article->addtime = date("Y-m-d H:i:s");
         if(!empty($_FILES['imgFile']['name'])){
-            $imgFile = $this->upload();
+            $imgFile = ImgUpload();
             $article->image = $imgFile['savename'];
         }
         $articleid = $article->add();
@@ -68,10 +68,10 @@ class ArticleController extends CommonController {
             $cateogyMapping->addtime = date("Y-m-d H:i:s");
             $cateogyMapping->add();
         }
-        $this->success("添加成功","/Home/Article/index");
+        $this->success("添加成功","index");
     }
     public function edit(){
-        if(!isset($_REQUEST['id'])) $this->error('文章不存在!','/Home/Article/index');
+        if(!isset($_REQUEST['id'])) $this->error('文章不存在!','index');
         $articleid = $_REQUEST['id'];
         $article = D('article');
         $result = $article->getById($articleid);
@@ -92,7 +92,7 @@ class ArticleController extends CommonController {
         $this->display();
     }
     public function update(){
-        if(!isset($_REQUEST['id'])) $this->error('文章不存在!','/Home/Article/index');
+        if(!isset($_REQUEST['id'])) $this->error('文章不存在!','index');
         $articleid = $_REQUEST['id'];
         $article = D('article');
         $data = $article->where($articleid)->find();
@@ -103,7 +103,7 @@ class ArticleController extends CommonController {
         $data['maintainorder'] = $_POST['maintainorder'];
         $data['articlesource'] = $_POST['articlesource'];
         if(!empty($_FILES['imgFile']['name'])){
-            $imgFile = $this->upload();
+            $imgFile = ImgUpload();
             $data['image'] = $imgFile['savename'];
         }
         $article->create($data);
@@ -123,14 +123,14 @@ class ArticleController extends CommonController {
             $cateogyMapping->addtime = date("Y-m-d H:i:s");
             $cateogyMapping->add();   
         }
-        $this->success("编辑成功","/Home/Article/index");
+        $this->success("编辑成功","index");
     }
     public function btn_Search(){
         session('articleSearch','');
         //组成查询及排序数组
         $searchArray = array();
         if(isset($_POST['titleOrId'])){
-            $searchArray['where']['_query'] = "title={$_POST['titleOrId']}&id={$_POST['titleOrId']}&_logic=or";
+            $searchArray['where']['titleOrId'] = $_POST['titleOrId'];
         }
         if(isset($_POST['selectarticlesource'])){
             $searchArray['where']['articlesource'] = $_POST['selectarticlesource'];
@@ -144,18 +144,18 @@ class ArticleController extends CommonController {
         session('articleSearch',$searchArray);
         echo "1";
     }
-    public function upload(){
-        $upload = new \Think\Upload();// 实例化上传类
-        $upload->maxSize   =     3145728 ;// 设置附件上传大小
-        $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
-        $upload->savePath  =      C('IMG_SAVE_PATH'); // 设置附件上传目录
-        // 上传文件 
-        $info   =   $upload->upload();
-        if(!$info) {// 上传错误提示错误信息
-            //$this->error($upload->getError());
-            return false;
-        }else{// 上传成功
-            return $info['imgFile'];
+    public function publish(){
+        if(!isset($_REQUEST['id'])) $this->error('文章不存在!','index');
+        $articleid = $_REQUEST['id'];
+        $article = D('article');
+        $data['id'] = $articleid;
+        $data['status'] = 'active';
+        $article->create($data);
+        $result = $article->save();
+        if($result){
+            $this->success("发布成功!");
+        }else{
+            $this->success("发布失败!");
         }
     }
 }

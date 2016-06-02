@@ -1,7 +1,23 @@
  <!-- BEGIN SIDEBAR -->
         <div class="page-sidebar nav-collapse collapse">
             <!-- BEGIN SIDEBAR MENU -->
-            <ul class="page-sidebar-menu">               
+            <ul class="page-sidebar-menu">   
+                <li>
+                    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                    <div class="sidebar-toggler hidden-phone"></div>
+                    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                </li>
+                <li>
+                    <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                    <form class="sidebar-search">
+                        <div class="input-box">
+                            <a href="javascript:;" class="remove"></a>
+                            <input type="text" placeholder="Search...">
+                            <input type="button" class="submit" value=" ">
+                        </div>
+                    </form>
+                    <!-- END RESPONSIVE QUICK SEARCH FORM -->
+                </li>            
                 <li class="active ">
                     <a href="{:U('/')}">
                         <i class="icon-home"></i>
@@ -81,6 +97,21 @@
                         </li>
                         <li>
                             <a href="{:U('Category/index')}">Category Management</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="">
+                    <a href="javascript:;">
+                        <i class="icon-tags"></i>
+                        <span class="title">Tag</span>
+                        <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{:U('Tag/add')}">Add Tag</a>
+                        </li>
+                        <li>
+                            <a href="{:U('Tag/index')}">Tag Management</a>
                         </li>
                     </ul>
                 </li>

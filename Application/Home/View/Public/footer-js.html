@@ -1,0 +1,29 @@
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<script src="__PUBLIC__/media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+<script src="__PUBLIC__/media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="__PUBLIC__/media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+<script src="__PUBLIC__/media/js/bootstrap.min.js" type="text/javascript"></script>
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/media/js/excanvas.min.js"></script>
+<script src="__PUBLIC__/media/js/respond.min.js"></script>  
+<![endif]-->
+<script src="__PUBLIC__/media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="__PUBLIC__/media/js/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="__PUBLIC__/media/js/jquery.cookie.min.js" type="text/javascript"></script>
+<script src="__PUBLIC__/media/js/jquery.uniform.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="__PUBLIC__/media/js/app.js" type="text/javascript"></script>
+<include file="Public:plugin-js"/>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="__PUBLIC__/own-js/base.js" type="text/javascript"></script>
+<script src="__PUBLIC__/own-js/{$Think.CONTROLLER_NAME}/{$Think.ACTION_NAME}.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+ <script type="text/javascript">
+    $(function () {
+        App.init(); // initlayout and core plugins
+    });
+</script>
+<!-- END JAVASCRIPTS -->

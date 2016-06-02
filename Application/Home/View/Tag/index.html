@@ -1,0 +1,76 @@
+<!-- BEGIN SEARCHBAR-->
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    {$Think.config.SEARCH_AERA}
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+            </div>
+            <div class="portlet-body form" >
+                <div class="row-fluid">
+                    <!--BEGIN SEARCH-->
+                    <div class="span2" style="margin-top:10px;">
+                        <div class="btn-group">
+                            <button class="btn blue" id="searchbutton">{$Think.config.SEARCH_BUTTON}</button>
+                        </div>
+                    </div>
+                    <!--END SEARCH-->
+                <div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END SEARCHBAR-->
+<!-- BEGIN CONTENT-->
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-list"></i>标签列表
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row-fluid">
+                    <div class="span12">
+                         <div class="btn-group">
+                            <button class="btn green" id="addTag">{$Think.config.ADD_BUTTON}标签</button>
+                         </div>
+                    </div>
+                </div>
+                <table class="display" id="tbTagList">
+                    <thead>
+                        <tr>
+                            <th>
+                                id
+                            </th>
+                            <th>
+                                displayname
+                            </th>
+                            <th>
+                                addtime
+                            </th>
+                            <th>
+                                lastchangetime
+                            </th>
+                            <th>
+                                displayorder
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END CONTENT-->

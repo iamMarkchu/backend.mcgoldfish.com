@@ -21,7 +21,7 @@
                     { "data": "displayorder" },
                     { "data": "id",
                       "render": function (data, type, row) {
-                            return '<a href="/Home/Category/edit/id/'+data+'" class="edit">编辑</a><a href="/Home/Category/delete/id/'+data+'" class="delete">删除</a>'; 
+                            return '<a href="/Home/Category/edit/id/'+data+'" class="edit">编辑</a>|<a href="/Home/Category/delete/id/'+data+'" class="delete">删除</a>'; 
                         }
                     }
                 ]

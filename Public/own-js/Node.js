@@ -1,9 +1,9 @@
 (function () {
-    var AuthManager = {
+    var AuthIndexManager = {
         //初始化
         init: function () {
             var that = this;
-            that.currentTable = kxxBase.kxxDT('#tbList', {
+            that.currentTable = kxxBase.kxxDT('#tbAuthList', {
                 "ajax": {
                     "url": '/Home/Node/QueryData/',
                     "type": 'POST'
@@ -71,6 +71,6 @@
         }
     };
     $(function () {
-        AuthManager.init();
+        AuthIndexManager.init();
     });
 })(window);

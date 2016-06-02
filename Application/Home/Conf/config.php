@@ -32,8 +32,15 @@ return array(
     /*图片路径*/
     'IMG_SAVE_PATH' => './uploads/fengmian',
     /*按钮文字*/
-    'SAVE_BUTTON'  => '&nbsp保存',
+    'SAVE_BUTTON'  => '<i class="icon-ok"></i>保存',
     'CANCEL_BUTTON'  => '&nbsp取消',
+    'SEARCH_BUTTON'  => '<i class="icon-search"></i>&nbsp搜索',
+    'SEARCH_AERA'  =>  '<i class="icon-search"></i>搜索栏',
+    'ADD_BUTTON'  =>  '<i class="icon-plus"></i>&nbsp新增',
+    'EDIT_BUTTON' =>  '<i class="icon-edit"></i>修改',
     /*提示文字*/
-    'NEW_ARTICLE_MESSAGE' =>'新文章待审核!'
+    'NEW_ARTICLE_MESSAGE' =>'新文章待审核!',
+    /*网站常量*/
+    'BACKEND_SITE' => 'backend.mcgoldfish.com',
+    
 );

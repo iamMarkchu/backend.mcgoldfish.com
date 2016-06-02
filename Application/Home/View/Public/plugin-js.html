@@ -1,0 +1,21 @@
+<!-- Kindeditor js start -->
+<if condition="($isEditor eq 1)">
+    <script charset="utf-8" src="__PUBLIC__/kindeditor/kindeditor-all-min.js"></script>
+    <script charset="utf-8" src="__PUBLIC__/kindeditor/lang/zh-CN.js"></script>
+    <script type="text/javascript">
+        KindEditor.ready(function(K) {
+                window.editor = K.create('#articleContent');
+        });
+    </script>
+</if>
+<!-- Kindeditor js end -->
+<!-- Select2 js start -->
+<if condition="($isSelect2 eq 1)">
+<script src="__PUBLIC__/media/js/select2.min.js" type="text/javascript"></script>
+</if>
+<!-- Select2 js end -->
+<!-- MutiSelect js start -->
+<if condition="($isMutiSelect eq 1)">
+<script type="text/javascript" src="__PUBLIC__/media/js/jquery.multi-select.js"></script>
+</if>
+<!-- MutiSelect js end -->

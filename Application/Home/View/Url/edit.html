@@ -3,7 +3,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="icon-plus"></i>修改文章
+                    {$Think.config.EDIT_BUTTON}链接
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse"></a>
@@ -14,64 +14,66 @@
                     <div class="span12">
                         <div class="tab-pane">
                             <!-- BEGIN FORM-->
-                            <form action="{:U('/Home/Article/update')}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                            <form action="{:U('/Home/Url/update')}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                                 <div class="hidden">
                                     <input type="hidden" value="{$result.id}" name="id" />
                                 </div>
-                                 <div class="control-group">
+                                <div class="control-group">
                                         <label class="control-label">
-                                            文章标题</label>
+                                            requestpath</label>
                                     <div class="controls">
-                                        <input type="text" placeholder="文章标题" class="m-wrap medium" value="{$result.title}"  name="title" />
+                                        <input type="text" placeholder="RequestPath" class="m-wrap medium"  name="requestpath" value="{$result.requestpath}" />
                                         <span class="help-inline">不能为空</span>
                                     </div>
                                  </div>
                                  <div class="control-group">
                                         <label class="control-label">
-                                            网页H1</label>
+                                            optdataid</label>
                                     <div class="controls">
-                                        <input type="text" placeholder="网页H1" class="m-wrap medium" value="{$result.pageh1}" name="pageh1" />
-                                        <span class="help-inline">与seo有关的网页h1</span>
-                                    </div>
-                                 </div>
-                                  <div class="control-group">
-                                        <label class="control-label">
-                                            文章封面</label>
-                                    <div class="controls">
-                                        <input type="file" name="imgFile" />
+                                        <input type="text" placeholder="OptDataId" class="m-wrap medium" name="optdataid" value="{$result.optdataid}"/>
                                         <span class="help-inline"></span>
                                     </div>
                                  </div>
                                  <div class="control-group">
                                         <label class="control-label">
-                                            文章来源</label>
+                                            modeltype</label>
                                     <div class="controls">
-                                        <select name="articlesource">
-                                            <option  <eq name="$result.articlesource" value="原创">selected="selected"</eq>>原创</option>
-                                            <option <eq name="$result.articlesource" value="转载">selected="selected"</eq>>转载</option>
+                                        <select name="modeltype">
+                                            <option value="article" <eq value="article" name="result.modeltype">selected="true"</eq>>文章</option>
+                                            <option value="category" <eq value="category" name="result.modeltype">selected="true"</eq>>类别</option>
+                                            <option value="tag" <eq value="tag" name="result.modeltype">selected="true"</eq>>文章</option>>标签</option>
                                         </select>
                                         <span class="help-inline"></span>
                                     </div>
                                  </div>
-                                  <div class="control-group">
+                                    <div class="control-group">
                                         <label class="control-label">
-                                            文章内容</label>
-                                    <div class="controls">
-                                        <textarea id="articleContent" name="content">{$result.content}</textarea>
-                                    </div>
-                                 </div>
+                                            jumptype</label>
+                                        <div class="controls">
+                                            <select name="isjump">
+                                                <option value="NO" <eq value="NO" name="result.isjump">selected="true"</eq>>NO</option>
+                                                <option value="301" <eq value="301" name="result.isjump">selected="true"</eq>>301</option>
+                                                <option value="302" <eq value="302" name="result.isjump">selected="true"</eq>>302</option>
+                                                <option value="404" <eq value="404" name="result.isjump">selected="true"</eq>>404</option>
+                                            </select>
+                                            <span class="help-inline"></span>
+                                        </div>
+                                    </div>  
                                 <div class="control-group">
                                         <label class="control-label">
-                                            维护等级</label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="维护等级" class="m-wrap small" id="maintainorder" name="maintainorder" value="{$result.maintainorder}" />
-                                        <span class="help-inline">按什么顺序排序</span>
-                                    </div>
-                                 </div>
+                                            Status</label>
+                                        <div class="controls">
+                                            <select name="status">
+                                                <option value="yes" <eq value="yes" name="result.status">selected="true"</eq>>yes</option>
+                                                <option value="no" <eq value="no" name="result.status">selected="true"</eq>>no</option>
+                                            </select>
+                                            <span class="help-inline"></span>
+                                        </div>
+                                    </div> 
                                 <div class="form-actions">
                                     <button type="submit" class="btn blue">
-                                        <i class="icon-ok"></i>保存</button>
-                                    <a href="{:U('/Home/Article/index')}" class="btn">取消</a>
+                                        {$Think.config.SAVE_BUTTON}</button>
+                                    <a href="{:U('/Home/Url/index')}" class="btn">{$Think.config.CANCEL_BUTTON}</a>
                                 </div>
                             </form>
                             <!-- END FORM-->

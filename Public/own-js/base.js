@@ -1,6 +1,6 @@
-var kxxBase = function () {
+var MarkBase = function () {
     return {
-        kxxDT: function (selection, args) {
+        MarkDT: function (selection, args) {
             var defaultParams = {
                 "ordering": false,
                 "serverSide": true,

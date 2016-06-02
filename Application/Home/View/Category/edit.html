@@ -3,7 +3,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="icon-plus"></i>修改文章
+                    {$Think.config.EDIT_BUTTON}类别
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse"></a>
@@ -44,8 +44,8 @@
                                  </div>
                                 <div class="form-actions">
                                     <button type="submit" class="btn blue">
-                                        <i class="icon-ok"></i>保存</button>
-                                    <a href="{:U('/Home/Article/index')}" class="btn">取消</a>
+                                        {$Think.config.SAVE_BUTTON}</button>
+                                    <a href="{:U('/Home/Category/index')}" class="btn">{$Think.config.CANCEL_BUTTON}</a>
                                 </div>
                             </form>
                             <!-- END FORM-->

@@ -4,7 +4,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="icon-plus"></i>搜索栏
+                    {$Think.config.SEARCH_AERA}
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse"></a>
@@ -14,43 +14,9 @@
                 <div class="row-fluid">
                     <!--BEGIN SEARCH-->
                     <input type="hidden" id="noAjax" value="{$noAjax}"/>
-                    <div class="span3">
-                        <div class="controls">
-                            <input type="text" id="search_id_or_title" name="search_id_or_title" class="m-wrap medium" placeholder="请输入文章id或者title" />
-                        </div>
-                    </div>
-                    <div class="span2">
-                        <div class="controls">
-                              <select id="selectarticlesource" class="m-wrap small" placeholder="文章来源">
-                                  <option value="-1">文章来源</option>
-                                  <option value="原创">原创</option>
-                                  <option value="转载">转载</option>
-                              </select>
-                        </div>
-                    </div>
-                    <div class="span2">
-                        <div class="controls">
-                              <select id="selectstatus" class="m-wrap small" placeholder="文章状态">
-                                  <option value="-1">文章状态</option>
-                                  <option value="active">active</option>
-                                  <option value="deleted">deleted</option>
-                              </select>
-                        </div>
-                    </div>
-                    <div class="span2">
-                        <div class="controls">
-                              <select id="selectorderby" class="m-wrap small" placeholder="文章排序">
-                                  <option value="-1">文章排序</option>
-                                  <option value="id">by id asc</option>
-                                  <option value="id">by id desc</option>
-                                  <option value="maintainorder asc">by maintainorder asc</option>
-                                  <option value="maintainorder desc">by maintainorder desc</option>
-                              </select>
-                        </div>
-                    </div>
                     <div class="span2">
                         <div class="btn-group">
-                            <button class="btn blue" id="searchbutton"><i class="icon-plus"></i>搜索</button>
+                            <button class="btn blue" id="searchbutton">{$Think.config.SEARCH_BUTTON}</button>
                         </div>
                     </div>
                     <!--END SEARCH-->
@@ -76,11 +42,11 @@
                 <div class="row-fluid">
                     <div class="span12">
                          <div class="btn-group">
-                            <button class="btn green" id="add"><i class="icon-plus"></i>新增节点</button>
+                            <button class="btn green" id="addNode">{$Think.config.ADD_BUTTON}节点</button>
                          </div>
                     </div>
                 </div>
-                <table class="display" id="tbList">
+                <table class="display" id="tbNodeList">
                     <thead>
                         <tr>
                             <th>

@@ -4,7 +4,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="icon-search"></i>搜索栏
+                    {$Think.config.SEARCH_AERA}
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse"></a>
@@ -34,6 +34,7 @@
                                   <option value="-1">文章状态</option>
                                   <option value="active">active</option>
                                   <option value="deleted">deleted</option>
+                                  <option value="republish">republish</option>
                               </select>
                         </div>
                     </div>
@@ -50,7 +51,7 @@
                     </div>
                     <div class="span2">
                         <div class="btn-group">
-                            <button class="btn blue" id="searchbutton"><i class="icon-search"></i>&nbsp搜索</button>
+                            <button class="btn blue" id="searchbutton">{$Think.config.SEARCH_BUTTON}</button>
                         </div>
                     </div>
                     <!--END SEARCH-->
@@ -76,7 +77,7 @@
                 <div class="row-fluid">
                     <div class="span12">
                          <div class="btn-group">
-                            <button class="btn green" id="addArticle"><i class="icon-plus"></i>&nbsp新增文章</button>
+                            <button class="btn green" id="addArticle">{$Think.config.ADD_BUTTON}文章</button>
                          </div>
                     </div>
                 </div>
@@ -84,31 +85,33 @@
                     <thead>
                         <tr>
                             <th>
-                                id
+                                编号
                             </th>
                             <th>
-                                title
+                                标题
                             </th>
                             <th>
-                                status
+                                状态
                             </th>
                             <th>
-                                pageh1
+                                所属类别
                             </th>
                             <th>
-                                addtime
-                            </th>
-                             <th>
-                                lastupdatetime
+                                文章来源
                             </th>
                             <th>
-                                source
+                                维护等级
                             </th>
                             <th>
-                                maintainorder
+                                编辑
                             </th>
                             <th>
-                                addeditor
+                                添加时间
+                                <br>
+                                最后更新时间
+                            </th>
+                            <th>
+                                操作
                             </th>
                         </tr>
                     </thead>

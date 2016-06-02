@@ -3,12 +3,12 @@ namespace Home\Controller;
 use Think\Controller;
 class CommonController extends Controller {
     public function index(){
-        $blockName = __FUNCTION__." ".CONTROLLER_NAME;
+        $blockName = CONTROLLER_NAME."|".__FUNCTION__;
         $this->assign("blockName",$blockName);
         $this->display();
     }
     public function add(){
-        $blockName = __FUNCTION__." ".CONTROLLER_NAME;
+        $blockName = CONTROLLER_NAME."|".__FUNCTION__;
         $this->assign("blockName",$blockName);
         $this->display();
     }
@@ -64,8 +64,7 @@ class CommonController extends Controller {
     }
     public function foreverdelete() {
         //删除指定记录
-        $name=$this->getActionName();
-        $model = D ($name);
+        $model = D (CONTROLLER_NAME);
         if (! empty ( $model )) {
             $pk = $model->getPk ();
             $id = $_REQUEST [$pk];
@@ -82,5 +81,53 @@ class CommonController extends Controller {
             }
         }
         $this->forward ();
+    }
+    public function edit(){
+        $model = D(CONTROLLER_NAME);
+        $id = $_REQUEST[$model->getPk()];
+        $result = $model->getById($id);
+        $this->assign('result',$result);
+        $this->display();
+    }
+    function update() {
+        $model = D(CONTROLLER_NAME);
+        if (false === $model->create ()) {
+            $this->error ( $model->getError () );
+        }
+        $list=$model->save ();
+        if (false !== $list) {
+            $this->success ('编辑成功!','index');
+        } else {
+            $this->error ('编辑失败!');
+        }
+    }
+    function insert() {
+        $model = D (CONTROLLER_NAME);
+        if (false === $model->create ()) {
+            $this->error ( $model->getError () );
+        }
+        //保存当前数据对象
+        $list=$model->add ();
+        if ($list!==false) { 
+            $this->success ('新增成功!','index');
+        } else {
+            $this->error ('新增失败!');
+        }
+    }
+    public function QueryData(){
+        $start = $_POST['start'];
+        $length = $_POST['length'];
+        $map = array();
+        $model = D(CONTROLLER_NAME);
+        $searchArray = session(CONTROLLER_NAME.'Search');
+        if(isset($searchArray['where'])) $map = $searchArray['where'];
+        if(isset($searchArray['order'])) $order = $searchArray['order'];
+        $result = $model->limit($start,$length)->select();
+        $count = $model->count();
+        $jsonBack = array();
+        $jsonBack['data'] = $result;
+        $jsonBack['recordsFiltered'] = $count;
+        $jsonBack['recordsTotal'] = $count;
+        $this->ajaxReturn($jsonBack);
     }
 }
