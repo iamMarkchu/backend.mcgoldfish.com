@@ -40,7 +40,18 @@ class UrlController extends CommonController {
         $urlid = $_REQUEST['id'];
         $url = D('rewrite_url');
         $url->create();
-        $url->save();        
-        $this->success("编辑成功","index");
+        $url->save(); 
+        if(IS_AJAX){
+            echo '1';
+        }else{
+            $this->success("编辑成功","index");
+        }
+    }
+    public function getUrlInfo(){
+        if(!isset($_REQUEST['urlid'])) echo '0';
+        $urlid = $_REQUEST['urlid'];
+        $url = D('rewrite_url');
+        $result = $url->find($urlid);
+        $this->ajaxReturn($result);
     }
 }

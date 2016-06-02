@@ -8,16 +8,20 @@ class TagController extends CommonController {
         $tag->addtime = date("Y-m-d H:i:s");
         $flag = $tag->add();
         if($flag){
-            $requestPath = "/tag/{$flag}.html";
+            $requestpath = "/tag/{$flag}.html";
             $url = D('rewrite_url');
-            $urlData['requestPath'] = $requestPath;
+            $urlData['requestpath'] = $requestpath;
             $urlData['modeltype'] = "tag";
             $urlData['optdataidd'] = $flag;
             $urlData['isjump'] = "NO";
             $urlData['status'] = "yes";
             $url->create($urlData);
             $flag = $url->add();
-            $this->success("添加成功","/Home/Tag/index");
+            if(IS_AJAX){
+                echo "1";
+            }else{
+                $this->success("添加成功","index");
+            }
         }
         
     }

@@ -15,7 +15,7 @@ if(!isset($_GET['controllerName'])){
 $ownJsPath = "/app/site/mark-ubuntu/web/backend.mcgoldfish.com/Public/own-js/";
 $controllerName = $_GET['controllerName'];
 if(!is_dir($ownJsPath.$controllerName)){
-	$f = mkdir($ownJsPath.$controllerName,0775);
+	$f = mkdir($ownJsPath.$controllerName,0777);
 	if(!$f){
 		echo '创建目录失败,请检查 '.$ownJsPath.'目录的权限';exit;
 	}

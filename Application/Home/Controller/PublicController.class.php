@@ -30,17 +30,17 @@ class PublicController extends Controller {
 			$this->error('帐号错误！');
 		}elseif (empty($_POST['password'])){
 			$this->error('密码必须！');
-		}//elseif (empty($_POST['verify'])){
-		// 	$this->error('验证码必须！');
-		// }
+		}elseif (empty($_POST['verify'])){
+		 	$this->error('验证码必须！');
+		}
         //生成认证条件
         $map            =   array();
 		// 支持使用绑定帐号登录
 		$map['account']	= $_POST['account'];
         $map["status"]	=	array('eq','active');
-		// if($_SESSION['verify_code'] != $_POST['verify']) {
-		// 	$this->error('验证码错误！');
-		// }
+		if(!$this->check_verify($_POST['verify'])){
+			$this->error('验证码错误!');
+		}
 		$r = new \Org\Util\Rbac();
         $authInfo = $r->authenticate($map);
         //使用用户名、密码和状态的方式进行认证
@@ -79,6 +79,10 @@ class PublicController extends Controller {
         $r = new \Think\Verify();
         $r->entry();
     }
+    public function check_verify($code, $id = ''){
+	    $verify = new \Think\Verify();
+	    return $verify->check($code, $id);
+	}
     	// 用户登出
     public function logout()
     {

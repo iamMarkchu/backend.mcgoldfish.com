@@ -8,16 +8,20 @@ class CategoryController extends CommonController {
         $category->addtime = date("Y-m-d H:i:s");
         $flag = $category->add();
         if($flag){
-            $requestPath = "/category/{$flag}.html";
+            $requestpath = "/category/{$flag}.html";
             $url = D('rewrite_url');
-            $urlData['requestPath'] = $requestPath;
+            $urlData['requestpath'] = $requestpath;
             $urlData['modeltype'] = "category";
             $urlData['optdataid'] = $flag;
             $urlData['isjump'] = "NO";
             $urlData['status'] = "yes";
             $url->create($urlData);
             $flag = $url->add();
-            $this->success("添加成功","/Home/Category/index");
+            if(IS_AJAX){
+                echo '1';
+            }else{
+                $this->success("添加成功","/Home/Category/index");
+            }
         }
         
     }

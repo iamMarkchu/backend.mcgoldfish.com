@@ -53,12 +53,24 @@ class CommonController extends Controller {
                 $condition = array ($pk => array ('in', explode ( ',', $id ) ) );
                 $list=$model->where ( $condition )->setField ( 'status', "deleted" );
                 if ($list!==false) {
-                    $this->success ('删除成功！' );
+                    if(IS_AJAX){
+                        echo "1";
+                    }else{
+                        $this->success ('删除成功！' );
+                    }
                 } else {
-                    $this->error ('删除失败！');
+                    if(IS_AJAX){
+                        echo "0";
+                    }else{
+                        $this->error ('删除失败！');
+                    }
                 }
             } else {
-                $this->error ( '非法操作' );
+                if(IS_AJAX){
+                    echo "-1";
+                }else{
+                    $this->error ( '非法操作' );
+                }
             }
         }
     }
@@ -81,6 +93,17 @@ class CommonController extends Controller {
             }
         }
         $this->forward ();
+    }
+    public function resume() {
+        //恢复指定记录
+        $model = D (CONTROLLER_NAME);
+        $id = $_REQUEST[$model->getPk ()];
+        $condition = array ($pk => array ('in', $id ) );
+        if (false !== $model->resume ( $condition )) {
+            echo "1";
+        } else {
+            echo "0";
+        }
     }
     public function edit(){
         $model = D(CONTROLLER_NAME);
@@ -109,9 +132,17 @@ class CommonController extends Controller {
         //保存当前数据对象
         $list=$model->add ();
         if ($list!==false) { 
-            $this->success ('新增成功!','index');
+            if(IS_AJAX){
+                echo "1";
+            }else{
+                $this->success ('新增成功!','index');
+            }
         } else {
-            $this->error ('新增失败!');
+            if(IS_AJAX){
+                echo "0";
+            }else{
+                $this->error ('新增失败!');
+            }
         }
     }
     public function QueryData(){

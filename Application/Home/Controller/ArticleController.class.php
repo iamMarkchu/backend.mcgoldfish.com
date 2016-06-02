@@ -11,8 +11,11 @@ class ArticleController extends CommonController {
     }
     public function _before_add(){
         $category = D('category');
-        $AllcateInfo =$category->getAllCategory();
-        $this->assign('AllcateInfo',$AllcateInfo);
+        $tag = D('tag');
+        $allCateInfo =$category->getAllCategory();
+        $allTagInfo = $tag->getAllTag();
+        $this->assign('allTagInfo',$allTagInfo);
+        $this->assign('allCateInfo',$allCateInfo);
         $this->assign('isSelect2',1);
         $this->assign('isEditor',1);
     }
@@ -67,6 +70,24 @@ class ArticleController extends CommonController {
             $cateogyMapping->isprimary = 'yes';
             $cateogyMapping->addtime = date("Y-m-d H:i:s");
             $cateogyMapping->add();
+            //添加标签信息
+            if(isset($_POST['tag_multi_select2'])){
+                $tagMapping = D('tagMapping');
+                $tagMapping->create();
+                foreach ($_POST['tag_multi_select2'] as $k => $v) {
+                    $data = array();
+                    $data['optdataid'] = $articleid;
+                    $data['datatype'] = 'article';
+                    if($k == 0){
+                        $data['isprimary'] = 'yes';
+                    }else{
+                        $data['isprimary'] = 'no';
+                    }
+                    $data['addtime'] = date("Y-m-d H:i:s");
+                    $data['tagid'] = $v;
+                    $tagMapping->add($data);
+                }
+            }
         }
         $this->success("添加成功","index");
     }
@@ -78,6 +99,16 @@ class ArticleController extends CommonController {
         $category = D('category');
         $AllcateInfo =$category->getAllCategory();
         $cateInfo = $category->getCategoryByIdAndType($articleid);
+        $tag = D('tag');
+        $allTagInfo = $tag->getAllTag();
+        $tagInfo = $tag->getTagByIdAndType($articleid);
+        foreach ($allTagInfo as $k => $v) {
+            if(in_array($v['id'],$tagInfo)){
+                $allTagInfo[$k]['selected'] = '1';
+            }else{
+                $allTagInfo[$k]['selected'] = '0';
+            }
+        }
         $pageMeta = D('page_meta');
         $where = "optdataid = {$articleid} and `status` = 'yes' and modeltype='article'";
         $pageMetaInfo = $pageMeta->where($where)->find();
@@ -85,6 +116,7 @@ class ArticleController extends CommonController {
         $this->assign('result',$result);
         $this->assign('categoryid',$cateInfo['categoryid']);
         $this->assign('AllcateInfo',$AllcateInfo);
+        $this->assign('allTagInfo',$allTagInfo);
         $this->assign('pageMetaInfo',$pageMetaInfo);
         //加载插件
         $this->assign('isEditor',1);

@@ -38,6 +38,7 @@ return array(
     'SEARCH_AERA'  =>  '<i class="icon-search"></i>搜索栏',
     'ADD_BUTTON'  =>  '<i class="icon-plus"></i>&nbsp新增',
     'EDIT_BUTTON' =>  '<i class="icon-edit"></i>修改',
+    'COMFIRM_BUTTON' => '确定',
     /*提示文字*/
     'NEW_ARTICLE_MESSAGE' =>'新文章待审核!',
     /*网站常量*/

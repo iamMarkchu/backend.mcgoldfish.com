@@ -1,0 +1,31 @@
+<div class="container">
+    <div id="addArticleTag" class="modal hide fade in" style="display: none; ">
+        <div class="modal-header">
+            <h3>新增标签</h3>
+        </div>
+        <div class="modal-body form-horizontal">
+            <div class="hidden">
+                <input type="hidden" value="" name="id" />
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    displayname</label>
+                <div class="controls">
+                    <input type="text" placeholder="displayname" class="m-wrap medium"  name="displayname" />
+                    <span class="help-inline">不能为空</span>
+                </div>  
+            </div>
+            <div class="control-group">
+                    <label class="control-label">
+                        displayorder</label>
+                <div class="controls">
+                    <input type="text" placeholder="displayorder" class="m-wrap medium" name="displayorder" />
+                    <span class="help-inline"></span>
+                </div>
+             </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn blue" id="addTagForArticle">{$Think.config.SAVE_BUTTON}</a>
+            <a href="#" class="btn" data-dismiss="modal">{$Think.config.CANCEL_BUTTON}</a>
+        </div>
+</div>
