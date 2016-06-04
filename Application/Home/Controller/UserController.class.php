@@ -49,10 +49,10 @@ class UserController extends CommonController {
             $roleUser->user_id = $userid;
             $roleUser->add();
         }
-    	$this->success("添加成功","/Home/User/index");
+    	$this->success("添加成功","index");
     }
     public function edit(){
-        if(!isset($_REQUEST['id'])) $this->error('组别不存在!','/Home/Auth/index');
+        if(!isset($_REQUEST['id'])) $this->error('用户不存在!','index');
         $userid = $_REQUEST['id'];
         $user = D('user');
         $result = $user->getById($userid);
@@ -70,7 +70,7 @@ class UserController extends CommonController {
         $this->display();
     }
     public function update(){
-        if(!isset($_REQUEST['id'])) $this->error('用户不存在!','/Home/Auth/index');
+        if(!isset($_REQUEST['id'])) $this->error('用户不存在!','index');
         $userid = $_REQUEST['id'];
         $user = D('user');
         $user->create();

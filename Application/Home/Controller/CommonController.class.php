@@ -41,6 +41,9 @@ class CommonController extends Controller {
                 }
             }
         }
+        $map['name'] = CONTROLLER_NAME;
+        $controllerInfo = D('node')->where($map)->find();
+        $this->assign('conInfo',$controllerInfo);
     }
     public function delete() {
         //删除指定记录

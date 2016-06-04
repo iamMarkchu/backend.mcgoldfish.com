@@ -20,7 +20,7 @@ class CategoryController extends CommonController {
             if(IS_AJAX){
                 echo '1';
             }else{
-                $this->success("添加成功","/Home/Category/index");
+                $this->success("添加成功","index");
             }
         }
         

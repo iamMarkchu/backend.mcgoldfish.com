@@ -5,13 +5,13 @@
             var that = this;
             that.currentTable = MarkBase.MarkDT('#tbList', {
                 "ajax": {
-                    "url": '/Home/Auth/QueryData/',
+                    "url": '/Auth/QueryData/',
                     "type": 'POST'
                 },
                 "columns": [
                     { "data": "id",
                       "render": function (data, type, row) {
-                            return '<div class="btn-group"><a class="btn purple" href="#" data-toggle="dropdown">'+data+'</a><ul class="dropdown-menu"><li><a href="/Home/Auth/edit/id/'+data+'"><i class="icon-trash"></i> Edit</a></li><li><a href="/Home/Auth/delete/id/'+data+'"><i class="icon-remove"></i> Delete</a></li><li><a href="/Home/User/index/role_id/'+data+'"><i class="icon-add"></i> userList</a></li><li><a href="/Home/Auth/giveAuth/role_id/'+data+'"><i class="icon-add"></i> giveAuth</a></li></ul></div>';
+                            return '<div class="btn-group"><a class="btn purple" href="#" data-toggle="dropdown">'+data+'</a><ul class="dropdown-menu"><li><a href="/Auth/edit/id/'+data+'"><i class="icon-trash"></i> Edit</a></li><li><a href="/Auth/delete/id/'+data+'"><i class="icon-remove"></i> Delete</a></li><li><a href="/User/index/role_id/'+data+'"><i class="icon-add"></i> userList</a></li><li><a href="/Auth/giveAuth/role_id/'+data+'"><i class="icon-add"></i> giveAuth</a></li></ul></div>';
                             //return '<a href="/Home/Article/edit/id/'+data+'" class="edit" articleid="' + data + '">编辑</a><a href="/Home/Article/delete/id/'+data+'" class="delete" articleid="' + data + '">删除</a>'; 
                         }
                     },
@@ -34,7 +34,7 @@
             var that = this;    
             //绑定新增文章点击事件
             $('#add').click(function(e){
-                window.location.href="/Home/Auth/add/";
+                window.location.href="/Auth/add/";
             });
             $('#selOY2').select2();
             //绑定搜索按钮事件
@@ -54,7 +54,7 @@
                     selectorderby = $('#selectorderby').val();
                 }
                 //ajax 前端与后台沟通参数
-                var url = "/Home/Article/btn_Search";
+                var url = "/Article/btn_Search";
                 var sendData = { titleOrId: titleOrId, selectarticlesource: selectarticlesource, selectstatus: selectstatus, selectorderby: selectorderby };
                 $.ajax({
                     url: url,

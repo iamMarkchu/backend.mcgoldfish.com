@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class PublicController extends Controller {
+class PublicController extends CommonController {
     // 检查用户是否登录
 	protected function checkUser() {
 		if(!isset($_SESSION[C('USER_AUTH_KEY')])) {
@@ -120,5 +120,28 @@ class PublicController extends Controller {
 		$user->remark = '新用户';
 		$user->add();
 		$this->success('注册成功!等待管理员验证');
+	}
+	public function menu(){
+		//读取数据库模块列表生成菜单项
+        $node    =   M("Node");
+		$id	=	$node->getField("id");
+		$where['level']=2;
+		$where['status']=1;
+		$where['pid']=$id;
+        $list	=	$node->where($where)->field('id,name,title')->order('sort asc')->select();
+        $r = new \Org\Util\Rbac();
+        $accessList = $r->getAccessList($_SESSION[C('USER_AUTH_KEY')]);
+        foreach($list as $key=>$module) {
+             if(isset($accessList[strtoupper(MODULE_NAME)][strtoupper($module['name'])]) || $_SESSION['administrator']) {
+                //设置模块访问权限
+                $module['access'] =   1;
+                $menu[$key]  = $module;
+            }
+        }
+        //缓存菜单访问
+       // $_SESSION['menu'.$_SESSION[C('USER_AUTH_KEY')]]	=	$menu;
+        session(array('menu'.$_SESSION[C('USER_AUTH_KEY')]=>$menu,'expire'=>72000));
+        $this->assign('menu',$menu);;
+        $this->display();
 	}
 }

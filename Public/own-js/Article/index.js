@@ -5,7 +5,7 @@
             var that = this;
             that.currentTable = MarkBase.MarkDT('#tbartilceList', {
                 "ajax": {
-                    "url": '/Home/Article/QueryData/',
+                    "url": '/Article/QueryData/',
                     "type": 'POST'
                 },
                 "columns": [
@@ -18,11 +18,14 @@
                     { "data": "status",
                         "render": function(data,type,row){
                             if(data == 'active'){
-                                return '<span style="color:green;">'+data+'</span>';
+                                return '<span class="label label-success">'+data+'</span>';
+                                //return '<span style="color:green;">'+data+'</span>';
                             }else if(data == 'republish'){
-                                return '<span style="color:red;">'+data+'</span>';
+                                return '<span class="label label-info">'+data+'</span>';
+                                //return '<span style="color:red;">'+data+'</span>';
                             }else{
-                                return data;
+                                return '<span class="label label-danger">'+data+'</span>';
+                                //return data;
                             }
                         }
                     },
@@ -34,7 +37,7 @@
                         "render": function(data,type,row){
                             var returnList = '';
                             if(data == null){
-                                returnList += '<span style="color:red;">无类别</span>';
+                                returnList += '<span class="label label-danger">无类别</span>';
                             }else{
                                 returnList += data;
                             }
@@ -52,9 +55,9 @@
                     },
                     {"data": "id",
                         "render": function (data, type, row) {
-                            var str ='<a href="/Home/Article/edit/id/'+data+'">编辑</a>|' ;
+                            var str ='<a href="/Article/edit/id/'+data+'">编辑</a>|' ;
                             if(row.status == 'republish'){
-                                str += '<a href="/Home/Article/publish/id/'+data+'">发布</a>|';
+                                str += '<a href="/Article/publish/id/'+data+'">发布</a>|';
                             }
                             str += '<a href="#" class="editUrlLink" data-id="'+row.rid+'">编辑链接</a>|'
                             if(row.status != 'deleted'){
@@ -74,7 +77,12 @@
             var that = this;    
             //绑定新增文章点击事件
             $('#addArticle').click(function(e){
-                window.location.href="/Home/Article/add/";
+                window.location.href="/Article/add/";
+            });
+            //绑定编辑文章点击事件
+            $('.btn-group').on('click','.purple#editArticle',function(){
+                var articleid = $('tr.selected>td').html();
+                window.location.href="/Article/edit/id/"+articleid;
             });
             //绑定搜索按钮事件
             $('#searchbutton').click(function (e) {
@@ -93,7 +101,7 @@
                     selectorderby = $('#selectorderby').val();
                 }
                 //ajax 前端与后台沟通参数
-                var url = "/Home/Article/btn_Search";
+                var url = "/Article/btn_Search";
                 var sendData = { titleOrId: titleOrId, selectarticlesource: selectarticlesource, selectstatus: selectstatus, selectorderby: selectorderby };
                 $.ajax({
                     url: url,
@@ -113,7 +121,7 @@
                 var urlid = $(this).attr('data-id');
                 //ajax
                 var sendData = {urlid:urlid};
-                var sendUrl = '/Home/Url/getUrlInfo/';
+                var sendUrl = '/Url/getUrlInfo/';
                 $.ajax({
                     url:sendUrl,
                     data:sendData,
@@ -161,7 +169,7 @@
                     status = $('#editArticleUrl select[name=status]').val();
                 }
                 //ajax 前端与后台沟通参数
-                var url = "/Home/Url/update";
+                var url = "/Url/update";
                 var sendData = { id: id, requestpath: requestpath, modeltype: modeltype, isjump: isjump,status:status };
                 $.ajax({
                     url: url,
@@ -178,7 +186,7 @@
             //绑定 modal-delete 删除事件
             $('#deleteForArticle').click(function(){
                 var articleid = $('#delete-modal input[name=articleid]').val();
-                var sendUrl = "/Home/Article/delete/";
+                var sendUrl = "/Article/delete/";
                 var sendData = {id:articleid};
                 $.ajax({
                     url:sendUrl,
@@ -192,14 +200,17 @@
                     }
                 });
             });
-            $("#tbartilceList").on('click','.deleteArticle',function(){
+            $(".portlet-body").on('click','.deleteArticle,.black#deleteArticle',function(){
                 var articleid = $(this).attr('data-id');
+                if(articleid == undefined){
+                    articleid = $('tr.selected>td').html();
+                }
                 $('#delete-modal input[name=articleid]').val(articleid);
                 $("#delete-modal").modal('show');
             });
             $("#tbartilceList").on('click','.resumeArticle',function(){
                 var articleid = $(this).attr('data-id');
-                var sendUrl = "/Home/Article/resume/";
+                var sendUrl = "/Article/resume/";
                 var sendData = {id:articleid};
                 $.ajax({
                     url:sendUrl,
@@ -214,6 +225,26 @@
                     }
                 });
             });
+            $('#tbartilceList tbody').on( 'click', 'tr', function () {
+                if ( $(this).hasClass('selected') ) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    that.currentTable.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+                if(that.currentTable.$('tr.selected').length > 0){
+                    $('#editArticle').addClass('purple');
+                    if($('tr.selected .deleteArticle').length >0){
+                        $('#deleteArticle').addClass('black');
+                    }else{
+                        $('#deleteArticle').removeClass('black');
+                    }
+                }else{
+                    $('#editArticle').removeClass('purple');
+                    $('#deleteArticle').removeClass('black');
+                }
+            } );
         }
     };
     $(function () {

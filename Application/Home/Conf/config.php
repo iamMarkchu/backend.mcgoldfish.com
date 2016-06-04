@@ -37,7 +37,8 @@ return array(
     'SEARCH_BUTTON'  => '<i class="icon-search"></i>&nbsp搜索',
     'SEARCH_AERA'  =>  '<i class="icon-search"></i>搜索栏',
     'ADD_BUTTON'  =>  '<i class="icon-plus"></i>&nbsp新增',
-    'EDIT_BUTTON' =>  '<i class="icon-edit"></i>修改',
+    'EDIT_BUTTON' =>  '<i class="icon-edit"></i>&nbsp修改',
+    'DELETE_BUTTON' =>  '<i class="icon-trash"></i>&nbsp删除',
     'COMFIRM_BUTTON' => '确定',
     /*提示文字*/
     'NEW_ARTICLE_MESSAGE' =>'新文章待审核!',

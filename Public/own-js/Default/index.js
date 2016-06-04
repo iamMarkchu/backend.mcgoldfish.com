@@ -4,7 +4,7 @@
             var that = this;
             that.currentTable = MarkBase.MarkDT('#tb[controllerName]List', {
                 "ajax": {
-                    "url": '/Home/[controllerName]/QueryData/',
+                    "url": '/[controllerName]/QueryData/',
                     "type": 'POST'
                 },
                 "columns": [
@@ -17,7 +17,7 @@
         bindEvent: function () {
             var that = this;    
             $('#add[controllerName]').click(function(e){
-                window.location.href="/Home/[controllerName]/add/";
+                window.location.href="/[controllerName]/add/";
             });
             $('#searchbutton').click(function (e) {
                 // var titleOrId,selectarticlesource,selectstatus,selectorderby;
@@ -33,7 +33,7 @@
                 // if ($('#selectorderby').val() != '-1') {
                 //     selectorderby = $('#selectorderby').val();
                 // }
-                var url = "/Home/[controllerName]/btn_Search";
+                var url = "/[controllerName]/btn_Search";
                 //var sendData = { titleOrId: titleOrId, selectarticlesource: selectarticlesource, selectstatus: selectstatus, selectorderby: selectorderby };
                 $.ajax({
                     url: url,

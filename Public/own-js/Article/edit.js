@@ -30,7 +30,7 @@
                     displayorder = $('#addArticleTag input[name=displayorder]').val();
                 }
                 //ajax 前端与后台沟通参数
-                var url = "/Home/Tag/insert";
+                var url = "Tag/insert";
                 var sendData = { displayname: displayname, displayorder: displayorder};
                 //console.log(sendData);
                 $.ajax({
@@ -59,7 +59,7 @@
                     displayorder = $('#addArticleCategory input[name=displayorder]').val();
                 }
                 //ajax 前端与后台沟通参数
-                var url = "/Home/Category/insert";
+                var url = "Category/insert";
                 var sendData = { displayname: displayname, parentcategoryid: parentcategoryid, displayorder: displayorder};
                 //console.log(sendData);
                 $.ajax({
@@ -74,6 +74,10 @@
                         }
                     }
                 });
+            });
+            //submit
+            $('.updateArticleBtn').click(function(){
+                $('.updateArticleForm').submit();
             });
         }
     };

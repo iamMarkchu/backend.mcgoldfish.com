@@ -9,6 +9,21 @@
 </script>
 <!-- Kindeditor js end -->
 </if>
+<if condition="($isUeditor eq 1)">
+<!-- Ueditor js start -->
+<!-- 配置文件 -->
+    <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('container',{
+        	initialFrameHeight:'600',
+        	initialFrameWidth:'90%'
+        });
+    </script>
+<!-- Ueditor js end -->
+</if>
 <if condition="($isSelect2 eq 1)">
 <!-- Select2 js start -->
 <script src="__PUBLIC__/media/js/select2.min.js" type="text/javascript"></script>

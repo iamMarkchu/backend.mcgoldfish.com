@@ -32,7 +32,7 @@ class AuthController extends CommonController {
     	$this->success("添加成功","/Home/Auth/index");
     }
     public function edit(){
-        if(!isset($_REQUEST['id'])) $this->error('组别不存在!','/Home/Auth/index');
+        if(!isset($_REQUEST['id'])) $this->error('组别不存在!','index');
         $roleid = $_REQUEST['id'];
         $role = D('role');
         $result = $role->getById($roleid);
@@ -41,11 +41,11 @@ class AuthController extends CommonController {
         $this->display();
     }
     public function update(){
-        if(!isset($_REQUEST['id'])) $this->error('组别不存在!','/Home/Auth/index');
+        if(!isset($_REQUEST['id'])) $this->error('组别不存在!','index');
         $role = D('role');
         $role->create();
         $role->save();
-        $this->success("编辑成功","/Home/Auth/index");
+        $this->success("编辑成功","index");
     }
     public function giveAuth(){
         $role_id = $_REQUEST['role_id'];

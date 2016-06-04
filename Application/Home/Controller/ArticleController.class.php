@@ -17,7 +17,8 @@ class ArticleController extends CommonController {
         $this->assign('allTagInfo',$allTagInfo);
         $this->assign('allCateInfo',$allCateInfo);
         $this->assign('isSelect2',1);
-        $this->assign('isEditor',1);
+        //$this->assign('isEditor',1);
+        $this->assign('isUeditor',1);
     }
     public function QueryData(){
     	$start = $_POST['start'];
@@ -119,7 +120,8 @@ class ArticleController extends CommonController {
         $this->assign('allTagInfo',$allTagInfo);
         $this->assign('pageMetaInfo',$pageMetaInfo);
         //加载插件
-        $this->assign('isEditor',1);
+        //$this->assign('isEditor',1);
+        $this->assign('isUeditor',1);
         $this->assign('isSelect2',1);
         $this->display();
     }
@@ -127,8 +129,8 @@ class ArticleController extends CommonController {
         if(!isset($_REQUEST['id'])) $this->error('文章不存在!','index');
         $articleid = $_REQUEST['id'];
         $article = D('article');
-        $data = $article->where($articleid)->find();
-        $data['title'] == $_POST['title'];
+        $data = $article->find($articleid);
+        $data['title'] = $_POST['title'];
         $data['pageh1'] = $_POST['pageh1'];
         $data['articlesource'] = $_POST['articlesource'];
         $data['content'] = addslashes($_POST['content']);

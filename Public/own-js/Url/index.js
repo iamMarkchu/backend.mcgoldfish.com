@@ -4,7 +4,7 @@
             var that = this;
             that.currentTable = MarkBase.MarkDT('#tbUrlList', {
                 "ajax": {
-                    "url": '/Home/Url/QueryData/',
+                    "url": '/Url/QueryData/',
                     "type": 'POST'
                 },
                 "columns": [
@@ -22,7 +22,7 @@
                     { "data": "lastupdatetime" },
                     { "data": "id",
                       "render": function (data, type, row) {
-                            return '<a href="/Home/Url/edit/id/'+data+'" class="edit">编辑</a>|<a href="/Home/Url/delete/id/'+data+'" class="delete">删除</a>'; 
+                            return '<a href="/Url/edit/id/'+data+'" class="edit">编辑</a>|<a href="/Url/delete/id/'+data+'" class="delete">删除</a>'; 
                         }
                     }
                 ]
@@ -33,7 +33,7 @@
         bindEvent: function () {
             var that = this;    
             $('#addUrl').click(function(e){
-                window.location.href="/Home/Url/add/";
+                window.location.href="/Url/add/";
             });
             $('#searchbutton').click(function (e) {
                 // var titleOrId,selectarticlesource,selectstatus,selectorderby;
@@ -49,7 +49,7 @@
                 // if ($('#selectorderby').val() != '-1') {
                 //     selectorderby = $('#selectorderby').val();
                 // }
-                var url = "/Home/Url/btn_Search";
+                var url = "/Url/btn_Search";
                 //var sendData = { titleOrId: titleOrId, selectarticlesource: selectarticlesource, selectstatus: selectstatus, selectorderby: selectorderby };
                 $.ajax({
                     url: url,

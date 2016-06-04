@@ -20,7 +20,7 @@ class NodeController extends CommonController {
     	$node->create();
     	$node->addtime = date("Y-m-d H:i:s");
     	$node->add();
-    	$this->success("添加成功","/Home/Node/index");
+    	$this->success("添加成功","index");
     }
     public function _before_add(){
         $this->assign('isSelect2',1);

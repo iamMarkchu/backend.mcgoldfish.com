@@ -4,7 +4,7 @@
             var that = this;
             that.currentTable = MarkBase.MarkDT('#tbCategoryList', {
                 "ajax": {
-                    "url": '/Home/Category/QueryData/',
+                    "url": '/Category/QueryData/',
                     "type": 'POST'
                 },
                 "columns": [
@@ -20,7 +20,7 @@
                     { "data": "displayorder" },
                     { "data": "id",
                       "render": function (data, type, row) {
-                            return '<a href="/Home/Category/edit/id/'+data+'" class="edit">编辑</a>|<a href="/Home/Category/delete/id/'+data+'" class="delete">删除</a>'; 
+                            return '<a href="/Category/edit/id/'+data+'" class="edit">编辑</a>|<a href="/Category/delete/id/'+data+'" class="delete">删除</a>'; 
                         }
                     }
                 ]
@@ -31,7 +31,7 @@
         bindEvent: function () {
             var that = this;    
             $('#addCategory').click(function(e){
-                window.location.href="/Home/Category/add/";
+                window.location.href="/Category/add/";
             });
             $('#searchbutton').click(function (e) {
                 // var titleOrId,selectarticlesource,selectstatus,selectorderby;
@@ -47,7 +47,7 @@
                 // if ($('#selectorderby').val() != '-1') {
                 //     selectorderby = $('#selectorderby').val();
                 // }
-                var url = "/Home/Category/btn_Search";
+                var url = "/Category/btn_Search";
                 //var sendData = { titleOrId: titleOrId, selectarticlesource: selectarticlesource, selectstatus: selectstatus, selectorderby: selectorderby };
                 $.ajax({
                     url: url,
