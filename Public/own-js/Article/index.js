@@ -50,7 +50,11 @@
                     },
                     { "data": "addtime",
                         "render": function(data,type,row){
-                          return data+"<br/>"+row.lastupdatetime;
+                            var returnString = data+"<br/>";
+                            var myDate = new Date();
+
+                            returnString += row.lastupdatetime;
+                            return returnString;
                         }
                     },
                     {"data": "id",

@@ -14,38 +14,38 @@
                 <div class="row-fluid">
                     <!--BEGIN SEARCH-->
                     <input type="hidden" id="noAjax" value="{$noAjax}"/>
-                    <div class="span1">
+                    <div class="span2">
                         <div class="controls">
                             <input type="text" id="search_id_or_title" name="search_id_or_title" class="m-wrap small" placeholder="id或者title" value="{$searchArray.where.titleOrId}" />
                         </div>
                     </div>
-                    <div class="span1">
+                    <div class="span2">
                         <div class="controls">
                               <select id="selectarticlesource" class="m-wrap small" placeholder="文章来源">
                                   <option value="-1">文章来源</option>
-                                  <option value="原创" <eq name="$searchArray.where.articlesource" value="原创">selected="true"</eq>>原创</option>
-                                  <option value="转载" <eq name="$searchArray.where.articlesource" value="转载">selected="true"</eq>>转载</option>
+                                  <option value="原创" <eq name="searchArray.where.articlesource" value="原创">selected="true"</eq>>原创</option>
+                                  <option value="转载" <eq name="searchArray.where.articlesource" value="转载">selected="true"</eq>>转载</option>
                               </select>
                         </div>
                     </div>
-                    <div class="span1">
+                    <div class="span2">
                         <div class="controls">
                               <select id="selectstatus" class="m-wrap small" placeholder="文章状态">
                                   <option value="-1">文章状态</option>
-                                  <option value="active" <eq name="$searchArray.where.status" value="active">selected="selected"</eq>>active</option>
-                                  <option value="deleted" <eq name="$searchArray.where.status" value="deleted">selected="selected"</eq>>deleted</option>
-                                  <option value="republish" <eq name="$searchArray.where.status" value="republish">selected="selected"</eq>>republish</option>
+                                  <option value="active" <eq name="searchArray.where.status" value="active">selected="selected"</eq>>active</option>
+                                  <option value="deleted" <eq name="searchArray.where.status" value="deleted">selected="selected"</eq>>deleted</option>
+                                  <option value="republish" <eq name="searchArray.where.status" value="republish">selected="selected"</eq>>republish</option>
                               </select>
                         </div>
                     </div>
-                    <div class="span1">
+                    <div class="span2">
                         <div class="controls">
                               <select id="selectorderby" class="m-wrap small" placeholder="文章排序">
                                   <option value="-1">文章排序</option>
-                                  <option value="id">by id asc</option>
-                                  <option value="id desc">by id desc</option>
-                                  <option value="maintainorder asc">by maintainorder asc</option>
-                                  <option value="maintainorder desc">by maintainorder desc</option>
+                                  <option value="id"  <eq name="searchArray.order" value="id">selected="selected"</eq>>by id asc</option>
+                                  <option value="id desc" <eq name="searchArray.order" value="id desc">selected="selected"</eq>>by id desc</option>
+                                  <option value="maintainorder asc" <eq name="searchArray.order" value="maintainorder asc">selected="selected"</eq>>by maintainorder asc</option>
+                                  <option value="maintainorder desc" <eq name="searchArray.order" value="maintainorder desc">selected="selected"</eq>>by maintainorder desc</option>
                               </select>
                         </div>
                     </div>

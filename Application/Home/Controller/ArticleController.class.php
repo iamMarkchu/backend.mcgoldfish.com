@@ -98,7 +98,7 @@ class ArticleController extends CommonController {
         $article = D('article');
         $result = $article->getById($articleid);
         $category = D('category');
-        $AllcateInfo =$category->getAllCategory();
+        $allCateInfo =$category->getAllCategory();
         $cateInfo = $category->getCategoryByIdAndType($articleid);
         $tag = D('tag');
         $allTagInfo = $tag->getAllTag();
@@ -116,7 +116,7 @@ class ArticleController extends CommonController {
         //变量传到前台
         $this->assign('result',$result);
         $this->assign('categoryid',$cateInfo['categoryid']);
-        $this->assign('AllcateInfo',$AllcateInfo);
+        $this->assign('allCateInfo',$allCateInfo);
         $this->assign('allTagInfo',$allTagInfo);
         $this->assign('pageMetaInfo',$pageMetaInfo);
         //加载插件

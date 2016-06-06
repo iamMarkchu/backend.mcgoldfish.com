@@ -30,7 +30,8 @@ return array(
     'URL_MODEL' => '2',
     'URL_HTML_SUFFIX'       =>  'html',
     /*图片路径*/
-    'IMG_SAVE_PATH' => './uploads/fengmian',
+    //'IMG_SAVE_PATH' => '/app/site/mark-ubuntu/web/backend.mcgoldfish.com/Public',
+    'IMG_SAVE_PATH' => '/app/site/mark-ubuntu/web/backend.mcgoldfish.com/Public',
     /*按钮文字*/
     'SAVE_BUTTON'  => '<i class="icon-ok"></i>保存',
     'CANCEL_BUTTON'  => '&nbsp取消',
@@ -44,5 +45,5 @@ return array(
     'NEW_ARTICLE_MESSAGE' =>'新文章待审核!',
     /*网站常量*/
     'BACKEND_SITE' => 'backend.mcgoldfish.com',
-    
+    'SITE_VERSION' => '1.0.0.01',
 );

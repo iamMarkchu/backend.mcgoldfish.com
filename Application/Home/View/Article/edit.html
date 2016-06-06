@@ -68,7 +68,7 @@
                                             <div class="controls">
                                                 <select multiple="multiple" id="tag_multi_select2" data-placeholder="标签选择" class="chosen span3 chzn-done" tabindex="-1"  name="tag_multi_select2[]">
                                                     <volist name="allTagInfo" id="vo">
-                                                        <option value='{$vo.id}' <eq name="$vo.selected" value="1">selected="selected"</eq>>{$vo.displayname}</option>
+                                                        <option value='{$vo.id}' <eq name="vo.selected" value="1">selected="selected"</eq>>{$vo.displayname}</option>
                                                     </volist>
                                                 </select>
                                                 &nbsp<a href="#" id="addOneTag" class="btn red">{$Think.config.ADD_BUTTON}一个新标签</a>
@@ -82,7 +82,7 @@
                                                     <volist name="allCateInfo" id="vo">
                                                         <optgroup label="{$vo.displayname}">
                                                             <volist name="vo.child" id="vovo">
-                                                                <option value='{$vovo.id}' >{$vovo.displayname}</option>
+                                                                <option value='{$vovo.id}' <eq name="vovo.id" value="$categoryid">selected="selected"</eq>>{$vovo.displayname}</option>
                                                             </volist>
                                                         </optgroup>    
                                                     </volist>
