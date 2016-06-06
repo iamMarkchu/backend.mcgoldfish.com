@@ -104,7 +104,8 @@
                     <!-- END TODO DROPDOWN -->
                     <!-- BEGIN USER LOGIN DROPDOWN -->
                     <li class="dropdown user"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img alt="" src="__PUBLIC__/media/image/avatar1_small.jpg" />
+                        <img alt="" src="__PUBLIC__{$Think.Session.userImage}" />
+                        &nbsp
                         <span class="username">{$Think.Session.loginUserName}</span><i class="icon-angle-down"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="{:U('Public/changepwd')}"><i class="icon-user"></i>修改密码</a></li>

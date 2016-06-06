@@ -8,11 +8,55 @@
                     "type": 'POST'
                 },
                 "columns": [
-                    { "data": "id"}
+                    { "data": "id"},
+                    { "data": "username"},
+                    { "data": "parentname",
+                        "render": function(data,type,row){
+                            var returnString = '';
+                            if(data != null){
+                                returnString += "回复给:" + data +"<br>"+"内容: ";
+                            }
+                            returnString += row.content;
+                            return returnString;
+                         }
+                    },
+                    { "data": "status",
+                        "render": function(data,type,row){
+                            if(data == 'active'){
+                                return '<span class="label label-success">'+data+'</span>';
+                                //return '<span style="color:green;">'+data+'</span>';
+                            }else if(data == 'republish'){
+                                return '<span class="label label-info">'+data+'</span>';
+                                //return '<span style="color:red;">'+data+'</span>';
+                            }else{
+                                return '<span class="label label-danger">'+data+'</span>';
+                                //return data;
+                            }
+                        }
+                    },
+                    { "data": "title",
+                        "render":function(data,type,row){
+                            return '<a href="http://mcgoldfish.com'+row.requestpath+'" title="查看文章">'+data+'</a>';
+                        }
+                    },
+                    { "data": "addtime"},
+                    {"data": "id",
+                        "render": function (data, type, row) {
+                            var str ='<a href="/Article/edit/id/'+data+'">编辑</a>|' ;
+                            if(row.status == 'republish'){
+                                str += '<a href="/Article/publish/id/'+data+'">发布</a>|';
+                            }
+                            if(row.status != 'deleted'){
+                                str += '<a href="#" class="deleteArticle" data-id="'+data+'">移动到回收站</a>';
+                            }else{
+                                str += '<a href="#" class="resumeArticle" data-id="'+data+'">恢复</a>';
+                            }
+                            return str;
+                        }
+                    }
                 ]
             });
             that.bindEvent();
-            that.initChat();
         },
         currentTable: null,
         bindEvent: function () {
@@ -48,42 +92,7 @@
                 });
             });
 
-        },
-        initChat: function () {
-            var cont = $('#chats');
-            var list = $('.chats', cont);
-            var form = $('.chat-form', cont);
-            var input = $('input', form);
-            var btn = $('.btn', form);
-            var handleClick = function (e) {
-                e.preventDefault();
-                
-                var text = input.val();
-                if (text.length == 0) {
-                    return;
-                }
-
-                var time = new Date();
-                var time_str = time.toString('MMM dd, yyyy hh:mm');
-                var tpl = '';
-                tpl += '<li class="out">';
-                tpl += '<img class="avatar" alt="" src="assets/img/avatar1.jpg"/>';
-                tpl += '<div class="message">';
-                tpl += '<span class="arrow"></span>';
-                tpl += '<a href="#" class="name">Bob Nilson</a>&nbsp;';
-                tpl += '<span class="datetime">at ' + time_str + '</span>';
-                tpl += '<span class="body">';
-                tpl += text;
-                tpl += '</span>';
-                tpl += '</div>';
-                tpl += '</li>';
-
-                var msg = list.append(tpl);
-                input.val("");
-                $('.scroller', cont).slimScroll({
-                    scrollTo: list.height()
-                });
-            }
+        }
     };
     $(function () {
         CommentindexManager.init();

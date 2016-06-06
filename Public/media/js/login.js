@@ -55,7 +55,8 @@ var Login = function () {
 	        $('.login-form input').keypress(function (e) {
 	            if (e.which == 13) {
 	                if ($('.login-form').validate().form()) {
-	                    window.location.href = "index.html";
+	                	$('.login-form').submit();
+	                    //window.location.href = "index.html";
 	                }
 	                return false;
 	            }
@@ -105,7 +106,8 @@ var Login = function () {
 	        $('.forget-form input').keypress(function (e) {
 	            if (e.which == 13) {
 	                if ($('.forget-form').validate().form()) {
-	                    window.location.href = "index.html";
+	                	$('.forget-form').submit();
+	                    //window.location.href = "index.html";
 	                }
 	                return false;
 	            }

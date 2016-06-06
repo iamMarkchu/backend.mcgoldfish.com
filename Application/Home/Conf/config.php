@@ -41,9 +41,15 @@ return array(
     'EDIT_BUTTON' =>  '<i class="icon-edit"></i>&nbsp修改',
     'DELETE_BUTTON' =>  '<i class="icon-trash"></i>&nbsp删除',
     'COMFIRM_BUTTON' => '确定',
+    'LISTNAME' => '列表',
+    'ADDNAME' => 'add',
+    'EDITNAME' => 'edit',
+    'DELETENAME' => 'delete',
     /*提示文字*/
     'NEW_ARTICLE_MESSAGE' =>'新文章待审核!',
     /*网站常量*/
     'BACKEND_SITE' => 'backend.mcgoldfish.com',
     'SITE_VERSION' => '1.0.0.01',
+    'PORLET_COLOR' => 'blue',
+    'SEARCH_BUTTON_COLOR' =>'blue'
 );

@@ -1,6 +1,6 @@
 <div class="row-fluid">
     <div class="span12">
-        <div class="portlet box blue">
+        <div class="portlet box {$Think.config.PORLET_COLOR}">
             <div class="portlet-title">
                 <div class="caption">
                     {$Think.config.EDIT_BUTTON}用户
@@ -30,6 +30,13 @@
                                     <div class="controls">
                                         <input type="text" placeholder="用户昵称" class="m-wrap large"  name="nickname" value="{$result.nickname}"/>
                                         <span class="help-inline">不能为空</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">用户头像</label>
+                                    <div class="controls">
+                                        <input type="file" name="imgFile" />
+                                        <span class="help-inline"></span>
                                     </div>
                                 </div>
                                 <div class="control-group">

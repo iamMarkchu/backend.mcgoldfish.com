@@ -12,6 +12,11 @@ class PublicController extends CommonController {
 	// 用户登录页面
 	public function login() {
 		if(!isset($_SESSION[C('USER_AUTH_KEY')])) {
+			$isRemmberInfo = cookie('saveUser');
+			if(!empty($isRemmberInfo)){
+				$this->assign('saveUser',cookie('saveUser'));
+				$this->assign('remember',1);
+			}
 			$this->assign('isLogin',1);
 			$this->display();
 		}else{
@@ -53,11 +58,17 @@ class PublicController extends CommonController {
             $_SESSION[C('USER_AUTH_KEY')]	=	$authInfo['id'];
             $_SESSION['email']	=	$authInfo['email'];
             $_SESSION['loginUserName']		=	$authInfo['nickname'];
+            $_SESSION['userImage']		=	$authInfo['image'];
             $_SESSION['lastLoginTime']		=	$authInfo['last_login_time'];
 			$_SESSION['login_count']	=	$authInfo['login_count'];
             if($authInfo['account']=='admin') {
             	$_SESSION['administrator']		=	true;
             }
+            if(isset($_POST['remember'])){
+            	$saveUser['account'] = $_POST['account'];
+            	$saveUser['password'] = $_POST['password'];
+            	cookie('saveUser',$saveUser);
+            } 
             //保存登录信息
 			$User	=	M('User');
 			$ip		=	get_client_ip();

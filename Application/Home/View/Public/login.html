@@ -61,7 +61,7 @@
 				<div class="controls">
 					<div class="input-icon left">
 						<i class="icon-user"></i>
-						<input class="m-wrap placeholder-no-fix" type="text" placeholder="用户名" name="account"/>
+						<input class="m-wrap placeholder-no-fix" type="text" placeholder="用户名" name="account" value="{$saveUser.account}" />
 					</div>
 				</div>
 			</div>
@@ -70,7 +70,7 @@
 				<div class="controls">
 					<div class="input-icon left">
 						<i class="icon-lock"></i>
-						<input class="m-wrap placeholder-no-fix" type="password" placeholder="密码" name="password"/>
+						<input class="m-wrap placeholder-no-fix" type="password" placeholder="密码" name="password" value="{$saveUser.password}"/>
 					</div>
 				</div>
 			</div>
@@ -88,7 +88,7 @@
 			</div>
 			<div class="form-actions">
 				<label class="checkbox">
-					<input type="checkbox" name="remember" value="1"/> 记住我
+					<input type="checkbox" name="remember" value="1" <eq name="remember" value="1">checked="checked"</eq>/> 记住我
 				</label>
 				<button type="submit" class="btn green pull-right">
 				登录 <i class="m-icon-swapright m-icon-white"></i>

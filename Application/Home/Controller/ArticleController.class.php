@@ -43,8 +43,9 @@ class ArticleController extends CommonController {
         $article->tip = C('NEW_ARTICLE_MESSAGE');
         $article->addtime = date("Y-m-d H:i:s");
         if(!empty($_FILES['imgFile']['name'])){
-            $imgFile = ImgUpload();
-            $article->image = $imgFile['savename'];
+            $path = '/article/';
+            $imgFile = ImgUpload($path);
+            $article->image = $imgFile['savepath'].$imgFile['savename'];
         }
         $articleid = $article->add();
         if($articleid){
@@ -137,7 +138,8 @@ class ArticleController extends CommonController {
         $data['maintainorder'] = $_POST['maintainorder'];
         $data['articlesource'] = $_POST['articlesource'];
         if(!empty($_FILES['imgFile']['name'])){
-            $imgFile = ImgUpload();
+            $path = '/article/';
+            $imgFile = ImgUpload($path);
             $data['image'] = $imgFile['savename'];
         }
         $article->create($data);
@@ -156,6 +158,30 @@ class ArticleController extends CommonController {
             $cateogyMapping->isprimary = 'yes';
             $cateogyMapping->addtime = date("Y-m-d H:i:s");
             $cateogyMapping->add();   
+        }
+        //tag处理,删除原有标签，保存post过来的标签
+        $tagMapping = D('tagMapping');
+        $tagMappingData = $tagMapping->where("optdataid = {$articleid} and datatype = 'article'")->find();
+        if(!empty($tagMappingData)){
+            foreach ($tagMappingData as $k => $v) {
+                $tagMapping->delete($v['id']);
+            }
+        }
+        if(isset($_POST['tag_multi_select2'])){
+            $tagMapping->create();
+            foreach ($_POST['tag_multi_select2'] as $k => $v) {
+                $data = array();
+                $data['optdataid'] = $articleid;
+                $data['datatype'] = 'article';
+                if($k == 0){
+                    $data['isprimary'] = 'yes';
+                }else{
+                    $data['isprimary'] = 'no';
+                }
+                $data['addtime'] = date("Y-m-d H:i:s");
+                $data['tagid'] = $v;
+                $tagMapping->add($data);
+            }
         }
         $this->success("编辑成功","index");
     }

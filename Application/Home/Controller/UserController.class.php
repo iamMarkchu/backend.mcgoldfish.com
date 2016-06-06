@@ -42,6 +42,16 @@ class UserController extends CommonController {
     	$user->create();
     	$user->password = md5("123456");
     	$user->addtime = date("Y-m-d H:i:s");
+        if(!empty($_FILES['imgFile']['name'])){
+            $path = '/user/';
+            $imgFile = ImgUpload($path);
+            $imageObj = new \Think\Image(); 
+            $abPath = C('IMG_SAVE_PATH').$imgFile['savepath'].$imgFile['savename'];
+            $imageObj->open($abPath);
+            // 按照原图的比例生成一个最大为150*150的缩略图并保存为thumb.jpg
+            $imageObj->thumb(9, 9)->save(C('IMG_SAVE_PATH').'/thumb/'.$imgFile['savename']);
+            $user->image = $imgFile['savepath'].'/thumb'.$imgFile['savename'];
+        }
     	$userid = $user->add();
         if($userid){
             $roleUser = D('role_user');
@@ -74,6 +84,16 @@ class UserController extends CommonController {
         $userid = $_REQUEST['id'];
         $user = D('user');
         $user->create();
+        if(!empty($_FILES['imgFile']['name'])){
+            $path = '/user/';
+            $imgFile = ImgUpload($path);
+            $imageObj = new \Think\Image(); 
+            $abPath = C('IMG_SAVE_PATH').$imgFile['savepath'].$imgFile['savename'];
+            $imageObj->open($abPath);
+            // 按照原图的比例生成一个最大为150*150的缩略图并保存为thumb.jpg
+            $imageObj->thumb(20, 20)->save(C('IMG_SAVE_PATH').'/thumb/'.$imgFile['savename']);
+            $user->image = '/thumb/'.$imgFile['savename'];
+        }
         $user->save();
         $sql = "delete from role_user where user_id = {$userid}";
         $user->execute($sql);
@@ -81,7 +101,7 @@ class UserController extends CommonController {
         $roleUser->create();
         $roleUser->user_id = $userid;
         $roleUser->add();
-        $this->success("编辑成功","/Home/User/index");
+        $this->success("编辑成功","/User/index");
     }
     public function btn_Search(){
         session('userSearch','');
