@@ -1,0 +1,52 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box {$Think.config.PORLET_COLOR}">
+            <div class="portlet-title">
+                <div class="caption">
+                    {$Think.config.ADD_BUTTON}{$conInfo.remark}
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="tab-pane">
+                            <!-- BEGIN FORM-->
+                            <form action="{:U('Finance/updateCsv')}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        消费信息</label>
+                                    <div class="controls">
+                                        <input type="text" placeholder="消费信息" class="m-wrap medium"  name="amount" />
+                                        <span class="help-inline">用逗号分隔,例如: 20,支出,在人民广场,when,炸鸡店,鸡排,mark,现金</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        添加一条模板</label>
+                                    <div class="controls">
+                                        <select name="moban">
+                                            <option value="0"></option>
+                                            <option value="1">地铁</option>
+                                            <option value="2">工资</option>
+                                            <option value="3">陆金所收益</option>
+                                        </select>
+                                        <span class="help-inline">用逗号分隔</span>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn blue">
+                                        {$Think.config.SAVE_BUTTON}</button>
+                                    <a href="{:U('Finance/index')}" class="btn">{$Think.config.CANCEL_BUTTON}</a>
+                                </div>
+                            </form>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

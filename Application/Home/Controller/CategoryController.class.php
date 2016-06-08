@@ -7,6 +7,7 @@ class CategoryController extends CommonController {
         $category->create();
         $category->addtime = date("Y-m-d H:i:s");
         $flag = $category->add();
+        $back = $category->find($flag);
         if($flag){
             $requestpath = "/category/{$flag}.html";
             $url = D('rewrite_url');
@@ -18,7 +19,7 @@ class CategoryController extends CommonController {
             $url->create($urlData);
             $flag = $url->add();
             if(IS_AJAX){
-                echo '1';
+                $this->ajaxReturn($back);
             }else{
                 $this->success("添加成功","index");
             }

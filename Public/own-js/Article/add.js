@@ -30,19 +30,19 @@
                     displayorder = $('#addArticleTag input[name=displayorder]').val();
                 }
                 //ajax 前端与后台沟通参数
-                var url = "/Home/Tag/insert";
+                var url = "/Tag/insert";
                 var sendData = { displayname: displayname, displayorder: displayorder};
                 //console.log(sendData);
                 $.ajax({
                     url: url,
                     data: sendData,
+                    dataType:'json',
                     type: 'POST',
                     success: function (data) {
-                        if (data == "1") {
-                            $("#addArticleTag").modal('hide');
-                            $('#alert-modal .alert-data-title').html('添加成功!');
-                            $('#alert-modal').modal();
-                        }
+                        $("#addArticleTag").modal('hide');
+                        $('#alert-modal .alert-data-title').html('添加成功!');
+                        $('#alert-modal').modal();
+                        $('#tag_multi_select2').append('<option value="'+data.id+'" selected="selected" >'+data.displayname+'</option>').trigger('change');
                     }
                 });
             });
@@ -59,18 +59,22 @@
                     displayorder = $('#addArticleCategory input[name=displayorder]').val();
                 }
                 //ajax 前端与后台沟通参数
-                var url = "Category/insert";
+                var url = "/Category/insert";
                 var sendData = { displayname: displayname, parentcategoryid: parentcategoryid, displayorder: displayorder};
                 //console.log(sendData);
                 $.ajax({
                     url: url,
                     data: sendData,
+                    dataType: 'json',
                     type: 'POST',
                     success: function (data) {
-                        if (data == "1") {
-                            $("#addArticleCategory").modal('hide');
-                            $('#alert-modal .alert-data-title').html('添加成功!');
-                            $('#alert-modal').modal();
+                        $("#addArticleCategory").modal('hide');
+                        $('#alert-modal .alert-data-title').html('添加成功!');
+                        $('#alert-modal').modal();
+                        if(data.parentcategoryid != ''){
+
+                        }else{
+                            $('#selOY2').append('<optgroup label="'+data.displayname+'" data-id="'+data.id+'"><option value="'+data.id+'" selected="selected" >'+data.displayname+'</option></<optgroup>').trigger('change');
                         }
                     }
                 });

@@ -64,7 +64,7 @@
                                     <div class="tab-pane" id="tab_1_2">
                                        <div class="control-group">
                                             <label class="control-label">标签选择</label>
-                                            <div class="controls">
+                                            <div class="controls tagclass">
                                                 <select multiple="multiple" id="tag_multi_select2" data-placeholder="标签选择" class="chosen span3 chzn-done" tabindex="-1"  name="tag_multi_select2[]">
                                                     <volist name="allTagInfo" id="vo">
                                                         <option value='{$vo.id}' >{$vo.displayname}</option>
@@ -79,7 +79,7 @@
                                                 <select data-placeholder="分类选择" class="chosen span3 chzn-done" tabindex="-1" id="selOY2" name="categoryid" style="display: none;">
                                                     <option></option>
                                                     <volist name="allCateInfo" id="vo">
-                                                        <optgroup label="{$vo.displayname}">
+                                                        <optgroup label="{$vo.displayname}" data-id="{$vo.id}">
                                                             <volist name="vo.child" id="vovo">
                                                                 <option value='{$vovo.id}' >{$vovo.displayname}</option>
                                                             </volist>

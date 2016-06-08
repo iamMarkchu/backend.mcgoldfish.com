@@ -1,0 +1,76 @@
+<!-- BEGIN SEARCHBAR-->
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box {$Think.config.PORLET_COLOR}">
+            <div class="portlet-title">
+                <div class="caption">
+                    {$Think.config.SEARCH_AERA}
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+            </div>
+            <div class="portlet-body form" >
+                <div class="row-fluid">
+                    <!--BEGIN SEARCH-->
+                    <input type="hidden" id="noAjax" value="{$noAjax}"/>
+                    <div class="span2">
+                        <div class="controls">
+                            <input type="text" id="search_id_or_title" name="search_id_or_title" class="m-wrap small" placeholder="id或者title" value="{$searchArray.where.titleOrId}" />
+                        </div>
+                    </div>
+                    <div class="span1">
+                        <div class="btn-group">
+                            <button class="btn {$Think.config.SEARCH_BUTTON_COLOR}" id="searchbutton">{$Think.config.SEARCH_BUTTON}</button>
+                        </div>
+                    </div>
+                </div>
+                    <!--END SEARCH-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END SEARCHBAR-->
+<!-- BEGIN CONTENT-->
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box {$Think.config.PORLET_COLOR}">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-list"></i>{$conInfo.remark}{$Think.config.LISTNAME}
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row-fluid">
+                    <div class="span12">
+                         <div class="btn-group">
+                            <button class="btn green" id="{$Think.config.ADDNAME}{$conInfo.name}">{$Think.config.ADD_BUTTON}{$conInfo.remark}</button>
+                         </div>
+                         <div class="btn-group">
+                            <button class="btn" id="{$Think.config.EDITNAME}{$conInfo.name}">{$Think.config.EDIT_BUTTON}{$conInfo.remark}</button>
+                         </div>
+                         <div class="btn-group">
+                            <button class="btn" id="{$Think.config.DELETENAME}{$conInfo.name}">{$Think.config.DELETE_BUTTON}{$conInfo.remark}</button>
+                         </div>
+                    </div>
+                </div>
+                <table class="display" id="tb{$conInfo.name|strtolower}List">
+                    <thead>
+                        <tr>
+                            <th>
+                                编号
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END CONTENT-->

@@ -7,6 +7,7 @@ class TagController extends CommonController {
         $tag->create();
         $tag->addtime = date("Y-m-d H:i:s");
         $flag = $tag->add();
+        $back = $tag->find($flag);
         if($flag){
             $requestpath = "/tag/{$flag}.html";
             $url = D('rewrite_url');
@@ -18,7 +19,7 @@ class TagController extends CommonController {
             $url->create($urlData);
             $flag = $url->add();
             if(IS_AJAX){
-                echo "1";
+                $this->ajaxReturn($back);
             }else{
                 $this->success("添加成功","index");
             }
