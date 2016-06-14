@@ -23,6 +23,14 @@
                                         <span class="help-inline">不能为空</span>
                                     </div>
                                 </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        地点</label>
+                                    <div class="controls">
+                                        <input type="text" placeholder="地点" class="m-wrap medium"  name="where" />
+                                        <span class="help-inline">不能为空</span>
+                                    </div>
+                                </div>
                                <div class="control-group">
                                     <label class="control-label">类型</label>
                                     <div class="controls">
@@ -37,13 +45,14 @@
                                 <div class="control-group">
                                     <label class="control-label">
                                         商家</label>
-                                    <div class="controls">
-                                        <select name="belong">
-                                            <volist name="allAssetInfo" id="vo">
+                                    <div class="controls" >
+                                        <select name="merchant" data-placeholder="商家选择" class="chosen span3 chzn-done" tabindex="-1">
+                                            <option value=""></option>
+                                            <volist name="allMerchnatInfo" id="vo">
                                                 <option value="{$vo.name}">{$vo.name}</option>
                                             </volist>
                                         </select>
-                                        <input type="text" placeholder="商家" class="m-wrap medium hide"  name="merchant" />
+                                        &nbsp<a href="#" id="addOneMerchant" class="btn green">{$Think.config.ADD_BUTTON}商家</a>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -58,12 +67,12 @@
                                     <label class="control-label">
                                         来源</label>
                                     <div class="controls">
-                                        <select name="belong">
+                                        <select name="belong" name="merchant" data-placeholder="商家选择" class="chosen span3 chzn-done" tabindex="-1">
                                             <volist name="allAssetInfo" id="vo">
                                                 <option value="{$vo.name}">{$vo.name}</option>
                                             </volist>
                                         </select>
-                                        <span class="help-inline">不能为空</span>
+                                        &nbsp<a href="#" id="addOneBelong" class="btn green">{$Think.config.ADD_BUTTON}来源</a>
                                     </div>
                                 </div>
                                 <div class="form-actions">
@@ -80,3 +89,5 @@
         </div>
     </div>
 </div>
+<include file="Public:modal-merchant-add" />
+<include file="Public:modal-alert" />

@@ -136,7 +136,7 @@ class CommonController extends Controller {
         $list=$model->add ();
         if ($list!==false) { 
             if(IS_AJAX){
-                echo "1";
+                $this->ajaxReturn($model->find($list));
             }else{
                 $this->success ('新增成功!','index');
             }

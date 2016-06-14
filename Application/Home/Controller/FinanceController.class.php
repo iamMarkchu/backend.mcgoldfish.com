@@ -25,10 +25,30 @@ class FinanceController extends CommonController {
         $jsonBack['recordsTotal'] = $count;
         $this->ajaxReturn($jsonBack);
     }
+    public function QueryData(){
+        $start = $_POST['start'];
+        $length = $_POST['length'];
+        $map = array();
+        $model = D(CONTROLLER_NAME);
+        $searchArray = session(CONTROLLER_NAME.'Search');
+        if(isset($searchArray['where'])) $map = $searchArray['where'];
+        if(isset($searchArray['order'])) $order = $searchArray['order'];
+        $result = $model->order('`when` desc')->limit($start,$length)->select();
+        $count = $model->count();
+        $jsonBack = array();
+        $jsonBack['data'] = $result;
+        $jsonBack['recordsFiltered'] = $count;
+        $jsonBack['recordsTotal'] = $count;
+        $this->ajaxReturn($jsonBack);
+    }
     public function _before_add(){
     	$asset = D('asset');
+        $merchant = D('merchant');
     	$allAssetInfo = $asset->select();
+        $allMerchnatInfo = $merchant->select();
+        $this->assign('isSelect2',1);
     	$this->assign('allAssetInfo',$allAssetInfo);
+        $this->assign('allMerchnatInfo',$allMerchnatInfo);
     }
     public function indexCsv(){
         $this->display();

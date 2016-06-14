@@ -3,7 +3,7 @@ if(!defined("__CONST__"))
 {
 	define("__CONST__", 1);
 
-	define("TIME_ZONE", "Asia/ShangHai");
+	//define("TIME_ZONE", "Asia/PRC");
 	date_default_timezone_set(TIME_ZONE);
 
 	define('INCLUDE_ROOT', dirname(dirname(__FILE__)) . "/");
@@ -14,7 +14,6 @@ if(!defined("__CONST__"))
 	define("BASE_DB_USER", "root");
 	define("BASE_DB_PASS", "chukui");
 	define("BASE_DB_NAME", "chukui_base");
-
 	define("MYSQL_ENCODING","utf8");
 }
 
