@@ -24,8 +24,7 @@ class PublicController extends CommonController {
 		}
 	}
 
-	public function index()
-	{
+	public function index() {
 		//如果通过认证跳转到首页
 		redirect(__APP__);
 	}
@@ -88,6 +87,9 @@ class PublicController extends CommonController {
 	public function verify()
     {
         $r = new \Think\Verify();
+        $r->__set('codeSet','1');
+        $r->__set('length',3);
+        $r->__set('useImgBg',true);
         $r->entry();
     }
     public function check_verify($code, $id = ''){

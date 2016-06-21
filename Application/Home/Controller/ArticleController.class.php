@@ -23,6 +23,8 @@ class ArticleController extends CommonController {
     public function QueryData(){
     	$start = $_POST['start'];
     	$length = $_POST['length'];
+        //$start = 0;
+        //$length = 10;
     	$searchArray = session('articleSearch');
         if(isset($searchArray['where'])) $map = $searchArray['where'];
         if(isset($searchArray['order'])) $order = $searchArray['order'];
@@ -52,7 +54,7 @@ class ArticleController extends CommonController {
             //添加url信息
             $url = D('rewrite_url');
             $requestPath = "/article/{$articleid}.html";
-            $urlData['requestpath'] = $requestPath;
+            $urlData['requestpath'] = isset($_POST['requestPath'])?$_POST['requestPath']:$requestPath;
             $urlData['Modeltype'] = "文章";
             $urlData['optdataid'] = $articleid;
             $urlData['isjump'] = "NO";
@@ -114,12 +116,15 @@ class ArticleController extends CommonController {
         $pageMeta = D('page_meta');
         $where = "optdataid = {$articleid} and `status` = 'yes' and modeltype='article'";
         $pageMetaInfo = $pageMeta->where($where)->find();
+        $url = D('rewrite_url');
+        $urlInfo = $url->where($where)->find();
         //变量传到前台
         $this->assign('result',$result);
         $this->assign('categoryid',$cateInfo['categoryid']);
         $this->assign('allCateInfo',$allCateInfo);
         $this->assign('allTagInfo',$allTagInfo);
         $this->assign('pageMetaInfo',$pageMetaInfo);
+        $this->assign('urlInfo',$urlInfo);
         //加载插件
         //$this->assign('isEditor',1);
         $this->assign('isUeditor',1);
@@ -144,6 +149,9 @@ class ArticleController extends CommonController {
         }
         $article->create($data);
         $article->save();
+        //url信息
+        $url = D('rewrite_url');
+        
         //保存category信息(逻辑删除原有category_mapping然后添加新category_mapping)
         //添加分类信息
         $cateogyMapping = D('category_mapping');

@@ -12,7 +12,11 @@
                     { "data": "id"},
                     { "data": "title",
                         "render": function(data,type,row){
-                            return '<a href="http://mcgoldfish.com'+row.requestpath+'" title="查看文章">'+data+'</a>'  
+                            if(row.requestpath == null){
+                                return data;
+                            }else{  
+                                return '<a href="http://mcgoldfish.com'+row.requestpath+'" title="查看文章">'+data+'</a>';
+                            }
                         }
                     },
                     { "data": "status",
