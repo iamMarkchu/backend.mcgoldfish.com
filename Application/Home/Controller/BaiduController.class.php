@@ -10,6 +10,7 @@ class BaiduController extends CommonController {
         $data['keyword'] = $keyword;
         $data['addtime'] = date('Y-m-d H:i:s');
         $data['who'] = $_SESSION['loginUserName'];
+        $data['search_ip'] = get_client_ip();
         $flag = $my_search_keyword->add($data);
         echo $flag;
     }
