@@ -1,0 +1,64 @@
+{__NOLAYOUT__}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>百度搜索</title>
+</head>
+<body>
+	<div>
+		<form onsubmit="return baiduWithHttps(this)" class="baiduForm" action="http://www.baidu.com/baidu" target="_blank">
+		    <input name="tn" type="hidden" value="SE_zzsearchcode_shhzc78w">
+		    <a href="https://www.baidu.com/" target="_blank">
+		        <img src="https://www.baidu.com/img/baidu_jgylogo3.gif" alt="Baidu" align="bottom" border="0">
+		    </a>
+		    <input type="text"  onfocus="checkHttps" name="word" id="keyword"  size="30">
+		    <input type="submit" value="百度搜索">
+		</form>
+	</div>
+</body>
+<script src="//cdn.bootcss.com/jquery/2.2.2/jquery.min.js"></script>
+<script src="http://s1.bdstatic.com/r/www/cache/global/js/BaiduHttps_20150714_zhanzhang.js"></script>
+<script charset="gbk" src="http://www.baidu.com/js/opensug.js"></script>
+<script>
+    function checkHttps () {
+        BaiduHttps.useHttps();    
+    };
+    function baiduWithHttps (formname) {
+        var data = BaiduHttps.useHttps();
+        var myKeyword = $('#keyword').val();
+        if(myKeyword != '' || myKeyword != undefined){
+        	var sendData = {keyword:myKeyword};
+            var sendUrl = '/Baidu/saveKeyword/';
+        	$.ajax({
+                    url: sendUrl,
+                    data: sendData,
+                    type: 'POST'
+            });
+        }
+        if (data.s === 0){
+            return true;
+        }else{
+            formname.action = 'https://www.baidu.com/baidu' + '?ssl_s=1&ssl_c' + data.ssl_code;
+            return true;
+        }
+    };
+    function show(str){  
+        $('#keyword').val(str);
+        $('.baiduForm').submit();
+    }
+    var params = {
+	    "XOffset": 0,     // 提示框位置横向偏移量,单位px
+	    "YOffset": 0,     // 提示框位置纵向偏移量,单位px
+	    "width": 350,     // 提示框宽度，单位px
+	    "fontColor": "#03c",     // 提示框文字颜色
+	    "fontColorHI": "#FFF",     // 提示框高亮选择时文字颜色
+	    "fontSize": "12px",     // 文字大小
+	    "fontFamily": "宋体",     // 文字字体
+	    "borderColor": "#03c",     // 提示框的边框颜色
+	    "bgcolorHI": "#fd0",     // 提示框高亮选择的颜色
+	    "sugSubmit": false     // 选中提示框中词条时是否提交表单
+	}
+    BaiduSuggestion.bind('keyword',params,show); 
+</script>
+</html>

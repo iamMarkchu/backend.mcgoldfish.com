@@ -1,10 +1,10 @@
 <div id="delete-modal" class="modal hide fade in" style="display: none; ">
     <div class="modal-header">
         <h3>确认删除?</h3>
-        <input type="hidden" name="articleid" value="" />
+        <input type="hidden" name="{$conInfo.name|strtolower}id" value="" />
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn blue" id="deleteForArticle">{$Think.config.COMFIRM_BUTTON}</a>
+        <a href="#" class="btn blue" id="deleteFor{$conInfo.name}">{$Think.config.COMFIRM_BUTTON}</a>
         <a href="#" class="btn" data-dismiss="modal">{$Think.config.CANCEL_BUTTON}</a>
     </div>
 </div>

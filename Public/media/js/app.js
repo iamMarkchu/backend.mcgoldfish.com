@@ -338,22 +338,22 @@ var App = function () {
         });
 
         // handle the search submit
-        $('.sidebar-search .submit').on('click', function (e) {
-            e.preventDefault();
+        // $('.sidebar-search .submit').on('click', function (e) {
+        //     e.preventDefault();
           
-                if ($('body').hasClass("page-sidebar-closed")) {
-                    if ($('.sidebar-search').hasClass('open') == false) {
-                        if ($('.page-sidebar-fixed').size() === 1) {
-                            $('.page-sidebar .sidebar-toggler').click(); //trigger sidebar toggle button
-                        }
-                        $('.sidebar-search').addClass("open");
-                    } else {
-                        window.location.href = "extra_search.html";
-                    }
-                } else {
-                    window.location.href = "extra_search.html";
-                }
-        });
+        //         if ($('body').hasClass("page-sidebar-closed")) {
+        //             if ($('.sidebar-search').hasClass('open') == false) {
+        //                 if ($('.page-sidebar-fixed').size() === 1) {
+        //                     $('.page-sidebar .sidebar-toggler').click(); //trigger sidebar toggle button
+        //                 }
+        //                 $('.sidebar-search').addClass("open");
+        //             } else {
+        //                 window.location.href = "extra_search.html";
+        //             }
+        //         } else {
+        //             window.location.href = "extra_search.html";
+        //         }
+        // });
     }
 
     var handleHorizontalMenu = function () {

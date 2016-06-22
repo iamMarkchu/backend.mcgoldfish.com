@@ -156,8 +156,8 @@ class CommonController extends Controller {
         $searchArray = session(CONTROLLER_NAME.'Search');
         if(isset($searchArray['where'])) $map = $searchArray['where'];
         if(isset($searchArray['order'])) $order = $searchArray['order'];
-        $result = $model->limit($start,$length)->select();
-        $count = $model->count();
+        $result = $model->where($map)->order($order)->limit($start,$length)->select();
+        $count = $model->where($map)->order($order)->count();
         $jsonBack = array();
         $jsonBack['data'] = $result;
         $jsonBack['recordsFiltered'] = $count;
