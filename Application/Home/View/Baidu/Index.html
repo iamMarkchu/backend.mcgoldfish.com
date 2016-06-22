@@ -5,14 +5,17 @@
 	<meta charset="UTF-8">
 	<title>百度搜索</title>
 </head>
+<style type="text/css">
+	.wrap{width: 800px;margin: 0 auto;text-align: center;}
+</style>
 <body>
-	<div>
+	<div class="wrap">
 		<form onsubmit="return baiduWithHttps(this)" class="baiduForm" action="http://www.baidu.com/baidu" target="_blank">
+			<p><a href="https://www.baidu.com/" target="_blank">
+		        <img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png" alt="Baidu" width="270" height="129">
+		    </a></p>
 		    <input name="tn" type="hidden" value="SE_zzsearchcode_shhzc78w">
-		    <a href="https://www.baidu.com/" target="_blank">
-		        <img src="https://www.baidu.com/img/baidu_jgylogo3.gif" alt="Baidu" align="bottom" border="0">
-		    </a>
-		    <input type="text"  onfocus="checkHttps" name="word" id="keyword"  size="30">
+		    <input type="text"  onfocus="checkHttps" name="word" id="keyword" maxlength="100" autocomplete="off">
 		    <input type="submit" value="百度搜索">
 		</form>
 	</div>
@@ -21,6 +24,7 @@
 <script src="http://s1.bdstatic.com/r/www/cache/global/js/BaiduHttps_20150714_zhanzhang.js"></script>
 <script charset="gbk" src="http://www.baidu.com/js/opensug.js"></script>
 <script>
+	$('#keyword').focus();
     function checkHttps () {
         BaiduHttps.useHttps();    
     };
