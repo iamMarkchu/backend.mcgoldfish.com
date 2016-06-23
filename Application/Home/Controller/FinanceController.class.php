@@ -50,6 +50,14 @@ class FinanceController extends CommonController {
     	$this->assign('allAssetInfo',$allAssetInfo);
         $this->assign('allMerchnatInfo',$allMerchnatInfo);
     }
+    public function insert(){
+        $model = D (CONTROLLER_NAME);
+        //保存当前数据对象
+        $model->create();
+        $model->who = $_SESSION['loginUserName'];
+        $list=$model->add ();
+        $this->success('插入成功','index');
+    }
     public function indexCsv(){
         $this->display();
     }
