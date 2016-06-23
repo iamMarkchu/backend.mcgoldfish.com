@@ -32,9 +32,9 @@
                     },
                     {"data": "id",
                         "render": function (data, type, row) {
-                            var str ='<a href="/Node/edit/id/'+data+'">编辑</a>|' ;
-                            str += '<a href="/Node/index/pid/'+data+'">子节点列表</a>|'
-                            str += '<a href="/Auth/delete/id/'+data+'" class="deleteNode">删除</a>';
+                            var str ='<a href="/Node/edit/id/'+data+'" data-id="'+data+'">编辑</a>|' ;
+                            str += '<a href="/Node/index/pid/'+data+'" data-id="'+data+'" class="childList">子节点列表</a>|'
+                            str += '<a href="/Auth/delete/id/'+data+'" data-id="'+data+'" class="deleteNode">删除</a>';
                             return str;
                         }
                     }
@@ -82,6 +82,13 @@
                 }
                 $('#delete-modal input[name=nodeid]').val(nodeid);
                 $("#delete-modal").modal('show');
+            });
+            $(".portlet-body").on('click','.childList,.yellow#showNode',function(){
+                var nodeid = $(this).attr('data-id');
+                if(nodeid == undefined){
+                    nodeid = $('tr.selected>td').html();
+                }
+                window.location.href = '/Node/index/pid/'+nodeid;
             });
             //绑定 modal-delete 删除事件
             var controller = 'Node';

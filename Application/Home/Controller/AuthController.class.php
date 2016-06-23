@@ -29,7 +29,7 @@ class AuthController extends CommonController {
     	$role->addtime = date("Y-m-d H:i:s");
         $role->pid = 0;
     	$role->add();
-    	$this->success("添加成功","/Home/Auth/index");
+    	$this->success("添加成功","index");
     }
     public function edit(){
         if(!isset($_REQUEST['id'])) $this->error('组别不存在!','index');

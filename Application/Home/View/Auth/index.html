@@ -16,36 +16,7 @@
                     <input type="hidden" id="noAjax" value="{$noAjax}"/>
                     <div class="span3">
                         <div class="controls">
-                            <input type="text" id="search_id_or_title" name="search_id_or_title" class="m-wrap medium" placeholder="请输入文章id或者title" />
-                        </div>
-                    </div>
-                    <div class="span2">
-                        <div class="controls">
-                              <select id="selectarticlesource" class="m-wrap small" placeholder="文章来源">
-                                  <option value="-1">文章来源</option>
-                                  <option value="原创">原创</option>
-                                  <option value="转载">转载</option>
-                              </select>
-                        </div>
-                    </div>
-                    <div class="span2">
-                        <div class="controls">
-                              <select id="selectstatus" class="m-wrap small" placeholder="文章状态">
-                                  <option value="-1">文章状态</option>
-                                  <option value="active">active</option>
-                                  <option value="deleted">deleted</option>
-                              </select>
-                        </div>
-                    </div>
-                    <div class="span2">
-                        <div class="controls">
-                              <select id="selectorderby" class="m-wrap small" placeholder="文章排序">
-                                  <option value="-1">文章排序</option>
-                                  <option value="id">by id asc</option>
-                                  <option value="id">by id desc</option>
-                                  <option value="maintainorder asc">by maintainorder asc</option>
-                                  <option value="maintainorder desc">by maintainorder desc</option>
-                              </select>
+                            <input type="text" id="search_id_or_title" name="search_id_or_title" class="m-wrap medium" placeholder="" />
                         </div>
                     </div>
                     <div class="span2">
@@ -84,25 +55,24 @@
                     <thead>
                         <tr>
                             <th>
-                                id
+                                组别编号
                             </th>
                             <th>
-                                name
+                                组别名称
                             </th>
                             <th>
-                                status
+                                简介
                             </th>
                             <th>
-                                pid
+                                创建时间
+                                <br>
+                                最后更改时间
                             </th>
                             <th>
-                                addtime
-                            </th>
-                             <th>
-                                lastupdatetime
+                                状态
                             </th>
                             <th>
-                                remark
+                                操作
                             </th>
                         </tr>
                     </thead>

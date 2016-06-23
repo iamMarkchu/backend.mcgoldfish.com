@@ -50,7 +50,7 @@ class UserController extends CommonController {
             $imageObj->open($abPath);
             // 按照原图的比例生成一个最大为150*150的缩略图并保存为thumb.jpg
             $imageObj->thumb(9, 9)->save(C('IMG_SAVE_PATH').'/thumb/'.$imgFile['savename']);
-            $user->image = $imgFile['savepath'].'/thumb'.$imgFile['savename'];
+            $user->image = '/thumb/'.$imgFile['savename'];
         }
     	$userid = $user->add();
         if($userid){

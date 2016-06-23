@@ -9,22 +9,36 @@
                     "type": 'POST'
                 },
                 "columns": [
-                    { "data": "id",
-                      "render": function (data, type, row) {
-                            return '<div class="btn-group"><a class="btn purple" href="#" data-toggle="dropdown">'+data+'</a><ul class="dropdown-menu"><li><a href="/Auth/edit/id/'+data+'"><i class="icon-trash"></i> Edit</a></li><li><a href="/Auth/delete/id/'+data+'"><i class="icon-remove"></i> Delete</a></li><li><a href="/User/index/role_id/'+data+'"><i class="icon-add"></i> userList</a></li><li><a href="/Auth/giveAuth/role_id/'+data+'"><i class="icon-add"></i> giveAuth</a></li></ul></div>';
-                            //return '<a href="/Home/Article/edit/id/'+data+'" class="edit" articleid="' + data + '">编辑</a><a href="/Home/Article/delete/id/'+data+'" class="delete" articleid="' + data + '">删除</a>'; 
+                    { "data": "id"},
+                    { "data": "name" },
+                    { "data": "remark"},
+                    { "data": "addtime",
+                        "render": function(data,type,row){
+                            var returnString = data+"<br/>";
+                            returnString += row.lastupdatetime;
+                            return returnString;
                         }
                     },
-                    { "data": "name" },
-                    { "data": "status" },
-                    { "data": "pid" },
-                    { "data": "addtime",
-                     "render": function(data, type,row){
-                        return data;
-                     }
+                    { "data": "status",
+                        "render": function(data,type,row){
+                            if(data == 'active'){
+                                return '<span class="label label-success">'+data+'</span>';
+                                //return '<span style="color:green;">'+data+'</span>';
+                            }else{
+                                return '<span class="label label-danger">'+data+'</span>';
+                                //return data;
+                            }
+                        }
                     },
-                    { "data": "lastupdatetime" },
-                    { "data": "remark"}
+                    {"data": "id",
+                        "render": function(data, type,row){
+                            var str ='<a href="/Auth/edit/id/'+data+'" data-id="'+data+'">编辑</a>|' ;
+                            str += '<a href="/Auth/delete/id/'+data+'" data-id="'+data+'" class="deleteAuth">删除组别</a>|'
+                            str += '<a href="/User/index/role_id/'+data+'" data-id="'+data+'" class="deleteNode">查看用户</a>|';
+                            str += '<a href="/Auth/giveAuth/role_id/'+data+'" data-id="'+data+'" class="giveAuth">给予权限</a>';
+                            return str;
+                        }
+                    }
                 ]
             });
             that.bindEvent();
