@@ -29,7 +29,7 @@ class UserController extends CommonController {
         if(isset($searchArray['where'])) $map = $searchArray['where'];
         if(isset($searchArray['order'])) $order = $searchArray['order'];
     	$user = D('user');
-    	$result = $user->join("role_user on user.id = role_user.user_id")->where($map)->order($order)->limit($start,$length)->select();
+    	$result = $user->field("user.*,role.name")->join("role_user on user.id = role_user.user_id")->join("role on role_user.role_id = role.id")->where($map)->order($order)->limit($start,$length)->select();
     	$count = $user->join("role_user on user.id = role_user.user_id")->where($map)->count();
     	$jsonBack = array();
     	$jsonBack['data'] = $result;

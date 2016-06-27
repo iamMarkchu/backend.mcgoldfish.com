@@ -44,7 +44,7 @@ class ArticleModel extends CommonModel {
 		return $result;
 	}
 	public function getArticleListForPageCount($map,$order){
-		$where = "where ru.modeltype = 'article' and ru.isjump = 'no' ";
+		$where = "where 1=1";
 		if(!empty($map)){
 			if(isset($map['titleOrId'])){
 				$titleOrId = $map['titleOrId'];
@@ -62,7 +62,7 @@ class ArticleModel extends CommonModel {
 		if(!empty($order)){
 			$order = "order by {$order}";
 		}
-		$sql = "select a.*,ru.`id` as rid,ru.`requestpath`,c.displayname from article as a left join rewrite_url as ru on a.id = ru.optdataid left join category_mapping as cm on a.id = cm.`optdataid` left join category as c on cm.`categoryid` = c.id {$where} {$order}";
+		$sql = "select * from article as a {$where} {$order}";
 		$result = $this->query($sql);
 		$result = count($result);
 		return $result;

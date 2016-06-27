@@ -8,24 +8,39 @@
                     "type": 'POST'
                 },
                 "columns": [
-                    { "data": "id",
-                      "render": function (data, type, row) {
-                            return '<div class="btn-group"><a class="btn purple" href="#" data-toggle="dropdown">'+data+'</a><ul class="dropdown-menu"><li><a href="/User/edit/id/'+data+'"><i class="icon-trash"></i> Edit</a></li><li><a href="/User/delete/id/'+data+'"><i class="icon-remove"></i> Delete</a></li></ul></div>';
-                            //return '<a href="/Home/Article/edit/id/'+data+'" class="edit" articleid="' + data + '">编辑</a><a href="/Home/Article/delete/id/'+data+'" class="delete" articleid="' + data + '">删除</a>'; 
-                        }
-                    },
+                    { "data": "id"},
                     { "data": "account" },
                     { "data": "nickname" },
-                    { "data": "last_login_time" },
-                    { "data": "last_login_ip",
-                     "render": function(data, type,row){
-                        return data;
-                     }
+                    { "data": "name"},
+                    { "data": "status",
+                        "render": function(data,type,row){
+                            if(data == 'active'){
+                                return '<span class="label label-success">'+data+'</span>';
+                                //return '<span style="color:green;">'+data+'</span>';
+                            }else if(data == 'republish'){
+                                return '<span class="label label-info">'+data+'</span>';
+                                //return '<span style="color:red;">'+data+'</span>';
+                            }else{
+                                return '<span class="label label-danger">'+data+'</span>';
+                                //return data;
+                            }
+                        }
+                    },
+                    { "data": "last_login_time",
+                        render:function(data,type,row){
+                            var str = data;
+                            str += "<br/>"+row.last_login_ip;
+                            return str;
+                        }
                     },
                     { "data": "login_count" },
                     { "data": "email"},
                     { "data": "remark" },
-                    { "data": "status" }
+                    { "data": "id",
+                        render:function(data,type,row){
+                            return '<a href="/User/edit/id/'+data+'">编辑</a>|<a href="/User/delete/id/'+data+'">删除</a>';
+                        }
+                    }
                 ]
             });
             that.bindEvent();

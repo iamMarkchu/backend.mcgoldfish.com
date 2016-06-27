@@ -15,7 +15,7 @@
                  $('#addFinanceMerchant').modal('show');
             });
             $('#addMerchantForFinance').click(function(){
-                var name
+                var name;
                 //如果select2中的值不为空,获取select2中的data中
                 if( $('#addFinanceMerchant input[name=name]').val() != ''){
                     name = $('#addFinanceMerchant input[name=name]').val();

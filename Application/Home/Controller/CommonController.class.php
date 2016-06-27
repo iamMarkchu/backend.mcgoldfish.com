@@ -101,6 +101,7 @@ class CommonController extends Controller {
         //恢复指定记录
         $model = D (CONTROLLER_NAME);
         $id = $_REQUEST[$model->getPk ()];
+        $pk = $model->getPk ();
         $condition = array ($pk => array ('in', $id ) );
         if (false !== $model->resume ( $condition )) {
             echo "1";

@@ -1,7 +1,7 @@
 <?php 
 namespace Home\Model;
 use Think\Model;
-class CommentModel extends CommonModel {
+class CommentModel extends Model {
 	protected $tablePrefix = '';
 	public function getCommentListForPage($start=0,$length=10,$map,$order){
 		$where = "where ru.modeltype = 'article' and ru.isjump = 'no' ";
@@ -56,4 +56,11 @@ class CommentModel extends CommonModel {
 		$result = count($result);
 		return $result;
 	}
+	public function resume($options,$field='status'){
+        if(FALSE === $this->where($options)->setField($field,'active')){
+            return false;
+        }else {
+            return True;
+        }
+    }
 }

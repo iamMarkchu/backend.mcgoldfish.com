@@ -5,9 +5,9 @@ class ArticleController extends CommonController {
 	public function _before_index(){
         $searchArray = session('articleSearch');
         $this->assign('searchArray',$searchArray);
+        //定义需要引入的page level js css
         $this->assign('noAjax',1);
         $this->assign('isSelect2',1);
-        //定义需要引入的page level js css
     }
     public function _before_add(){
         $category = D('category');
@@ -23,8 +23,6 @@ class ArticleController extends CommonController {
     public function QueryData(){
     	$start = $_POST['start'];
     	$length = $_POST['length'];
-        //$start = 0;
-        //$length = 10;
     	$searchArray = session('articleSearch');
         if(isset($searchArray['where'])) $map = $searchArray['where'];
         if(isset($searchArray['order'])) $order = $searchArray['order'];
@@ -107,11 +105,9 @@ class ArticleController extends CommonController {
         $allTagInfo = $tag->getAllTag();
         $tagInfo = $tag->getTagByIdAndType($articleid);
         foreach ($allTagInfo as $k => $v) {
-            if(in_array($v['id'],$tagInfo)){
-                $allTagInfo[$k]['selected'] = '1';
-            }else{
-                $allTagInfo[$k]['selected'] = '0';
-            }
+            if(in_array($v['id'],$tagInfo)) $allTagInfo[$k]['selected'] = '1';
+            else $allTagInfo[$k]['selected'] = '0';
+            
         }
         $pageMeta = D('page_meta');
         $where = "optdataid = {$articleid} and `status` = 'yes' and modeltype='article'";
