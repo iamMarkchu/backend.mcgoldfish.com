@@ -13,3 +13,13 @@ function ImgUpload($path){
         return $info['imgFile'];
     }
 }
+function save_log($action,$info,$isajax,$user){
+    $data['action'] = $action;
+    $data['info'] = $info;
+    $data['isajax'] = $isajax?1:0;
+    $data['user'] = empty($user)?'':$user;
+    $data['addtime'] = date('Y-m-d H:i:s');
+    $log = D('log');
+    $log->create();
+    $log->add($data);
+}

@@ -13,6 +13,8 @@ class CommonController extends Controller {
         $this->display();
     }
     public function _initialize(){
+        //dump(get_defined_constants());die;
+        save_log(__ACTION__,__INFO__,IS_AJAX,session('loginUserName'));
         $r = new \Org\Util\Rbac();
         // 用户权限检查
         if (C ( 'USER_AUTH_ON' ) && !in_array(MODULE_NAME,explode(',',C('NOT_AUTH_MODULE')))) {
