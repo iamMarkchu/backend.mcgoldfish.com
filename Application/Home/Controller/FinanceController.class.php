@@ -28,9 +28,9 @@ class FinanceController extends CommonController {
     	$asset = D('asset');
         $merchant = D('merchant');
         $fCategory = D('f_category');
-    	$allAssetInfo = $asset->where('order != 0 and order is not null')->order('`order`')->select();
-        $allMerchnatInfo = $merchant->where('order != 0 and order is not null')->order('`order`')->select();
-        $allFcategoryInfo = $fCategory->where('displayorder != 0 and displayorder is not null')->order('`displayorder`')->select();
+    	$allAssetInfo = $asset->where('`order` != 0 and `order` is not null')->order('`order`')->select();
+        $allMerchnatInfo = $merchant->where('`order` != 0 and `order` is not null')->order('`order`')->select();
+        $allFcategoryInfo = $fCategory->where('`displayorder` != 0 and `displayorder` is not null')->order('`displayorder`')->select();
         $this->assign('isSelect2',1);
     	$this->assign('allAssetInfo',$allAssetInfo);
         $this->assign('allMerchnatInfo',$allMerchnatInfo);
