@@ -28,7 +28,7 @@ class FinanceController extends CommonController {
     	$asset = D('asset');
         $merchant = D('merchant');
         $fCategory = D('f_category');
-    	$allAssetInfo = $asset->select();
+    	$allAssetInfo = $asset->order('order')->select();
         $allMerchnatInfo = $merchant->select();
         $allFcategoryInfo = $fCategory->select();
         $this->assign('isSelect2',1);
