@@ -44,6 +44,19 @@
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">
+                                        类别</label>
+                                    <div class="controls" >
+                                        <select name="category" data-placeholder="类别选择" class="chosen span3 chzn-done" tabindex="-1">
+                                            <option value=""></option>
+                                            <volist name="allFcategoryInfo" id="vo">
+                                                <option value="{$vo.displayname}">{$vo.displayname}</option>
+                                            </volist>
+                                        </select>
+                                        &nbsp<a href="#" id="addOneCategory" class="btn green">{$Think.config.ADD_BUTTON}类别</a>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
                                         商家</label>
                                     <div class="controls" >
                                         <select name="merchant" data-placeholder="商家选择" class="chosen span3 chzn-done" tabindex="-1">
@@ -90,4 +103,5 @@
     </div>
 </div>
 <include file="Public:modal-merchant-add" />
+<include file="Public:modal-f_category-add"/>
 <include file="Public:modal-alert" />

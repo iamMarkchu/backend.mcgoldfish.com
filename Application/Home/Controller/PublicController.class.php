@@ -157,4 +157,17 @@ class PublicController extends CommonController {
         $this->assign('menu',$menu);;
         $this->display();
 	}
+	public function insertFcategory(){
+		$model = D ('f_category');
+		
+		$model->create();
+		$model->addtime = date('Y-m-d H:i:s');
+        //保存当前数据对象
+        $list=$model->add ();
+        if ($list!==false) { 
+            $this->ajaxReturn($model->find($list));
+        } else {
+            echo "0";
+        }
+	}
 }

@@ -24,6 +24,15 @@
                             }
                         }
                     },
+                    { "data": "category",
+                        "render": function(data,type,row){
+                            if(data == undefined){
+                                return '暂无';
+                            }else{
+                                return data;
+                            }
+                        }
+                    },
                     { "data": "where"},
                     { "data": "when"},
                     { "data": "merchant"},

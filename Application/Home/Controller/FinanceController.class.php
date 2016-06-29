@@ -27,11 +27,14 @@ class FinanceController extends CommonController {
     public function _before_add(){
     	$asset = D('asset');
         $merchant = D('merchant');
+        $fCategory = D('f_category');
     	$allAssetInfo = $asset->select();
         $allMerchnatInfo = $merchant->select();
+        $allFcategoryInfo = $fCategory->select();
         $this->assign('isSelect2',1);
     	$this->assign('allAssetInfo',$allAssetInfo);
         $this->assign('allMerchnatInfo',$allMerchnatInfo);
+        $this->assign('allFcategoryInfo',$allFcategoryInfo);
     }
     public function insert(){
         $model = D (CONTROLLER_NAME);

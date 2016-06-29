@@ -6,8 +6,8 @@
 	<title>百度搜索</title>
 </head>
 <style type="text/css">
-	.wrap{width: 800px;margin: 0 auto;text-align: center;}
-	input[name=word]{width: 80%;padding: 8px 0}
+	.wrap{width: 800px;margin: 0 auto;text-align: center;margin-bottom: 50px;}
+	input[name=word],input[name=q]{width: 80%;padding: 8px 0}
 	input[type=submit]{cursor: pointer;
     width: 102px;
     height: 38px;
@@ -20,18 +20,33 @@
     color: white;
     box-shadow: none;
     font-weight: normal}
+    #hplogo{background:url(https://www.google.com.hk/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png) no-repeat}@media (-webkit-max-device-pixel-ratio:1),(max-resolution:96dpi){#hplogo{background:url(https://www.google.com.hk/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png) no-repeat}}
 </style>
 <body>
 	<div class="wrap">
 		<form onsubmit="return baiduWithHttps(this)" class="baiduForm" action="http://www.baidu.com/baidu" target="_blank">
-			<p><a href="https://www.baidu.com/" target="_blank">
+			<p>
+                <a href="https://www.baidu.com/" target="_blank">
 		        <img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png" alt="Baidu" width="270" height="129">
-		    </a></p>
+		        </a>
+            </p>
 		    <input name="tn" type="hidden" value="SE_zzsearchcode_shhzc78w">
 		    <input type="text"  onfocus="checkHttps" name="word" id="keyword" maxlength="100" autocomplete="off">
 		    <input type="submit" value="百度搜索">
 		</form>
 	</div>
+    <div class="wrap">
+        <!-- 使用该代码即表示您同意接受 Google 自定义搜索服务条款。 -->
+        <!-- 相关服务条款请见 http://www.google.com//cse/docs/tos.html -->
+        <form name="cse" id="searchbox_demo" action="https://www.google.com/search">
+          <input type="hidden" name="cref" value="" />
+          <input type="hidden" name="ie" value="utf-8" />
+          <input type="hidden" name="hl" value="" />
+          <input name="q" type="text" size="40" />
+          <input type="submit" name="sa" value="谷歌搜索" />
+        </form>
+        <script type="text/javascript" src="https%3A%2F%2Fcse.google.com%2Fcse/tools/onthefly?form=searchbox_demo&lang="></script>
+    </div>
 </body>
 <script src="//cdn.bootcss.com/jquery/2.2.2/jquery.min.js"></script>
 <script src="http://s1.bdstatic.com/r/www/cache/global/js/BaiduHttps_20150714_zhanzhang.js"></script>

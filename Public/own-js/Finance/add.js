@@ -8,11 +8,13 @@
         currentTable: null,
         bindEvent: function () {
             var that = this;    
-            $('select[name="merchant"]').select2();
-            $('select[name="belong"]').select2();
+            $('select[name="merchant"],select[name="belong"],select[name="category"]').select2();
             $('#addFinanceMerchant').modal({show:false});
             $('#addOneMerchant').click(function(){
                  $('#addFinanceMerchant').modal('show');
+            });
+            $('#addOneCategory').click(function(){
+                 $('#addFinanceCategory').modal('show');
             });
             $('#addMerchantForFinance').click(function(){
                 var name;
@@ -38,6 +40,31 @@
                     }
                 });
             });
+            $('#addCategoryForFinance').click(function(){
+                var displayname;
+                //如果select2中的值不为空,获取select2中的data中
+                if( $('#addFinanceCategory input[name=displayname]').val() != ''){
+                    displayname = $('#addFinanceCategory input[name=displayname]').val();
+                }
+                //ajax 前端与后台沟通参数
+                var url = "/Public/insertFcategory";
+                var sendData = {displayname:displayname};
+                console.log(sendData);
+                $.ajax({
+                    url: url,
+                    data: sendData,
+                    dataType:'json',
+                    type: 'POST',
+                    success: function (data) {
+                        console.log(data);
+                        $("#addFinanceCategory").modal('hide');
+                        $('#alert-modal .alert-data-title').html('添加成功!');
+                        $('#alert-modal').modal();
+                        $('select[name="category"]').append('<option value="'+data.displayname+'" selected="selected" >'+data.displayname+'</option>').trigger('change');
+                    }
+                });
+            });
+
         }
     };
     $(function () {
