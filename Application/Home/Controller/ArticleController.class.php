@@ -52,7 +52,7 @@ class ArticleController extends CommonController {
             //添加url信息
             $url = D('rewrite_url');
             $requestPath = "/article/{$articleid}.html";
-            $urlData['requestpath'] = isset($_POST['requestPath'])?$_POST['requestPath']:$requestPath;
+            $urlData['requestpath'] = !empty($_POST['requestPath'])?$_POST['requestPath']:$requestPath;
             $urlData['Modeltype'] = "文章";
             $urlData['optdataid'] = $articleid;
             $urlData['isjump'] = "NO";
