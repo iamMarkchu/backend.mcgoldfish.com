@@ -4,8 +4,8 @@ use Think\Controller;
 class FinanceController extends CommonController {
     public function _before_index(){
         $searchArray = session('FinanceSearch');
-        //dump($searchArray);die;
         $this->assign('searchArray',$searchArray);
+        $this->assign('isEcharts',"1"); 
         $this->assign('isDatePicker',"1");
     }
     public function QueryData(){
@@ -59,6 +59,14 @@ class FinanceController extends CommonController {
         }
         session('FinanceSearch',$searchArray);
         echo "1";
+    }
+    public function getSumFinance(){
+        $finance = D('finance');
+        $sumList = $finance->getSumList();
+        $dayList = $finance->getSumByDay();
+        $jsonBack['sumList'] = $sumList;
+        $jsonBack['dayList'] = $dayList;
+        $this->ajaxReturn($jsonBack);
     }
     public function QueryDataCsv(){
         $allInfofile = file("/app/site/mark-ubuntu/web/backend.mcgoldfish.com/tmp/xiaofei.csv");

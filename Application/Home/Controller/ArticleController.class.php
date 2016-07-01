@@ -132,22 +132,38 @@ class ArticleController extends CommonController {
         $articleid = $_REQUEST['id'];
         $article = D('article');
         $data = $article->find($articleid);
-        $data['title'] = $_POST['title'];
-        $data['pageh1'] = $_POST['pageh1'];
-        $data['articlesource'] = $_POST['articlesource'];
-        $data['content'] = addslashes($_POST['content']);
-        $data['maintainorder'] = $_POST['maintainorder'];
-        $data['articlesource'] = $_POST['articlesource'];
+        $data['title'] = ($data['title'] == $_POST['title'])? '':$_POST['title'];
+        $data['pageh1'] = ($data['pageh1'] == $_POST['pageh1'])?'':$_POST['pageh1'];
+        $data['articlesource'] = ($data['articlesource'] == $_POST['articlesource'])?'':$_POST['articlesource'];
+        $data['content'] = ($data['content'] == $_POST['content'])?'':addslashes($_POST['content']);
+        $data['maintainorder'] = ($data['maintainorder'] == $_POST['maintainorder'])?'':$_POST['maintainorder'];
+        $data['articlesource'] = ($data['articlesource'] == $_POST['articlesource'])?'':$_POST['articlesource'];
         if(!empty($_FILES['imgFile']['name'])){
             $path = '/article/';
             $imgFile = ImgUpload($path);
             $data['image'] = $imgFile['savename'];
         }
+        $data = array_filter($data);
         $article->create($data);
         $article->save();
         //url信息
-        $url = D('rewrite_url');
-        
+        if(!empty($_POST['requestPath'])){
+            $url = D('rewrite_url');
+            $urlWhere = "optdataid = {$articleid} and modeltype = 'article' and isJump = 'NO' and `status` = 'yes'";
+            $oldUrlInfo = $url->where($urlWhere)->find();
+            if(!empty($oldUrlInfo) && $oldUrlInfo['requestpath'] != $_POST['requestPath']){
+                $newUrlInfo['requestpath'] = $_POST['requestPath'];
+                $newUrlInfo['modeltype'] = 'article';
+                $newUrlInfo['optdataid'] = $articleid;
+                $newUrlInfo['isjump'] = 'NO';
+                $newUrlId = $url->add($newUrlInfo);
+                if($newUrlId){
+                    $oldUrlInfo['isjump'] = '301';
+                    $oldUrlInfo['jumprewriteurlid'] = $newUrlId;
+                    $url->save($oldUrlInfo);
+                }
+            }
+        }
         //保存category信息(逻辑删除原有category_mapping然后添加新category_mapping)
         //添加分类信息
         $cateogyMapping = D('category_mapping');
