@@ -4,6 +4,8 @@ use Think\Controller;
 class FinanceController extends CommonController {
     public function _before_index(){
         $searchArray = session('FinanceSearch');
+        if(is_mobile())
+            $this->assign('isMobile',"1");
         $this->assign('searchArray',$searchArray);
         $this->assign('isEcharts',"1"); 
         $this->assign('isDatePicker',"1");

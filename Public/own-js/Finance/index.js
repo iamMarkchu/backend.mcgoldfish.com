@@ -66,7 +66,7 @@
                                 },
                                 tooltip : {
                                     trigger: 'item',
-                                    formatter: "{a} <br/>{b} : {c} ({d}%) 元"
+                                    formatter: "{a} <br/>{b} : {c} 元 ({d}%)"
                                 },
                                 series : [
                                     {
