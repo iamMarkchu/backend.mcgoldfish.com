@@ -6,6 +6,13 @@ return array(
     'DB_NAME'               =>  'chukui_base',          // 数据库名
     'DB_USER'               =>  'root',      // 用户名
     'DB_PWD'                =>  'chukui',          // 密码
+    /* Memcache设置 */
+    'MEMCACHE_SETTING'      => array(
+                                'type'=>'memcache',
+                                'host'=>'localhost',
+                                'port'=>'11211',
+                                'prefix'=>'chukui_',
+                                'expire'=>60),
     /*模板布局功能*/
     'LAYOUT_ON'=>true,
     /*RBAC权限控制*/

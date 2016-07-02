@@ -13,7 +13,6 @@ class CommonController extends Controller {
         $this->display();
     }
     public function _initialize(){
-        //dump(get_defined_constants());die;
         save_log(__ACTION__,__INFO__,IS_AJAX,session('loginUserName'));
         $r = new \Org\Util\Rbac();
         // 用户权限检查
@@ -21,6 +20,7 @@ class CommonController extends Controller {
             if (! $r->AccessDecision ()) {
                 //检查认证识别号
                 if (! $_SESSION [C ( 'USER_AUTH_KEY' )]) {
+                    //session("oldPage",__INFO__);
                     $this->redirect('Public/login');
                     return;
                     if ($this->isAjax()){ // zhanghuihua@msn.com

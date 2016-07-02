@@ -20,7 +20,11 @@ class PublicController extends CommonController {
 			$this->assign('isLogin',1);
 			$this->display();
 		}else{
-			$this->redirect('Index/index');
+			// $oldPage = session('oldPage');
+			// if(isset($oldPage))
+			// 	$this->redirect(__INFO__);
+			// else
+				$this->redirect('Index/index');
 		}
 	}
 
@@ -60,8 +64,15 @@ class PublicController extends CommonController {
             $_SESSION['userImage']		=	$authInfo['image'];
             $_SESSION['lastLoginTime']		=	$authInfo['last_login_time'];
 			$_SESSION['login_count']	=	$authInfo['login_count'];
+			// session(array(C('USER_AUTH_KEY')=>$authInfo['id'],'expire'=>86400));
+			// session(array('email'=>$authInfo['email'],'expire'=>86400));
+			// session(array('loginUserName'=>$authInfo['nickname'],'expire'=>86400));
+			// session(array('userImage'=>$authInfo['image'],'expire'=>86400));
+			// session(array('lastLoginTime'=>$authInfo['last_login_time'],'expire'=>86400));
+			// session(array('login_count'=>$authInfo['login_count'],'expire'=>86400));
             if($authInfo['account']=='admin') {
             	$_SESSION['administrator']		=	true;
+            	//session(array('administrator'=>true,'expire'=>86400));
             }
             if(isset($_POST['remember'])){
             	$saveUser['account'] = $_POST['account'];

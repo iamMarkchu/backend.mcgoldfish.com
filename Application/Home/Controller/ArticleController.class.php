@@ -10,6 +10,9 @@ class ArticleController extends CommonController {
         $this->assign('isSelect2',1);
     }
     public function _before_add(){
+        //$key = C('USER_AUTH_KEY')."__";
+        //$tmpContent = getFromMemcache($key);
+        //$this->assign('$tmpContent',$tmpContent);
         $category = D('category');
         $tag = D('tag');
         $allCateInfo =$category->getAllCategory();
@@ -17,7 +20,6 @@ class ArticleController extends CommonController {
         $this->assign('allTagInfo',$allTagInfo);
         $this->assign('allCateInfo',$allCateInfo);
         $this->assign('isSelect2',1);
-        //$this->assign('isEditor',1);
         $this->assign('isUeditor',1);
     }
     public function QueryData(){
@@ -91,6 +93,8 @@ class ArticleController extends CommonController {
                 }
             }
         }
+        $key = session(C('USER_AUTH_KEY'))."_";
+        deleteFromCache($key);
         $this->success("添加成功","index");
     }
     public function edit(){
@@ -113,7 +117,7 @@ class ArticleController extends CommonController {
         $where = "optdataid = {$articleid} and `status` = 'yes' and modeltype='article'";
         $pageMetaInfo = $pageMeta->where($where)->find();
         $url = D('rewrite_url');
-        $urlInfo = $url->where($where)->find();
+        $urlInfo = $url->where($where." and isJump = 'NO'")->find();
         //变量传到前台
         $this->assign('result',$result);
         $this->assign('categoryid',$cateInfo['categoryid']);
@@ -141,7 +145,7 @@ class ArticleController extends CommonController {
         if(!empty($_FILES['imgFile']['name'])){
             $path = '/article/';
             $imgFile = ImgUpload($path);
-            $data['image'] = $imgFile['savename'];
+            $data['image'] = $imgFile['savepath'].$imgFile['savename'];
         }
         $data = array_filter($data);
         $article->create($data);
@@ -237,5 +241,20 @@ class ArticleController extends CommonController {
         }else{
             $this->success("发布失败!");
         }
+    }
+    public function saveTmpContetntToCache(){
+        if(!IS_AJAX) echo false;
+        if(!isset($_POST['contentHtml'])) echo "1";
+        if(isset($_POST['articleid'])) $articleid = $_POST['articleid'];
+        $key = session(C('USER_AUTH_KEY'))."_".$articleid;
+        $value = $_POST['contentHtml'];
+        saveToMemcache($key,$value);
+        echo $key;
+    }
+    public function getTmpContentFromCache(){
+        //if(!IS_AJAX) echo false;
+        if(isset($_POST['articleid'])) $articleid = $_POST['articleid'];
+        $key = session(C('USER_AUTH_KEY'))."_".$articleid;
+        echo getFromMemcache($key);
     }
 }

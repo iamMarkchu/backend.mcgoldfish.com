@@ -31,3 +31,22 @@ function is_mobile(){
         return false;
     }
 }
+function saveToMemcache($key,$value){
+    if(!isset($key) && !isset($value)) return false;
+    S(C('MEMCACHE_SETTING'));
+    $flag = S($key,$value,'600');
+    return $flag;
+}
+function getFromMemcache($key){
+    if(!isset($key)) return false;
+    S(C('MEMCACHE_SETTING'));
+    $flag = S($key);
+    return $flag;
+}
+function deleteFromCache($key){
+    if(!isset($key)) return false;
+    S(C('MEMCACHE_SETTING'));
+    $flag = S($key,null);
+    return $flag;
+}
+
