@@ -185,7 +185,7 @@ class ArticleController extends CommonController {
         }
         //tag处理,删除原有标签，保存post过来的标签
         $tagMapping = D('tagMapping');
-        $tagMappingData = $tagMapping->where("optdataid = {$articleid} and datatype = 'article'")->find();
+        $tagMappingData = $tagMapping->where("optdataid = {$articleid} and datatype = 'article'")->select();
         if(!empty($tagMappingData)){
             foreach ($tagMappingData as $k => $v) {
                 $tagMapping->delete($v['id']);
