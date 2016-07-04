@@ -14,11 +14,27 @@
                     { "data": "optdataid" },
                     { "data": "isjump",
                      "render": function(data, type,row){
-                        return data;
+                        if(data == 'NO'){
+                                return '<span class="label label-success">'+data+'</span>';
+                                //return '<span style="color:green;">'+data+'</span>';
+                            }else{
+                                return '<span class="label label-danger">'+data+'</span>';
+                                //return data;
+                            }
                      }
                     },
                     { "data": "jumprewriteurlid" },
-                    { "data": "status"},
+                    { "data": "status",
+                        "render": function(data,type,row){
+                            if(data == 'yes'){
+                                return '<span class="label label-success">'+data+'</span>';
+                                //return '<span style="color:green;">'+data+'</span>';
+                            }else{
+                                return '<span class="label label-danger">'+data+'</span>';
+                                //return data;
+                            }
+                        }
+                    },
                     { "data": "lastupdatetime" },
                     { "data": "id",
                       "render": function (data, type, row) {
