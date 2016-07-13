@@ -13,7 +13,7 @@ class TagController extends CommonController {
             $url = D('rewrite_url');
             $urlData['requestpath'] = $requestpath;
             $urlData['modeltype'] = "tag";
-            $urlData['optdataidd'] = $flag;
+            $urlData['optdataid'] = $flag;
             $urlData['isjump'] = "NO";
             $urlData['status'] = "yes";
             $url->create($urlData);
