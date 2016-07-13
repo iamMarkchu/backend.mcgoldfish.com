@@ -13,6 +13,13 @@ function ImgUpload($path){
         return $info['imgFile'];
     }
 }
+function processImgToTopDomain($content){
+    if(empty($content)) return '';
+    $regx = "/\<img src\=\"?(http://(\.|\d+|\:)+).*?\"/";
+    $regx = "/<img src=\"(.*)?\"/";
+    $content =preg_replace($regx,"<img src=\"".C('IMG_URL')."$1\"",$content);
+    return $content;
+}
 function save_log($action,$info,$isajax,$user){
     $data['action'] = $action;
     $data['info'] = $info;

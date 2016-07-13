@@ -40,7 +40,8 @@ class ArticleController extends CommonController {
     public function insert(){
         $article = D('article');
         $article->create();
-        $article->content = addslashes($_POST['content']);
+        //echo $_POST['content'];die;
+        $article->content = addslashes(processImgToTopDomain($_POST['content']));
         $article->addeditor = $_SESSION['loginUserName'];
         $article->tip = C('NEW_ARTICLE_MESSAGE');
         $article->addtime = date("Y-m-d H:i:s");
