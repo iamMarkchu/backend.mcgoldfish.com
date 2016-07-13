@@ -16,7 +16,7 @@ function ImgUpload($path){
 function processImgToTopDomain($content){
     if(empty($content)) return '';
     $regx = "/\<img src\=\"?(http://(\.|\d+|\:)+).*?\"/";
-    $regx = "/<img src=\"\/Public(.*)?\"/";
+    $regx = "/<img src=\"(.*)?\"/";
     $content =preg_replace($regx,"<img src=\"".C('IMG_URL')."$1\"",$content);
     return $content;
 }
