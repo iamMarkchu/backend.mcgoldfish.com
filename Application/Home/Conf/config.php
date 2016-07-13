@@ -62,6 +62,6 @@ return array(
     /*百度地图api*/
     'SUGGESTION_AK' => 'OkSOPAGevGNwQKlGeM6Fx7AgAaedBYao',
     /*图片域名*/
-     'IMG_URL' => 'http://img.mcgoldfish.com',
+     // 'IMG_URL' => 'http://img.mcgoldfish.com',
     //'IMG_URL' => 'http://192.168.56.103:7999',
 );
