@@ -9,6 +9,23 @@
         bindEvent: function () {
             var that = this;    
             $('select[name="merchant"],select[name="belong"],select[name="category"]').select2();
+            $('input[name=where]').select2({
+                minimumInputLength: 3,
+                allowClear: true,
+                ajax: {
+                    url: "/Finance/ajaxGetMapSuggestion/",
+                    dataType: 'json',
+                    quietMillis: 400,
+                    allowClear: true,
+                    data: function (term, page) {
+                        return { key: term };
+                    },
+                    results: function (data, page) {
+                        return { results: data.data };
+                    },
+                    cache: true
+                }
+            });
             $('#addFinanceMerchant').modal({show:false});
             $('#addOneMerchant').click(function(){
                  $('#addFinanceMerchant').modal('show');
@@ -64,7 +81,19 @@
                     }
                 });
             });
-
+            // $('input[name=where]').keyup(function(){
+            //     var whereWords =$(this).val();
+            //     if(whereWords.length > 3){
+            //         $.ajax({
+            //             url:'/Finance/ajaxGetMapSuggestion/',
+            //             data:{keyword:whereWords},
+            //             type: 'POST',
+            //             success : function(data){
+            //                 console.log(data);
+            //             }
+            //         });
+            //     }
+            // });
         }
     };
     $(function () {

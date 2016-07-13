@@ -93,6 +93,25 @@ class FinanceController extends CommonController {
         $jsonBack['recordsTotal'] = $count;
         $this->ajaxReturn($jsonBack);
     }
+    public function ajaxGetMapSuggestion(){
+        if(!IS_AJAX) echo 0;
+        $keyword = trim($_REQUEST['key']);
+        $apiUrlBase = 'http://api.map.baidu.com/place/v2/suggestion';
+        $output = 'json';
+        $ak = C('SUGGESTION_AK');
+        $region = '131';
+        $query = $keyword;
+        $apiUrl = $apiUrlBase."?query=".$query."&output=".$output."&region=".$region."&ak=".$ak;
+        $return = file_get_contents($apiUrl);
+        $return = json_decode($return,true);
+        $finalReturn = array();
+        foreach ($return['result'] as $k => $v) {
+            $tmp['id'] = $k;
+            $tmp['text'] = $v['name'];
+            $finalReturn['data'][] = $tmp;
+        }
+        $this->ajaxReturn($finalReturn);
+    }
     public function indexCsv(){
         $this->display();
     }

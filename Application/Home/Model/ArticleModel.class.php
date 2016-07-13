@@ -44,7 +44,7 @@ class ArticleModel extends CommonModel {
 		return $result;
 	}
 	public function getArticleListForPageCount($map,$order){
-		$where = "where 1=1";
+		$where = "where 1=1 ";
 		if(!empty($map)){
 			if(isset($map['titleOrId'])){
 				$titleOrId = $map['titleOrId'];

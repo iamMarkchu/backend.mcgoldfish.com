@@ -81,8 +81,8 @@
             });
             var ue = UE.getEditor('container',{
                 initialFrameHeight:'600',
-                initialFrameWidth:'90%'
-            });
+                initialFrameWidth:'875'
+                });
             //ue.execCommand( "getlocaldata" );
             ue.addListener('contentChange',function(){
                 var contentHtml = ue.getContent();

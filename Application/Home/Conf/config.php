@@ -58,5 +58,7 @@ return array(
     'BACKEND_SITE' => 'backend.mcgoldfish.com',
     'SITE_VERSION' => '1.0.0.01',
     'PORLET_COLOR' => 'blue',
-    'SEARCH_BUTTON_COLOR' =>'blue'
+    'SEARCH_BUTTON_COLOR' =>'blue',
+    /*百度地图api*/
+    'SUGGESTION_AK' => 'OkSOPAGevGNwQKlGeM6Fx7AgAaedBYao'
 );

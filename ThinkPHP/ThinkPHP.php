@@ -90,7 +90,6 @@ if(!IS_CLI) {
         define('__ROOT__',  (($_root=='/' || $_root=='\\')?'':$_root));
     }
 }
-
 // 加载核心Think类
 require CORE_PATH.'Think'.EXT;
 // 应用初始化 

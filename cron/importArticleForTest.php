@@ -9,40 +9,40 @@ include_once(INCLUDE_ROOT."func/function.php");
 define("MARK_DEBUG", false);
 echo "----------Start----------".date("Y-m-d H:i:s")."----------";
 $db = new mysql();
-$prefixSql = "insert into article (`title`,`content`,`tip`,`addtime`,`pageh1`,`maintainorder`,`status`,`articlesource`,`addeditor`) VALUES ";
-$defaultTitle = '测试文章title';
-$defaultContent = '测试文章content';
-$defaultTip = '测试文章tip';
-$defaultAddtime = date("Y-m-d H:i:s");
-$defaultPageh1 = '测试文章pageh1';
-$defaultStatus = array('active','deleted','republish');
-$defaultarticlesource = array('转载','原创');
-$defaultAddeditor = array('编辑','admin','markchu');
-$totalCount = 100;
-for ($i=1; $i < $totalCount; $i++) { 
-	$title = $defaultTitle."-{$i}";
-	$content = $defaultContent."-{$i}";
-	$tip = $defaultTip."-{$i}";
-	$addtime = $defaultAddtime;
-	$pageh1 = $defaultPageh1."-{$i}";
-	$maintainorder = rand(0,100);
-	$status = $defaultStatus[$maintainorder%3];
-	$articlesource = $defaultarticlesource[$maintainorder%2];
-	$addeditor = $defaultAddeditor[$maintainorder%3];
-	$postfixSql .= "('{$title}','{$content}','{$tip}','{$addtime}','{$pageh1}','{$maintainorder}','{$status}','{$articlesource}','{$addeditor}'),";
-}
-$sql = $prefixSql.$postfixSql;
-$sql = substr($sql,0,-1);
-if(MARK_DEBUG){
-    echo $sql;
-    echo "<br/>";
-}else{
-    $executeResult = $db->query($sql);
-    if($executeResult){
-    	echo "----------insert article success----------".date("Y-m-d H:i:s")."----------";
-    	echo "<br/>";
-    }
-}
+// $prefixSql = "insert into article (`title`,`content`,`tip`,`addtime`,`pageh1`,`maintainorder`,`status`,`articlesource`,`addeditor`) VALUES ";
+// $defaultTitle = '测试文章title';
+// $defaultContent = '测试文章content';
+// $defaultTip = '测试文章tip';
+// $defaultAddtime = date("Y-m-d H:i:s");
+// $defaultPageh1 = '测试文章pageh1';
+// $defaultStatus = array('active','deleted','republish');
+// $defaultarticlesource = array('转载','原创');
+// $defaultAddeditor = array('编辑','admin','markchu');
+// $totalCount = 100;
+// for ($i=1; $i < $totalCount; $i++) { 
+// 	$title = $defaultTitle."-{$i}";
+// 	$content = $defaultContent."-{$i}";
+// 	$tip = $defaultTip."-{$i}";
+// 	$addtime = $defaultAddtime;
+// 	$pageh1 = $defaultPageh1."-{$i}";
+// 	$maintainorder = rand(0,100);
+// 	$status = $defaultStatus[$maintainorder%3];
+// 	$articlesource = $defaultarticlesource[$maintainorder%2];
+// 	$addeditor = $defaultAddeditor[$maintainorder%3];
+// 	$postfixSql .= "('{$title}','{$content}','{$tip}','{$addtime}','{$pageh1}','{$maintainorder}','{$status}','{$articlesource}','{$addeditor}'),";
+// }
+// $sql = $prefixSql.$postfixSql;
+// $sql = substr($sql,0,-1);
+// if(MARK_DEBUG){
+//     echo $sql;
+//     echo "<br/>";
+// }else{
+//     $executeResult = $db->query($sql);
+//     if($executeResult){
+//     	echo "----------insert article success----------".date("Y-m-d H:i:s")."----------";
+//     	echo "<br/>";
+//     }
+// }
 //导入url
 $prefixUrl = "/article/";
 $postfixUrl = ".html";
