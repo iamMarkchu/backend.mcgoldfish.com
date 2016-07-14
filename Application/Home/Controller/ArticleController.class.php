@@ -164,6 +164,7 @@ class ArticleController extends CommonController {
                 $newUrlInfo['modeltype'] = 'article';
                 $newUrlInfo['optdataid'] = $articleid;
                 $newUrlInfo['isjump'] = 'NO';
+                $newUrlInfo['status'] = 'yes';
                 $newUrlId = $url->add($newUrlInfo);
                 if($newUrlId){
                     $oldUrlInfo['isjump'] = '301';
@@ -175,6 +176,7 @@ class ArticleController extends CommonController {
                 $newUrlInfo['modeltype'] = 'article';
                 $newUrlInfo['optdataid'] = $articleid;
                 $newUrlInfo['isjump'] = 'NO';
+                $newUrlInfo['status'] = 'yes';
                 $newUrlId = $url->add($newUrlInfo);
             }
         }
