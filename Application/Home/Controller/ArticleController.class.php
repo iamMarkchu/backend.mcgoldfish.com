@@ -170,6 +170,12 @@ class ArticleController extends CommonController {
                     $oldUrlInfo['jumprewriteurlid'] = $newUrlId;
                     $url->save($oldUrlInfo);
                 }
+            }else{
+                $newUrlInfo['requestpath'] = $_POST['requestPath'];
+                $newUrlInfo['modeltype'] = 'article';
+                $newUrlInfo['optdataid'] = $articleid;
+                $newUrlInfo['isjump'] = 'NO';
+                $newUrlId = $url->add($newUrlInfo);
             }
         }
         //保存category信息(逻辑删除原有category_mapping然后添加新category_mapping)
