@@ -171,7 +171,7 @@ class ArticleController extends CommonController {
                     $oldUrlInfo['jumprewriteurlid'] = $newUrlId;
                     $url->save($oldUrlInfo);
                 }
-            }elseif(!empty($oldUrlInfo)){
+            }elseif(empty($oldUrlInfo)){
                 $newUrlInfo['requestpath'] = $_POST['requestPath'];
                 $newUrlInfo['modeltype'] = 'article';
                 $newUrlInfo['optdataid'] = $articleid;
