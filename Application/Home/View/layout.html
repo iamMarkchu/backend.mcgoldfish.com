@@ -19,14 +19,17 @@
                 <div class="row-fluid">
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-                        <h3 class="page-title">
-                            {$blockName}
-                        </h3>
-                       <!--  <ul class="breadcrumb">
-                            <li><i class="icon-home"></i><a href="index.html">Home</a> <i class="icon-angle-right">
-                            </i></li>
-                            <li><a href="#">Dashboard</a></li>
-                        </ul> -->
+                        <ul class="breadcrumb my-breadcrumb">
+                            <li>
+                                <i class="icon-home"></i>
+                                <a href="/">Home</a>
+                                <i class="icon-angle-right">
+                                </i>
+                            </li>
+                            <volist name="breadCrumb" id="vo">
+                                <li><a href="">{$vo}</a><neq name="key" value="1"><i class="icon-angle-right"></i></neq></li>
+                            </volist>
+                        </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
                     </div>
                 </div>

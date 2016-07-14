@@ -38,11 +38,10 @@
                     data: sendData,
                     type: 'POST',
                     success: function (data) {
-                        if (data == "1") {
-                            $("#addArticleTag").modal('hide');
-                            $('#alert-modal .alert-data-title').html('添加成功!');
-                            $('#alert-modal').modal();
-                        }
+                        $("#addArticleTag").modal('hide');
+                        $('#alert-modal .alert-data-title').html('添加成功!');
+                        $('#alert-modal').modal();
+                        $('#tag_multi_select2').append('<option value="'+data.id+'" selected="selected" >'+data.displayname+'</option>').trigger('change');
                     }
                 });
             });
@@ -67,10 +66,13 @@
                     data: sendData,
                     type: 'POST',
                     success: function (data) {
-                        if (data == "1") {
-                            $("#addArticleCategory").modal('hide');
-                            $('#alert-modal .alert-data-title').html('添加成功!');
-                            $('#alert-modal').modal();
+                        $("#addArticleCategory").modal('hide');
+                        $('#alert-modal .alert-data-title').html('添加成功!');
+                        $('#alert-modal').modal();
+                        if(data.parentcategoryid != ''){
+
+                        }else{
+                            $('#selOY2').append('<optgroup label="'+data.displayname+'" data-id="'+data.id+'"><option value="'+data.id+'" selected="selected" >'+data.displayname+'</option></<optgroup>').trigger('change');
                         }
                     }
                 });
@@ -165,6 +167,9 @@
                 param.left = Math.round((maxWidth - param.width) / 2);
                 param.top = Math.round((maxHeight - param.height) / 2);
                 return param;
+            }
+            window.onbeforeunload = function() {
+                 return "您的编辑未保存，是否要离开本页面?";     
             }
         }
     };

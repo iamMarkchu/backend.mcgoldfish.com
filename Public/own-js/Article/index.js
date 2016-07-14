@@ -82,7 +82,7 @@
         },
         currentTable: null,
         bindEvent: function () {
-            var that = this;    
+         var that = this;    
             //绑定新增文章点击事件
             $('#addArticle').click(function(e){
                 window.location.href="/Article/add/";

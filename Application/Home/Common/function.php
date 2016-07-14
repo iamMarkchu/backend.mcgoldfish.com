@@ -15,8 +15,8 @@ function ImgUpload($path){
 }
 function processImgToTopDomain($content){
     if(empty($content)) return '';
-    $regx = "/\<img src\=\"?(http://(\.|\d+|\:)+).*?\"/";
-    $regx = "/<img src=\"(.*)?\"/";
+    //$regx = "/\<img src\=\"?(http://(\.|\d+|\:)+).*?\"/";
+    $regx = "/<img src=\"\/Public(.*)?\"/";
     $content =preg_replace($regx,"<img src=\"".C('IMG_URL')."$1\"",$content);
     return $content;
 }
@@ -56,4 +56,12 @@ function deleteFromCache($key){
     $flag = S($key,null);
     return $flag;
 }
+function saveUrl(){
+    if(CONTROLLER_NAME == 'Public') return false;
+    if(in_array(ACTION_NAME,array('index','add','edit'))){
+        $key = session(C('USER_AUTH_KEY'))."_oldPage";
+        return saveToMemcache($key,__ACTION__);
+    }
+}
+
 

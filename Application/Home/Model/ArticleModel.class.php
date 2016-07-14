@@ -18,6 +18,10 @@ class ArticleModel extends CommonModel {
 				$status = $map['status'];
 				$where .= "and a.status = '{$status}' ";
 			}
+			if(isset($map['addeditor'])){
+				$addeditor = $map['addeditor'];
+				$where .= "and a.addeditor = '{$addeditor}' ";
+			}
 		}
 		if(!empty($order)){
 			$order = "order by {$order}";
@@ -57,6 +61,10 @@ class ArticleModel extends CommonModel {
 			if(isset($map['status'])){
 				$status = $map['status'];
 				$where .= "and a.status = '{$status}' ";
+			}
+			if(isset($map['addeditor'])){
+				$status = $map['addeditor'];
+				$where .= "and a.addeditor = '{$addeditor}' ";
 			}
 		}
 		if(!empty($order)){

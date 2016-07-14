@@ -25,78 +25,65 @@
                         <span class="selected"></span>
                     </a>
                 </li>
-                <li <eq name="conInfo.name" value="Auth">class="active"</eq>>
-                    <a href="javascript:;">
-                        <i class="icon-wrench"></i>
-                        <span class="title">授权</span>
-                        <span class="arrow "></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="{:U('Auth/index')}">授权管理</a>
-                        </li>
-                        <li>
-                            <a href="{:U('Node/index')}">节点管理</a>
-                        </li>
-                    </ul>
-                </li>
-                <li <eq name="conInfo.name" value="User">class="active"</eq>>
-                    <a href="javascript:;">
-                        <i class="icon-user"></i>
-                        <span class="title">用户</span>
-                        <span class="arrow "></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="{:U('User/add')}">新增用户</a>
-                        </li>
-                        <li>
-                            <a href="{:U('User/index')}">用户管理</a>
-                        </li>
-                    </ul>
-                </li>
-                <li <eq name="conInfo.name" value="Article">class="active"</eq>>
-                    <a href="javascript:;">
-                        <i class="icon-file-text"></i>
-                        <span class="title">文章</span>
-                        <span class="arrow "></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="{:U('Article/add')}">新增文章</a>
-                        </li>
-                        <li>
-                            <a href="{:U('Article/index')}">文章管理</a>
-                        </li>
-                    </ul>
-                </li>
-                <li <eq name="conInfo.name" value="Comment">class="active"</eq>>
-                    <a href="javascript:;">
-                        <i class="icon-comment"></i>
-                        <span class="title">评论</span>
-                        <span class="arrow "></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="{:U('Comment/index')}">评论管理</a>
-                        </li>
-                    </ul>
-                </li>
-                <li <eq name="conInfo.name" value="Url">class="active"</eq>>
-                    <a href="javascript:;">
-                        <i class="icon-link"></i>
-                        <span class="title">链接</span>
-                        <span class="arrow "></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="{:U('Url/add')}">新增链接</a>
-                        </li>
-                        <li>
-                            <a href="{:U('Url/index')}">链接管理</a>
-                        </li>
-                    </ul>
-                </li>
+                <eq name="Think.Session.administrator" value="1">
+                    <li <eq name="conInfo.name" value="Auth">class="active"</eq>>
+                        <a href="javascript:;">
+                            <i class="icon-wrench"></i>
+                            <span class="title">授权</span>
+                            <span class="arrow "></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="{:U('Auth/index')}">授权管理</a>
+                            </li>
+                            <li>
+                                <a href="{:U('Node/index')}">节点管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li <eq name="conInfo.name" value="User">class="active"</eq>>
+                        <a href="javascript:;">
+                            <i class="icon-user"></i>
+                            <span class="title">用户</span>
+                            <span class="arrow "></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="{:U('User/add')}">新增用户</a>
+                            </li>
+                            <li>
+                                <a href="{:U('User/index')}">用户管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li <eq name="conInfo.name" value="Comment">class="active"</eq>>
+                        <a href="javascript:;">
+                            <i class="icon-comment"></i>
+                            <span class="title">评论</span>
+                            <span class="arrow "></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="{:U('Comment/index')}">评论管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li <eq name="conInfo.name" value="Url">class="active"</eq>>
+                        <a href="javascript:;">
+                            <i class="icon-link"></i>
+                            <span class="title">链接</span>
+                            <span class="arrow "></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="{:U('Url/add')}">新增链接</a>
+                            </li>
+                            <li>
+                                <a href="{:U('Url/index')}">链接管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                </eq>
                 <li <eq name="conInfo.name" value="Category">class="active"</eq>>
                     <a href="javascript:;">
                         <i class="icon-sitemap"></i>
@@ -124,6 +111,21 @@
                         </li>
                         <li>
                             <a href="{:U('Tag/index')}">标签管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li <eq name="conInfo.name" value="Article">class="active"</eq>>
+                    <a href="javascript:;">
+                        <i class="icon-file-text"></i>
+                        <span class="title">文章</span>
+                        <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{:U('Article/add')}">新增文章</a>
+                        </li>
+                        <li>
+                            <a href="{:U('Article/index')}">文章管理</a>
                         </li>
                     </ul>
                 </li>

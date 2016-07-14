@@ -28,6 +28,8 @@ class ArticleController extends CommonController {
     	$searchArray = session('articleSearch');
         if(isset($searchArray['where'])) $map = $searchArray['where'];
         if(isset($searchArray['order'])) $order = $searchArray['order'];
+        $adminFlag = session('administrator');
+        if(!isset($adminFlag)) $map['addeditor'] = session('loginUserName');
     	$article = D('article');
     	$result = $article->getArticleListForPage($start,$length,$map,$order);
     	$count = $article->getArticleListForPageCount($map,$order);
@@ -140,9 +142,10 @@ class ArticleController extends CommonController {
         $data['title'] = ($data['title'] == $_POST['title'])? '':$_POST['title'];
         $data['pageh1'] = ($data['pageh1'] == $_POST['pageh1'])?'':$_POST['pageh1'];
         $data['articlesource'] = ($data['articlesource'] == $_POST['articlesource'])?'':$_POST['articlesource'];
-        $data['content'] = ($data['content'] == $_POST['content'])?'':addslashes($_POST['content']);
+        $data['content'] = ($data['content'] == $_POST['content'])?'':addslashes(processImgToTopDomain($_POST['content']));
         $data['maintainorder'] = ($data['maintainorder'] == $_POST['maintainorder'])?'':$_POST['maintainorder'];
         $data['articlesource'] = ($data['articlesource'] == $_POST['articlesource'])?'':$_POST['articlesource'];
+        unset($data['lastupdatetime']);
         if(!empty($_FILES['imgFile']['name'])){
             $path = '/article/';
             $imgFile = ImgUpload($path);

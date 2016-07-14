@@ -20,11 +20,11 @@ class PublicController extends CommonController {
 			$this->assign('isLogin',1);
 			$this->display();
 		}else{
-			// $oldPage = session('oldPage');
-			// if(isset($oldPage))
-			// 	$this->redirect(__INFO__);
-			// else
-				$this->redirect('Index/index');
+			$oldPage = getFromMemcache(session(C('USER_AUTH_KEY'))."_oldPage");
+			if(!empty($oldPage))
+				$this->redirect($oldPage);
+			else
+				$this->redirect('/Index/index');
 		}
 	}
 
@@ -98,7 +98,7 @@ class PublicController extends CommonController {
 	public function verify()
     {
         $r = new \Think\Verify();
-        $r->__set('codeSet','1');
+        //$r->__set('codeSet','1');
         $r->__set('length',3);
         $r->__set('useImgBg',true);
         $r->entry();
@@ -130,6 +130,22 @@ class PublicController extends CommonController {
 			$this->success('资料修改成功！');
 		}else{
 			$this->error('资料修改失败!');
+		}
+	}
+	public function changepwd(){
+		if(IS_POST){
+			$user = D('user');
+			$userid = $_POST['userid'];
+			$userInfo  = $user->find($userid);
+			if(md5($_POST['oldPwd']) != $userInfo['password']) $this->error('密码错误');
+			if($_POST['newPwd'] != $_POST['rePwd']) $this->error('两次密码不一致');
+			$userInfo['password'] = md5($_POST['newPwd']);
+			$user->create($userInfo);
+			$user->save();
+			$this->success('修改密码成功!');
+		}else{
+			$this->assign('userid',session(C('USER_AUTH_KEY')));
+			$this->display();
 		}
 	}
 	public function register(){

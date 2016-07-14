@@ -3,24 +3,20 @@ namespace Home\Controller;
 use Think\Controller;
 class CommonController extends Controller {
     public function index(){
-        $blockName = CONTROLLER_NAME."|".__FUNCTION__;
-        $this->assign("blockName",$blockName);
         $this->display();
     }
     public function add(){
-        $blockName = CONTROLLER_NAME."|".__FUNCTION__;
-        $this->assign("blockName",$blockName);
         $this->display();
     }
     public function _initialize(){
+        saveUrl();
         save_log(__ACTION__,__INFO__,IS_AJAX,session('loginUserName'));
         $r = new \Org\Util\Rbac();
         // 用户权限检查
         if (C ( 'USER_AUTH_ON' ) && !in_array(MODULE_NAME,explode(',',C('NOT_AUTH_MODULE')))) {
-            if (! $r->AccessDecision ()) {
+            if (!$r->AccessDecision ()) {
                 //检查认证识别号
-                if (! $_SESSION [C ( 'USER_AUTH_KEY' )]) {
-                    //session("oldPage",__INFO__);
+                if (!$_SESSION [C ( 'USER_AUTH_KEY' )]) {
                     $this->redirect('Public/login');
                     return;
                     if ($this->isAjax()){ // zhanghuihua@msn.com
@@ -45,6 +41,8 @@ class CommonController extends Controller {
         }
         $map['name'] = CONTROLLER_NAME;
         $controllerInfo = D('node')->where($map)->find();
+        $breadCrumb = array(CONTROLLER_NAME,ACTION_NAME);
+        $this->assign('breadCrumb',$breadCrumb);
         $this->assign('conInfo',$controllerInfo);
     }
     public function delete() {

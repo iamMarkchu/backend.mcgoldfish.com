@@ -23,7 +23,7 @@ return array(
     'USER_AUTH_MODEL'=>'user',  // 默认验证数据表模型
     'AUTH_PWD_ENCODER'=>'md5',  // 用户认证密码加密方式
     'USER_AUTH_GATEWAY'=>'/Public/login',   // 默认认证网关
-    'NOT_AUTH_MODULE'=>'Public,Baidu',        // 默认无需认证模块
+    'NOT_AUTH_MODULE'=>'Public,Baidu,Merchant',        // 默认无需认证模块
     'REQUIRE_AUTH_MODULE'=>'',      // 默认需要认证模块
     'NOT_AUTH_ACTION'=>'',      // 默认无需认证操作
     'REQUIRE_AUTH_ACTION'=>'',      // 默认需要认证操作
@@ -63,5 +63,5 @@ return array(
     'SUGGESTION_AK' => 'OkSOPAGevGNwQKlGeM6Fx7AgAaedBYao',
     /*图片域名*/
      // 'IMG_URL' => 'http://img.mcgoldfish.com',
-    //'IMG_URL' => 'http://192.168.56.103:7999',
+    'IMG_URL' => 'http://img-ubuntu.mcgoldfish.com',
 );
