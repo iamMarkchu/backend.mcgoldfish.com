@@ -32,6 +32,22 @@
             //         alert($(this).attr('checked'));
             //     }
             // });
+            $('.checkinput').click(function(){
+                if(!$(this).parents('span').hasClass('checked')){
+                    if($(this).hasClass('oneLevel')){
+                        $(this).parents('.authdivone').siblings('.authdivtwo').find('.twoLevel').parent('span').addClass('checked');
+                        $(this).parents('.authdivone').siblings('.authdivtwo').find('.twoLevel').prop('checked','checked');
+                    }else if($(this).hasClass('twoLevel')){ //如果是互斥组的,则先去除所有元素的选中状态,然后在自身加上选中状态
+                        $(this).parents('.authdivtwo').siblings('.authdivone').find('.oneLevel').parent('span').addClass('checked');
+                        $(this).parents('.authdivtwo').siblings('.authdivone').find('.oneLevel').prop('checked','checked');
+                    }
+                }else{
+                   if($(this).hasClass('oneLevel')){
+                        $(this).parents('.authdivone').siblings('.authdivtwo').find('.twoLevel').parent('span').removeClass('checked');
+                        $(this).parents('.authdivone').siblings('.authdivtwo').find('.twoLevel').prop('checked','');
+                    } 
+                }
+            });
         }
     };
     $(function () {
