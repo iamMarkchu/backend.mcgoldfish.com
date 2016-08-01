@@ -168,9 +168,9 @@
                 param.top = Math.round((maxHeight - param.height) / 2);
                 return param;
             }
-            window.onbeforeunload = function() {
+            /*window.onbeforeunload = function() {
                  return "您的编辑未保存，是否要离开本页面?";     
-            }
+            }*/ 
         }
     };
     $(function () {

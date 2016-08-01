@@ -12,7 +12,7 @@ if(!defined("__CONST__"))
 	
 	define("BASE_DB_HOST", "localhost");
 	define("BASE_DB_USER", "root");
-	define("BASE_DB_PASS", "chukui");
+	define("BASE_DB_PASS", "root");
 	define("BASE_DB_NAME", "chukui_base");
 	define("MYSQL_ENCODING","utf8");
 }

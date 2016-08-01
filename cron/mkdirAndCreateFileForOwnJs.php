@@ -16,7 +16,7 @@ if(!isset($_GET['controllerName'])){
 }
 $controllerName = $_GET['controllerName'];
 //创建目录own-js
-$ownJsPath = "/app/site/mark-ubuntu/web/backend.mcgoldfish.com/Public/own-js/";
+$ownJsPath = "../Public/own-js/";
 if(!is_dir($ownJsPath.$controllerName)){
 	$f = mkdir($ownJsPath.$controllerName,0777);
 	if(!$f){
@@ -42,7 +42,7 @@ foreach ($fileNameArray as $k => $v) {
 	if(is_file($ownJsPath."Default/".$fileName)) $return = 1;
 }
 //创建目录
-$ViewPath = "/app/site/mark-ubuntu/web/backend.mcgoldfish.com/Application/Home/View/";
+$ViewPath = "../Application/Home/View/";
 if(!is_dir($ViewPath.$controllerName)){
 	$f = mkdir($ViewPath.$controllerName,0777);
 	if(!$f){
@@ -71,13 +71,13 @@ foreach ($fileNameArray as $k => $v) {
 	fclose($fHandle);
 }
 //创建目录
-$ControllerPath = "/app/site/mark-ubuntu/web/backend.mcgoldfish.com/Application/Home/Controller/";
+$ControllerPath = "../Application/Home/Controller/";
 //创建index.html,add.html,edit.html三种默认的html文件并填充模板html文件
 $fileName = $controllerName."Controller.class.php";
 $fHandle = fopen($ControllerPath.$fileName,"w");
 fclose($fHandle);
 //创建目录
-$ModelPath = "/app/site/mark-ubuntu/web/backend.mcgoldfish.com/Application/Home/Model/";
+$ModelPath = "../Application/Home/Model/";
 //创建index.html,add.html,edit.html三种默认的html文件并填充模板html文件
 $fileName = $controllerName."Model.class.php";
 $fHandle = fopen($ModelPath.$fileName,"w");
