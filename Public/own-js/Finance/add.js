@@ -41,7 +41,7 @@
                 }
                 //ajax 前端与后台沟通参数
                 var url = "/Merchant/insert";
-                var sendData = {name:name};
+                var sendData = {name:name,order:37};
                 //console.log(sendData);
                 $.ajax({
                     url: url,
