@@ -1,0 +1,30 @@
+<div class="container">
+    <div id="addFinanceBelong" class="modal hide fade in" style="display: none; ">
+        <div class="modal-header">
+            <h3>新增来源</h3>
+        </div>
+        <div class="modal-body form-horizontal">
+            <div class="control-group">
+                <label class="control-label">
+                    来源名称</label>
+                <div class="controls">
+                    <input type="text" placeholder="来源名称" class="m-wrap medium"  name="name" />
+                    <span class="help-inline">不能为空</span>
+                </div>  
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    账户余额</label>
+                <div class="controls">
+                    <input type="text" placeholder="账户余额" class="m-wrap medium"  name="value" />
+                    <span class="help-inline">不能为空</span>
+                </div>  
+            </div>
+        </div>
+        <div class="modal-footer">
+            <!-- <a href="#" class="btn yellow" id="addTwoCategoryForFinance">新建二级分类</a> -->
+            <a href="#" class="btn blue" id="addBelongForFinance">{$Think.config.SAVE_BUTTON}</a>
+            <a href="#" class="btn" data-dismiss="modal">{$Think.config.CANCEL_BUTTON}</a>
+        </div>
+    </div>
+</div>

@@ -197,4 +197,32 @@ class PublicController extends CommonController {
             echo "0";
         }
 	}
+	public function insertAsset(){
+		$model = D ('asset_new');
+		$model->create();
+		$model->order = 99;
+        //保存当前数据对象
+        $list=$model->add();
+        if ($list!==false) { 
+            $this->ajaxReturn($model->find($list));
+        } else {
+            echo "0";
+        }
+	}
+	public function insertBudget(){
+		$model = D('budget');
+		$map['userid'] = $_POST['userid'];
+		$map['yearmonth'] = date('Y-m');
+		$budgetInfo = $model->where($map)->find();
+		$model->create();
+		if(!empty($budgetInfo)){
+			$budgetInfo['budget'] = $_POST['budget'];
+			$model->save($budgetInfo);
+		}else{
+			$model->realcost = 0;
+			$model->yearmonth = date("Y-m");
+			$model->addtime = date("Y-m-d H:i:s");
+			$model->add();
+		}
+	}
 }

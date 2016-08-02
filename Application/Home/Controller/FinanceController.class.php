@@ -6,6 +6,14 @@ class FinanceController extends CommonController {
         $searchArray = session('FinanceSearch');
         if(is_mobile())
             $this->assign('isMobile',"1");
+        $userid = $_SESSION[C('USER_AUTH_KEY')];
+        $budgetMapping = D('budgetMapping');
+        $mappingFlag = $budgetMapping->where('userid ='.$userid)->find();
+        if(!empty($mappingFlag)){
+            $this->assign('noSetBudget',"1");
+        }
+        $this->assign('userid',$_SESSION[C('USER_AUTH_KEY')]);
+        $this->assign('username',$_SESSION['loginUserName']);
         $this->assign('searchArray',$searchArray);
         $this->assign('isEcharts',"1"); 
         $this->assign('isDatePicker',"1");
@@ -18,8 +26,10 @@ class FinanceController extends CommonController {
         $searchArray = session(CONTROLLER_NAME.'Search');
         if(isset($searchArray['where'])) $map = $searchArray['where'];
         if(isset($searchArray['order'])) $order = $searchArray['order'];
-        $result = $model->where($map)->order('`when` desc')->limit($start,$length)->select();
-        $count = $model->where($map)->count();
+        //$result = $model->where($map)->order('`when` desc')->limit($start,$length)->select();
+        $result = $model->getFinanceListPage($start,$length,$map,$order);
+        //$count = $model->where($map)->count();
+        $count = $model->getFinanceListForPageCount($map,$order);
         $jsonBack = array();
         $jsonBack['data'] = $result;
         $jsonBack['recordsFiltered'] = $count;
@@ -27,7 +37,7 @@ class FinanceController extends CommonController {
         $this->ajaxReturn($jsonBack);
     }
     public function _before_add(){
-    	$asset = D('asset');
+    	$asset = D('asset_new');
         $merchant = D('merchant');
         $fCategory = D('f_category');
     	$allAssetInfo = $asset->where('`order` != 0 and `order` is not null')->order('`order`')->select();
@@ -42,8 +52,8 @@ class FinanceController extends CommonController {
         $model = D (CONTROLLER_NAME);
         //保存当前数据对象
         $model->create();
-        $model->who = $_SESSION['loginUserName'];
-        $list=$model->add ();
+        $model->who = $_SESSION[C('USER_AUTH_KEY')];
+        $list=$model->add();
         $this->success('插入成功','index');
     }
     public function btn_Search(){
@@ -63,11 +73,39 @@ class FinanceController extends CommonController {
         echo "1";
     }
     public function getSumFinance(){
+        $userid = $_SESSION[C('USER_AUTH_KEY')];
+        $budgetMapping = D('budgetMapping');
+        $mappingFlag = $budgetMapping->where('userid ='.$userid)->find();
+        if(!empty($mappingFlag)){
+            $userid .=",".$mappingFlag['binduserid'];
+        }
         $finance = D('finance');
-        $sumList = $finance->getSumList();
-        $dayList = $finance->getSumByDay();
+        $budget = D('budget');
+        $sumList = $finance->getSumList($userid);
+        $dayList = $finance->getSumByDay($userid);
+        $budgetInfo = $budget->where('userid in ('.$userid.") and yearmonth = '".date("Y-m")."'")->select();
+        $budgetInfoSum = array();
+        if(count($budgetInfo) > 1){
+            foreach ($budgetInfo as $k => $v) {
+                if($v['userid'] == $mappingFlag['binduserid']){
+                    $budgetInfoSum['budget'] = $v['budget'];
+                    $budgetInfoSum['userid'] = $v['userid'];
+                    $budgetInfoSum['yearmonth'] = $v['yearmonth'];
+                    $budgetInfoSum['realcost'] = $v['realcost'];
+                    $budgetInfoSum['type'] = '1';
+                }else{
+                    $budgetInfoSum['realcost'] += $v['realcost'];
+                }
+            }
+        }else{
+            if(isset($budgetInfo[0])){
+                $budgetInfoSum = $budgetInfo[0];
+                $budgetInfoSum['type']='0';
+            }
+        }
         $jsonBack['sumList'] = $sumList;
         $jsonBack['dayList'] = $dayList;
+        $jsonBack['budgetInfo'] = $budgetInfoSum;
         $this->ajaxReturn($jsonBack);
     }
     public function QueryDataCsv(){
@@ -106,11 +144,59 @@ class FinanceController extends CommonController {
         $return = json_decode($return,true);
         $finalReturn = array();
         foreach ($return['result'] as $k => $v) {
-            $tmp['id'] = $k;
+            $tmp['id'] = $v['name'];
             $tmp['text'] = $v['name'];
             $finalReturn['data'][] = $tmp;
         }
         $this->ajaxReturn($finalReturn);
+    }
+    public function setBudget(){
+        $userid = $_SESSION[C('USER_AUTH_KEY')];
+        $budgetMapping = D('budgetMapping');
+        $mappingFlag = $budgetMapping->where('userid ='.$userid)->find();
+        if(!empty($mappingFlag)){
+            $userid .=",".$mappingFlag['binduserid'];
+        }
+        $budget = D('budget');
+        $budgetInfo = $budget->where("userid in (".$userid.") and yearmonth = '".date("Y-m")."'")->find();
+        $this->ajaxReturn($budgetInfo);   
+    }
+    public function getHisBudgetList(){
+        $userid = $_SESSION[C('USER_AUTH_KEY')];
+        $budgetMapping = D('budgetMapping');
+        $mappingFlag = $budgetMapping->where('userid ='.$userid)->find();
+        if(!empty($mappingFlag)){
+            $userid .=",".$mappingFlag['binduserid'];
+        }
+        $start = $_POST['start'];
+        $length = $_POST['length'];
+        $budget = D('budget');
+        $budgetList = $budget->where('userid in ('.$userid.')')->order('yearmonth desc')->limit($start,$length)->select();
+        $budgetInfoTmp = array();
+        $budgetInfoSum = array();
+        if(count($budgetList)> 1){
+            foreach ($budgetList as $k => $v) {
+                $budgetInfoTmp[$v['yearmonth']][] = $v;
+            }
+            $count = 0;
+            foreach ($budgetInfoTmp as $k => $v) {
+                foreach ($v as $kk => $vv) {
+                    if(isset($mappingFlag['binduserid']) && ($vv['userid'] == $mappingFlag['binduserid'])){
+                        $budgetInfoSum[$count] = $vv;
+                    }else if(isset($mappingFlag['binduserid'])){
+                        $budgetInfoSum[$count]['realcost']+= $vv['realcost'];
+                    }else{
+                        $budgetInfoSum[$count] = $vv;
+                    }
+                }
+                $count++;
+            }
+        }
+        $jsonBack = array();
+        $jsonBack['data'] = $budgetInfoSum;
+        $jsonBack['recordsFiltered'] = count($budgetInfoSum);
+        $jsonBack['recordsTotal'] = count($budgetInfoSum);
+        $this->ajaxReturn($jsonBack);
     }
     public function indexCsv(){
         $this->display();

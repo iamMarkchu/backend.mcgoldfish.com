@@ -24,7 +24,7 @@
                             }
                         }
                     },
-                    { "data": "category",
+                    { "data": "fcdisplayname",
                         "render": function(data,type,row){
                             if(data == undefined){
                                 return '暂无';
@@ -35,10 +35,18 @@
                     },
                     { "data": "where"},
                     { "data": "when"},
-                    { "data": "merchant"},
+                    { "data": "mname",
+                        "render": function(data,type,row){
+                            if(data == undefined){
+                                return "无商家"
+                            }else{
+                                return data;
+                            }
+                        }
+                    },
                     { "data": "content"},
-                    { "data": "who"},
-                    { "data": "belong"},
+                    { "data": "uname"},
+                    { "data": "anname"},
                 ],
                 "fnDrawCallback": function( oSettings ) {
                     $.ajax({
@@ -47,6 +55,8 @@
                         success: function(data){
                             var sumList = data.sumList;
                             var dayList = data.dayList;
+                            var budgetInfo = data.budgetInfo;
+                            var budgetLeft = budgetInfo.budget - budgetInfo.realcost;
                             var day = [];
                             var money = [];
                             $.each(dayList,function(n,value){
@@ -54,13 +64,14 @@
                                 day.push(value.day);
                                 money.push(value.money);
                             });
+                            console.log(sumList);
                             console.log(day);
                             console.log(money);
                             var myChart = echarts.init(document.getElementById('main'));
                             // 指定图表的配置项和数据
                             myChart.setOption({
                                 title : {
-                                    text: '消费比例图',
+                                    text: '本月消费比例图',
                                     subtext: day[0]+"~"+day[day.length -1],
                                     x:'left'
                                 },
@@ -77,11 +88,11 @@
                                     }
                                 ]
                             });
-                            var myChart = echarts.init(document.getElementById('main2'));
+                            var myChart2 = echarts.init(document.getElementById('main2'));
                             // 指定图表的配置项和数据
-                            myChart.setOption({
+                            myChart2.setOption({
                                 title: {
-                                    text: '日消费走势图',
+                                    text: '本月日消费走势图',
                                     subtext: day[0]+"~"+day[day.length -1],
                                     x:'left'
                                 },
@@ -98,6 +109,39 @@
                                     type: 'line',
                                     data: money
                                 }]
+                            });
+                            var myChart2 = echarts.init(document.getElementById('main3'));
+                            myChart2.setOption({
+                                title: {
+                                    text: (budgetInfo.type =='1'?'情侣账户':'个人账户')+'预算图',
+                                    subtext: budgetInfo.yearmonth+' 预算为: '+budgetInfo.budget+'元'+' 已用'+budgetInfo.realcost+'元',
+                                    x:'left'
+                                },
+                                color: ['#3398DB'],
+                                tooltip : {
+                                    trigger: 'axis',
+                                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                                    }
+                                },
+                                xAxis : [
+                                    {
+                                        data : ['剩余预算']
+                                    }
+                                ],
+                                yAxis : [
+                                    {
+                                        type : 'value'
+                                    }
+                                ],
+                                series : [
+                                    {
+                                        name:'剩余预算',
+                                        type:'bar',
+                                        itemStyle: {normal: {color:'rgba(181,195,52,0.5)', label:{show:true}}},
+                                        data:[budgetLeft],
+                                    }
+                                ],
                             });
                         }
                     });
@@ -163,6 +207,62 @@
             //         }
             //     }
             // });
+            hisBudgetTable = MarkBase.MarkDT('#hisBudgetList', {
+                        "ajax": {
+                            "url": '/Finance/getHisBudgetList/',
+                            "type": 'POST',
+                        },
+                        "columns": [
+                            { "data": "yearmonth"},
+                            { "data": "budget"},
+                            { "data": "realcost"},
+                            { "data": "realcost",
+                                "render": function(data,type,row){
+                                    if(row.budget == '0.00'){
+                                        return '<span class="label label-success">未设置预算</span>';
+                                    }else if(data <= row.budget){
+                                        return '<span class="label label-success">否</span>';
+                                    }else{
+                                        return '<span class="label label-danger">是</span>';
+                                    }
+                                }
+                            }
+                        ]
+                        });
+            $('#setBudget').click(function(){
+               $.ajax({
+                    url: "/Finance/setBudget",
+                    type: "POST",
+                    success: function(data){
+                        if(data != ''){
+                            //console.log(data);
+                            $("#setBudgetModal input[name=budget]").val(data.budget);
+                        }
+                        hisBudgetTable.fnDraw();
+                        $("#setBudgetModal").modal();
+                    }
+               }); 
+            });
+            $("#setBudgetModal").modal({show:false});
+            $("#setBudgetSubmit").click(function(){
+                var userid,budget;
+                //如果select2中的值不为空,获取select2中的data中
+                userid = $('#setBudgetModal input[name=userid]').val();
+                if( $('#setBudgetModal input[name=budget]').val() != ''){
+                    budget = $('#setBudgetModal input[name=budget]').val();
+                    sendData = {userid:userid,budget:budget};
+                    $.ajax({
+                        url: "/Public/insertBudget",
+                        data: sendData,
+                        type: "POST",
+                        success: function(data){
+                            $("#setBudgetModal").modal({show:false});
+                            $('#alert-modal .alert-data-title').html('设置成功!');
+                            $('#alert-modal').modal();
+                        }
+                    });
+                }
+            });
         }
     };
     $(function () {

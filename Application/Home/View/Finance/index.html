@@ -3,9 +3,13 @@
         <div class="span12">
             <div id="main" style="width:30%;height:200px;float:left;"></div>
             <div id="main2" style="width:30%;height:200px;float:left;"></div>
+            <div id="main3" style="width:30%;height:200px;float:left;"></div>
         </div>
     </div>
 </neq>
+<style>
+#setBudgetModal .dataTables_length,#setBudgetModal .dataTables_info,#setBudgetModal .dataTables_paginate.paging_simple_numbers{display: none;}
+</style>
 <!--BEGIN SEARCHBAR-->
 <div class="row-fluid">
     <div class="span12">
@@ -90,6 +94,7 @@
                     <div class="span12">
                         <div class="btn-group">
                             <button class="btn green" id="{$Think.config.ADDNAME}{$conInfo.name}">{$Think.config.ADD_BUTTON}{$conInfo.remark}</button>
+                            <button class="btn red" id="setBudget">设置预算</button>
                          </div>
                     </div>
                 </div>
@@ -133,4 +138,6 @@
         </div>
     </div>
 </div>
-<!-- END CONTENT
+<!-- END CONTENT -->
+<include file="Public:modal-budget-set" />
+<include file="Public:modal-alert" />
