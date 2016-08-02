@@ -9,7 +9,7 @@ class FinanceController extends CommonController {
         $userid = $_SESSION[C('USER_AUTH_KEY')];
         $budgetMapping = D('budgetMapping');
         $mappingFlag = $budgetMapping->where('userid ='.$userid)->find();
-        if(!empty($mappingFlag)){
+        if(isset($mappingFlag['isprimary']) && $mappingFlag['isprimary'] =='no'){
             $this->assign('noSetBudget',"1");
         }
         $this->assign('userid',$_SESSION[C('USER_AUTH_KEY')]);
@@ -87,7 +87,13 @@ class FinanceController extends CommonController {
         $budgetInfoSum = array();
         if(count($budgetInfo) > 1){
             foreach ($budgetInfo as $k => $v) {
-                if($v['userid'] == $mappingFlag['binduserid']){
+                if($v['userid'] == $mappingFlag['binduserid'] && $mappingFlag['isprimary'] == 'no'){
+                    $budgetInfoSum['budget'] = $v['budget'];
+                    $budgetInfoSum['userid'] = $v['userid'];
+                    $budgetInfoSum['yearmonth'] = $v['yearmonth'];
+                    $budgetInfoSum['realcost'] = $v['realcost'];
+                    $budgetInfoSum['type'] = '1';
+                }else if($mappingFlag['isprimary'] == 'yes' && $v['userid'] == $mappingFlag['userid']){
                     $budgetInfoSum['budget'] = $v['budget'];
                     $budgetInfoSum['userid'] = $v['userid'];
                     $budgetInfoSum['yearmonth'] = $v['yearmonth'];
@@ -181,9 +187,9 @@ class FinanceController extends CommonController {
             $count = 0;
             foreach ($budgetInfoTmp as $k => $v) {
                 foreach ($v as $kk => $vv) {
-                    if(isset($mappingFlag['binduserid']) && ($vv['userid'] == $mappingFlag['binduserid'])){
+                    if((isset($mappingFlag['userid']) && ($vv['userid'] == $mappingFlag['userid'] && $mappingFlag['isprimary'] == 'yes'))|| (isset($mappingFlag['binduserid']) && ($vv['userid'] == $mappingFlag['binduserid'] && $mappingFlag['isprimary'] == 'no'))){
                         $budgetInfoSum[$count] = $vv;
-                    }else if(isset($mappingFlag['binduserid'])){
+                    }else if(isset($mappingFlag['binduserid']) && $mappingFlag['isprimary'] == 'no'){
                         $budgetInfoSum[$count]['realcost']+= $vv['realcost'];
                     }else{
                         $budgetInfoSum[$count] = $vv;
