@@ -19,6 +19,7 @@ foreach ($file_array as $k => $v){
     $functionReg = '/public function (.*)\(\)/';
     preg_match($fileNameReg,$v,$match);
     $fileName = $match[1];
+    if(in_array($fileName,array("Common","Public","Test"))) continue;
     $sql = "select * from node where `name` = '{$fileName}'";
     $result = $db->getFirstRow($sql);
     if(empty($result)){
@@ -33,8 +34,13 @@ foreach ($file_array as $k => $v){
     foreach ($file as $kk => $vv){
         if(preg_match($functionReg,$vv,$match)){
             $functionName = $match[1];
-            $sql = "insert into node (`name`,`pid`,`level`,`addtime`) VALUES ('{$functionName}','{$pid}','3','".date("Y-m-d H:i:s")."')";
-            $db->query($sql);
+            if(in_array($functionName, array("_before_index","_before_add","_before_edit","index","update","add","edit","insert","QueryData","resume","forbid","foreverdelete","btn_Search"))) continue;
+            $sql = "select * from node where `name` = '{$functionName}' and `pid` = {$pid}";
+            $result = $db->getFirstRow($sql);
+            if(empty($result)){
+                $sql = "insert into node (`name`,`pid`,`level`,`addtime`) VALUES ('{$functionName}','{$pid}','3','".date("Y-m-d H:i:s")."')";    
+                $db->query($sql);
+            }
         }
     }
 }
