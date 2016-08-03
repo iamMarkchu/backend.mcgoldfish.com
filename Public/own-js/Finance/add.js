@@ -56,7 +56,7 @@
                         $("#addFinanceMerchant").modal('hide');
                         $('#alert-modal .alert-data-title').html('添加成功!');
                         $('#alert-modal').modal();
-                        $('select[name="merchant"]').append('<option value="'+data.name+'" selected="selected" >'+data.name+'</option>').trigger('change');
+                        $('select[name="merchant"]').append('<option value="'+data.id+'" selected="selected" >'+data.name+'</option>').trigger('change');
                     }
                 });
             });
@@ -80,7 +80,7 @@
                         $("#addFinanceCategory").modal('hide');
                         $('#alert-modal .alert-data-title').html('添加成功!');
                         $('#alert-modal').modal();
-                        $('select[name="category"]').append('<option value="'+data.displayname+'" selected="selected" >'+data.displayname+'</option>').trigger('change');
+                        $('select[name="category"]').append('<option value="'+data.id+'" selected="selected" >'+data.displayname+'</option>').trigger('change');
                     }
                 });
             });
