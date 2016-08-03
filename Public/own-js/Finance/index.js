@@ -57,6 +57,7 @@
                             var dayList = data.dayList;
                             var budgetInfo = data.budgetInfo;
                             var budgetLeft = budgetInfo.budget - budgetInfo.realcost;
+                            var budgetTotal = budgetInfo.budget;
                             var day = [];
                             var money = [];
                             $.each(dayList,function(n,value){
@@ -64,9 +65,9 @@
                                 day.push(value.day);
                                 money.push(value.money);
                             });
-                            console.log(sumList);
-                            console.log(day);
-                            console.log(money);
+                            //console.log(sumList);
+                            //console.log(day);
+                            //console.log(money);
                             var myChart = echarts.init(document.getElementById('main'));
                             // 指定图表的配置项和数据
                             myChart.setOption({
@@ -131,7 +132,7 @@
                                 ],
                                 yAxis : [
                                     {
-                                        type : 'value'
+                                        type : 'value',
                                     }
                                 ],
                                 series : [
@@ -140,6 +141,14 @@
                                         type:'bar',
                                         itemStyle: {normal: {color:'rgba(181,195,52,0.5)', label:{show:true}}},
                                         data:[budgetLeft],
+                                        markLine: {  
+                                            data: [  
+                                                {
+                                                    name: '预算线',
+                                                    yAxis: 5500
+                                                } 
+                                            ]  
+                                        } 
                                     }
                                 ],
                             });
