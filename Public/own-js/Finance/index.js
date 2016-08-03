@@ -133,6 +133,7 @@
                                 yAxis : [
                                     {
                                         type : 'value',
+                                        max : 7000
                                     }
                                 ],
                                 series : [
