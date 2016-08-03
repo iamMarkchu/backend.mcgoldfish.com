@@ -54,6 +54,10 @@ class FinanceController extends CommonController {
         $model->create();
         $model->who = $_SESSION[C('USER_AUTH_KEY')];
         $list=$model->add();
+        if($list){
+            $url = "http://backend.mcgoldfish.com/cron/updateBudget.php";
+            $flag = file_get_contents($url);
+        }
         $this->success('插入成功','index');
     }
     public function btn_Search(){
