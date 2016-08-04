@@ -9,8 +9,10 @@ function ImgUpload($path){
     if(!$info) {// 上传错误提示错误信息
         //$this->error($upload->getError());
         return false;
-    }else{// 上传成功
+    }else if(isset($info['imgFile'])){// 上传成功
         return $info['imgFile'];
+    }else{
+        return $info;
     }
 }
 function processImgToTopDomain($content){
