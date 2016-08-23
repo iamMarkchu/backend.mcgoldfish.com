@@ -58,10 +58,8 @@ class ArticleController extends CommonController {
                 $article->markdownurl = $imgFile['markDownFile']['savepath'].$imgFile['markDownFile']['savename'];            
                 $markDownString = file_get_contents("http://img.mcgoldfish.com".$imgFile['markDownFile']['savepath'].$imgFile['markDownFile']['savename']);
                 $markDownString = str_replace("\n", "", $markDownString);
-                preg_match('/<article id="content" class="markdown-body">(.*)<\/article>/',str_replace("\n", "", $markDownString),$match);
-                if(isset($match[1])) $result = $match[1];
-                //$parsedown = new \Think\Parsedown();
-                //$result = $parsedown->parse($markDownString);
+                $parsedown = new \Think\Parsedown();
+                $result = $parsedown->parse($markDownString);
                 $article->content = addslashes(trim($result));
             }            
         }
