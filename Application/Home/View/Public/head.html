@@ -29,7 +29,9 @@
     <if condition="($isDatePicker eq 1)">
         <link href="__PUBLIC__/media/css/datepicker.css" rel="stylesheet" type="text/css"/>
     </if>
-    <!-- <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" /> -->
+    <if condition="($isFileUpload eq 1)">
+        <link href="__PUBLIC__/media/css/jquery.fileupload-ui.css" rel="stylesheet" type="text/css"/>
+    </if>
     <link href="__PUBLIC__/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL STYLES -->
     <link rel="shortcut icon" href="__PUBLIC__/media/image/favicon.ico" />

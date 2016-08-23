@@ -17,6 +17,7 @@ class ArticleController extends CommonController {
         $tag = D('tag');
         $allCateInfo =$category->getAllCategory();
         $allTagInfo = $tag->getAllTag();
+        if(isset($_GET['type']) && $_GET['type'] == 'markdown') $this->assign('isMarkDown',1);
         $this->assign('allTagInfo',$allTagInfo);
         $this->assign('allCateInfo',$allCateInfo);
         $this->assign('isSelect2',1);
@@ -42,15 +43,27 @@ class ArticleController extends CommonController {
     public function insert(){
         $article = D('article');
         $article->create();
-        //echo $_POST['content'];die;
-        $article->content = addslashes(processImgToTopDomain($_POST['content']));
+        if(isset($_POST['content'])){
+            $article->content = addslashes(processImgToTopDomain($_POST['content']));
+        }
         $article->addeditor = $_SESSION['loginUserName'];
         $article->tip = C('NEW_ARTICLE_MESSAGE');
         $article->addtime = date("Y-m-d H:i:s");
-        if(!empty($_FILES['imgFile']['name'])){
+        if(!empty($_FILES['imgFile']['name']) || !empty($_FILES['markDownFile']['name'])){
             $path = '/article/';
             $imgFile = ImgUpload($path);
-            $article->image = $imgFile['savepath'].$imgFile['savename'];
+            if(isset($imgFile['imgFile']))
+                $article->image = $imgFile['imgFile']['savepath'].$imgFile['imgFile']['savename'];
+            if(isset($imgFile['markDownFile'])){
+                $article->markdownurl = $imgFile['markDownFile']['savepath'].$imgFile['markDownFile']['savename'];            
+                $markDownString = file_get_contents("http://img.mcgoldfish.com".$imgFile['markDownFile']['savepath'].$imgFile['markDownFile']['savename']);
+                $markDownString = str_replace("\n", "", $markDownString);
+                preg_match('/<article id="content" class="markdown-body">(.*)<\/article>/',str_replace("\n", "", $markDownString),$match);
+                if(isset($match[1])) $result = $match[1];
+                //$parsedown = new \Think\Parsedown();
+                //$result = $parsedown->parse($markDownString);
+                $article->content = addslashes(trim($result));
+            }            
         }
         $articleid = $article->add();
         if($articleid){
@@ -114,7 +127,6 @@ class ArticleController extends CommonController {
         foreach ($allTagInfo as $k => $v) {
             if(in_array($v['id'],$tagInfo)) $allTagInfo[$k]['selected'] = '1';
             else $allTagInfo[$k]['selected'] = '0';
-            
         }
         $pageMeta = D('page_meta');
         $where = "optdataid = {$articleid} and `status` = 'yes' and modeltype='article'";
@@ -149,7 +161,7 @@ class ArticleController extends CommonController {
         if(!empty($_FILES['imgFile']['name'])){
             $path = '/article/';
             $imgFile = ImgUpload($path);
-            $data['image'] = $imgFile['savepath'].$imgFile['savename'];
+            $data['image'] = $imgFile['imgFile']['savepath'].$imgFile['imgFile']['savename'];
         }
         $data = array_filter($data);
         $article->create($data);

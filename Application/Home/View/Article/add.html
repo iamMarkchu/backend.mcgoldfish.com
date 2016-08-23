@@ -56,16 +56,26 @@
                                                 <span class="help-inline">如果不填,url默认为/article/文章id.html</span>
                                             </div>
                                         </div>
-                                        <div class="control-group">
-                                            <label class="control-label">文章内容</label>
-                                            <!-- <div class="tmpSaveBtn">
-                                                <button class="btn blue">保存文章</button>
-                                            </div> -->
-                                            <div class="controls">
-                                                <!-- 加载编辑器的容器 -->
-                                                <script id="container" name="content" type="text/plain"></script>
+                                        <eq name="isMarkDown" value="1">
+                                            <div class="control-group">
+                                                <label class="control-label">上传md文件</label>
+                                                <div class="controls">
+                                                    <input type="file" name="markDownFile" />
+                                                </div>
                                             </div>
-                                        </div>
+                                        </eq>
+                                        <neq name="isMarkDown" value="1">
+                                            <div class="control-group">
+                                                <label class="control-label">文章内容</label>
+                                                <!-- <div class="tmpSaveBtn">
+                                                    <button class="btn blue">保存文章</button>
+                                                </div> -->
+                                                <div class="controls">
+                                                    <!-- 加载编辑器的容器 -->
+                                                    <script id="container" name="content" type="text/plain"></script>
+                                                </div>
+                                            </div>
+                                        </neq>
                                         <div class="control-group">
                                             <label class="control-label">维护等级</label>
                                             <div class="controls">

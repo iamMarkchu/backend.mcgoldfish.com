@@ -87,6 +87,9 @@
             $('#addArticle').click(function(e){
                 window.location.href="/Article/add/";
             });
+            $('#uploadMarkDown').click(function(e){
+                window.location.href="/Article/add/type/markdown";
+            });
             //绑定编辑文章点击事件
             $('.btn-group').on('click','.purple#editArticle',function(){
                 var articleid = $('tr.selected>td').html();

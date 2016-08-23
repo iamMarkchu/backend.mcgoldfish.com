@@ -46,11 +46,11 @@ class UserController extends CommonController {
             $path = '/user/';
             $imgFile = ImgUpload($path);
             $imageObj = new \Think\Image(); 
-            $abPath = C('IMG_SAVE_PATH').$imgFile['savepath'].$imgFile['savename'];
+            $abPath = C('IMG_SAVE_PATH').$imgFile['imgFile']['savepath'].$imgFile['imgFile']['savename'];
             $imageObj->open($abPath);
             // 按照原图的比例生成一个最大为150*150的缩略图并保存为thumb.jpg
-            $imageObj->thumb(9, 9)->save(C('IMG_SAVE_PATH').'/thumb/'.$imgFile['savename']);
-            $user->image = '/thumb/'.$imgFile['savename'];
+            $imageObj->thumb(9, 9)->save(C('IMG_SAVE_PATH').'/thumb/'.$imgFile['imgFile']['savename']);
+            $user->image = '/thumb/'.$imgFile['imgFile']['savename'];
         }
     	$userid = $user->add();
         if($userid){
@@ -88,11 +88,11 @@ class UserController extends CommonController {
             $path = '/user/';
             $imgFile = ImgUpload($path);
             $imageObj = new \Think\Image(); 
-            $abPath = C('IMG_SAVE_PATH').$imgFile['savepath'].$imgFile['savename'];
+            $abPath = C('IMG_SAVE_PATH').$imgFile['imgFile']['savepath'].$imgFile['imgFile']['savename'];
             $imageObj->open($abPath);
             // 按照原图的比例生成一个最大为150*150的缩略图并保存为thumb.jpg
-            $imageObj->thumb(20, 20)->save(C('IMG_SAVE_PATH').'/thumb/'.$imgFile['savename']);
-            $user->image = '/thumb/'.$imgFile['savename'];
+            $imageObj->thumb(20, 20)->save(C('IMG_SAVE_PATH').'/thumb/'.$imgFile['imgFile']['savename']);
+            $user->image = '/thumb/'.$imgFile['imgFile']['savename'];
         }
         $user->save();
         $sql = "delete from role_user where user_id = {$userid}";
