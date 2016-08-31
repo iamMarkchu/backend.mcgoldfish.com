@@ -108,10 +108,26 @@
                 }
             }
             $('input[name=imgFile]').change(function(){
-                //alert($(this).val());
                 previewImage(this);
                 $('#imghead').removeClass('hidden').show();
-                //console.log(this.files);
+            });
+            $('input[name=title]').blur(function(){
+                var title = $(this).val();
+                if (title != '') {
+                    url = "/Article/checkTitleDuplicated/";
+                    sendData = {title:title};
+                    $.ajax({
+                        url : url,
+                        data : sendData,
+                        type : 'POST',
+                        dateType : 'STRING',
+                        success : function(data){
+                            if(data == '0'){
+                                alert('标题与现有标题重复,请修改!');
+                            }
+                        }
+                    });
+                }
             });
             function previewImage(file){
               var MAXWIDTH  = 750; 
@@ -121,7 +137,7 @@
                   var img = document.getElementById('imghead');
                   console.log(img.offsetWidth);
                   img.onload = function(){
-                    var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, 450, 220);
+                    var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, 750, 220);
                     img.width  =  rect.width;
                     img.height =  rect.height;
                     img.style.marginLeft = rect.left+'px';

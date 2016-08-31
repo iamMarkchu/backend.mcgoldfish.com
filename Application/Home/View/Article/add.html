@@ -26,14 +26,17 @@
                                             <label class="control-label">文章标题</label>
                                             <div class="controls">
                                                 <input type="text" placeholder="文章标题" class="m-wrap large"  name="title" />
-                                                <span class="help-inline">不能为空</span>
+                                                <span class="help-inline"><span style="color:red;">*</span>&nbsp不能为空</span>
+                                                <span class="help-inline">1231232</span>
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">文章封面</label>
                                             <div class="controls">
                                                 <input type="file" name="imgFile" />
-                                                <span class="help-inline">750*220图片显示效果最佳,且图片大小不超过2M</span>
+                                            </div>
+                                            <div class="controls">
+                                                <span class="help-inline"><span style="color:red;">*</span>&nbsp750*220图片显示效果最佳,且图片大小不超过2M</span>
                                             </div>
                                             <div class="controls">
                                                 <img id="imghead" src="" <empty name="result.image">class="hidden"</empty>/>
@@ -42,18 +45,34 @@
                                         <div class="control-group">
                                             <label class="control-label">文章来源</label>
                                             <div class="controls">
-                                                <select name="articlesource">
+                                                <!-- <select name="articlesource">
                                                     <option value="原创">原创</option>
                                                     <option value="转载">转载</option>
-                                                </select>
-                                                <span class="help-inline"></span>
+                                                </select> -->
+                                                <label class="radio">
+                                                    <div class="radio">
+                                                        <span class="checked">
+                                                            <input type="radio" name="articlesource" value="原创" checked="checked">
+                                                        </span>
+                                                    </div>
+                                                    原创
+                                                </label>
+                                                <label class="radio">
+                                                    <div class="radio">
+                                                        <span>
+                                                            <input type="radio" name="articlesource" value="转载">
+                                                        </span>
+                                                    </div>
+                                                    转载
+                                                </label>
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">文章链接</label>
                                             <div class="controls">
                                                 <input type="text" placeholder="文章链接" class="m-wrap large"  name="requestPath" />
-                                                <span class="help-inline">如果不填,url默认为/article/文章id.html</span>
+
+                                                <span class="help-inline"><span style="color:red;">*</span>&nbsp若不填,url默认为/article/文章id.html</span>
                                             </div>
                                         </div>
                                         <eq name="isMarkDown" value="1">

@@ -10,9 +10,6 @@ class ArticleController extends CommonController {
         $this->assign('isSelect2',1);
     }
     public function _before_add(){
-        //$key = C('USER_AUTH_KEY')."__";
-        //$tmpContent = getFromMemcache($key);
-        //$this->assign('$tmpContent',$tmpContent);
         $category = D('category');
         $tag = D('tag');
         $allCateInfo =$category->getAllCategory();
@@ -278,5 +275,14 @@ class ArticleController extends CommonController {
         if(isset($_POST['articleid'])) $articleid = $_POST['articleid'];
         $key = session(C('USER_AUTH_KEY'))."_".$articleid;
         echo getFromMemcache($key);
+    }
+    public function checkTitleDuplicated(){
+        if(!IS_AJAX || !isset($_POST['title'])) echo "-1";
+        $title = $_POST['title'];
+        $article = D('article');
+        $condArray = array('title'=>$title);
+        $articleInfo = $article->where($condArray)->find();
+        if(!empty($articleInfo)) echo "0";
+            else echo "1";
     }
 }
