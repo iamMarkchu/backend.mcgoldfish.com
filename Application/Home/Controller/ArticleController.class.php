@@ -41,7 +41,7 @@ class ArticleController extends CommonController {
         $article = D('article');
         $article->create();
         if(isset($_POST['content'])){
-            $article->content = addslashes(processImgToTopDomain($_POST['content']));
+            $article->content = addslashes(processContent($_POST['content']));
         }
         $article->addeditor = $_SESSION['loginUserName'];
         $article->tip = C('NEW_ARTICLE_MESSAGE');
@@ -149,7 +149,8 @@ class ArticleController extends CommonController {
         $data['title'] = ($data['title'] == $_POST['title'])? '':$_POST['title'];
         $data['pageh1'] = ($data['pageh1'] == $_POST['pageh1'])?'':$_POST['pageh1'];
         $data['articlesource'] = ($data['articlesource'] == $_POST['articlesource'])?'':$_POST['articlesource'];
-        $data['content'] = ($data['content'] == $_POST['content'])?'':addslashes(processImgToTopDomain($_POST['content']));
+        //echo htmlspecialchars($_POST['content']);die;
+        $data['content'] = ($data['content'] == $_POST['content'])?'':addslashes(processContent($_POST['content']));
         $data['maintainorder'] = ($data['maintainorder'] == $_POST['maintainorder'])?'':$_POST['maintainorder'];
         $data['articlesource'] = ($data['articlesource'] == $_POST['articlesource'])?'':$_POST['articlesource'];
         unset($data['lastupdatetime']);

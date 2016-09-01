@@ -13,11 +13,15 @@ function ImgUpload($path){
         return $info;
     }
 }
-function processImgToTopDomain($content){
+function processContent($content){
     if(empty($content)) return '';
-    //$regx = "/\<img src\=\"?(http://(\.|\d+|\:)+).*?\"/";
-    $regx = "/<img src=\"\/Public(.*)?\"/";
-    $content =preg_replace($regx,"<img src=\"".C('IMG_URL')."$1\"",$content);
+    $content = str_replace("src=\"Public","scr=\"".C('IMG_URL'),$content);
+    $content = str_replace("\n","--s--",$content);
+    //$regx = "/<pre>-z-(php|js|html|css)-z-(.*?)<\/pre>/";
+    //if(preg_match($regx,$content)){
+    //    $content = preg_replace($regx,"<pre><code class=\"$1\">$2</code></pre>",$content);
+    //}
+    //$content = str_replace("--s--","\n",$content);
     return $content;
 }
 function save_log($action,$info,$isajax,$user){
