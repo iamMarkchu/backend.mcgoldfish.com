@@ -5,10 +5,10 @@ return array(
     'DB_HOST'               =>  'localhost', // 服务器地址
     'DB_NAME'               =>  'chukui_base',          // 数据库名
     'DB_USER'               =>  'root',      // 用户名
-    'DB_PWD'                =>  'root',          // 密码
+    'DB_PWD'                =>  'chukui',          // 密码
     /* Memcache设置 */
     'MEMCACHE_SETTING'      => array(
-                                'type'=>'memcache',
+                                'type'=>'memcached',
                                 'host'=>'localhost',
                                 'port'=>'11211',
                                 'prefix'=>'chukui_',
@@ -62,6 +62,6 @@ return array(
     /*百度地图api*/
     'SUGGESTION_AK' => 'OkSOPAGevGNwQKlGeM6Fx7AgAaedBYao',
     /*图片域名*/
-    //'IMG_URL' => 'http://img.mcgoldfish.com',
-    'IMG_URL' => 'http://img-ubuntu.mcgoldfish.com',
+    'IMG_URL' => 'http://img.mcgoldfish.com',
+    //'IMG_URL' => 'http://img-ubuntu.mcgoldfish.com',
 );
