@@ -15,7 +15,7 @@ function ImgUpload($path){
 }
 function processContent($content){
     if(empty($content)) return '';
-    $content = str_replace("src=\"/Public","scr=\"".C('IMG_URL'),$content);
+    $content = str_replace("src=\"/Public","src=\"".C('IMG_URL'),$content);
     $content = str_replace("\n","--s--",$content);
     //$regx = "/<pre>-z-(php|js|html|css)-z-(.*?)<\/pre>/";
     //if(preg_match($regx,$content)){
