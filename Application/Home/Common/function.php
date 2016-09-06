@@ -21,7 +21,7 @@ function processContent($content){
     //if(preg_match($regx,$content)){
     //    $content = preg_replace($regx,"<pre><code class=\"$1\">$2</code></pre>",$content);
     //}
-    //$content = str_replace("--s--","\n",$content);
+    $content = str_replace("--s--","\n",$content);
     return $content;
 }
 function save_log($action,$info,$isajax,$user){
