@@ -79,34 +79,6 @@
                     }
                 });
             });
-            if($('#container').length>0){
-                var ue = UE.getEditor('container',{
-                    initialFrameHeight:'600',
-                    initialFrameWidth:'875'
-                    });
-                //ue.execCommand( "getlocaldata" );
-                ue.addListener('contentChange',function(){
-                    var contentHtml = ue.getContent();
-                    $.ajax({
-                        url : "/Article/saveTmpContetntToCache/",
-                        data : {contentHtml:contentHtml},
-                        type : "POST"
-                    });
-                });
-                $.ajax({
-                    url: "/Article/getTmpContentFromCache/",
-                    type: "POST",
-                    success : function(data){
-                        ue.ready(function(){
-                             ue.setContent(data);
-                        });
-                    }
-                });
-                function clearLocalData () {
-                    ue.execCommand( "clearlocaldata" );
-                    alert("已清空草稿箱")
-                }
-            }
             $('input[name=imgFile]').change(function(){
                 previewImage(this);
                 $('#imghead').removeClass('hidden').show();
@@ -120,7 +92,7 @@
                         url : url,
                         data : sendData,
                         type : 'POST',
-                        dateType : 'STRING',
+                        dateType : 'string',
                         success : function(data){
                             if(data == '0'){
                                 alert('标题与现有标题重复,请修改!');

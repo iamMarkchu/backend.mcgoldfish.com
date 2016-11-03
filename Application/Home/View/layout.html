@@ -5,20 +5,14 @@
 <html lang="en" class="no-js">
 <!--<![endif]-->
 <include file="Public:head" />
-<!-- BEGIN BODY -->
 <body class="page-header-fixed page-sidebar-fixed page-sidebar-closed">
     <include file="Public:header" />
-    <!-- BEGIN CONTAINER -->
     <div class="page-container">
         <include file="Public:menu" />
-        <!-- BEGIN PAGE -->
         <div class="page-content">
-            <!-- BEGIN PAGE CONTAINER-->
             <div class="container-fluid">
-                <!-- BEGIN PAGE HEADER-->
                 <div class="row-fluid">
                     <div class="span12">
-                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
                         <ul class="breadcrumb my-breadcrumb">
                             <li>
                                 <i class="icon-home"></i>
@@ -27,25 +21,22 @@
                                 </i>
                             </li>
                             <volist name="breadCrumb" id="vo">
-                                <li><a href="">{$vo}</a><neq name="key" value="1"><i class="icon-angle-right"></i></neq></li>
+                                <li>
+                                    <a href="">{$vo}</a><neq name="key" value="1">
+                                        <i class="icon-angle-right"></i></neq>
+                                </li>
                             </volist>
                         </ul>
-                        <!-- END PAGE TITLE & BREADCRUMB-->
                     </div>
                 </div>
-                <!-- END PAGE HEADER-->
-                <div id="dashboard">
+                <div>
                     {__CONTENT__}
                 </div>
+              </div>
             </div>
-            <!-- END PAGE CONTAINER-->
         </div>
-        <!-- END PAGE -->
     </div>
-    <!-- END CONTAINER -->
     <include file="Public:footer"/>
-    <!-- END FOOTER -->
     <include file="Public:footer-js"/>
 </body>
-<!-- END BODY -->
 </html>

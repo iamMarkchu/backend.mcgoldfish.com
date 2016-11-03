@@ -17,8 +17,8 @@ class ArticleController extends CommonController {
         if(isset($_GET['type']) && $_GET['type'] == 'markdown') $this->assign('isMarkDown',1);
         $this->assign('allTagInfo',$allTagInfo);
         $this->assign('allCateInfo',$allCateInfo);
-        $this->assign('isSelect2',1);
-        $this->assign('isUeditor',1);
+        $this->assign('isSimditor', 1);
+        $this->assign('isSelect2', 1);
     }
     public function QueryData(){
     	$start = $_POST['start'];
@@ -136,8 +136,7 @@ class ArticleController extends CommonController {
         $this->assign('pageMetaInfo',$pageMetaInfo);
         $this->assign('urlInfo',$urlInfo);
         //加载插件
-        //$this->assign('isEditor',1);
-        $this->assign('isUeditor',1);
+        $this->assign('isSimditor', 1);
         $this->assign('isSelect2',1);
         $this->display();
     }
@@ -272,7 +271,6 @@ class ArticleController extends CommonController {
         echo $key;
     }
     public function getTmpContentFromCache(){
-        //if(!IS_AJAX) echo false;
         if(isset($_POST['articleid'])) $articleid = $_POST['articleid'];
         $key = session(C('USER_AUTH_KEY'))."_".$articleid;
         echo getFromMemcache($key);
@@ -285,5 +283,15 @@ class ArticleController extends CommonController {
         $articleInfo = $article->where($condArray)->find();
         if(!empty($articleInfo)) echo "0";
             else echo "1";
+    }
+    public function saveImage(){
+        if(!empty($_FILES['upload_file']['name'])){
+            $path = "/article/";
+            $imgFile = ImgUpload($path);
+            $jsonBack['success'] = true;
+            $jsonBack['msg'] = "上传成功！";
+            $jsonBack['file_path'] = "/Public". $imgFile['upload_file']['savepath']. $imgFile['upload_file']['savename'];
+            $this->ajaxReturn($jsonBack);
+        }
     }
 }
