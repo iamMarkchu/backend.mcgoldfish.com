@@ -81,33 +81,6 @@
             $('.updateArticleBtn').click(function(){
                 $('.updateArticleForm').submit();
             });
-            var ue = UE.getEditor('container',{
-                initialFrameHeight:'600',
-                initialFrameWidth:'90%'
-            });
-            // ue.execCommand( "getlocaldata" );
-            // ue.addListener('contentChange',function(){
-            //     var contentHtml = ue.getContent();
-            //     var articleid = $('input[name=id]').val();
-            //     $.ajax({
-            //         url : "/Article/saveTmpContetntToCache/",
-            //         data : {contentHtml:contentHtml,articleid:articleid},
-            //         type : "POST"
-            //     });
-            // });
-            // $.ajax({
-            //     url: "/Article/getTmpContentFromCache/",
-            //     type: "POST",
-            //     success : function(data){
-            //         ue.ready(function(){
-            //              ue.setContent(data);
-            //         });
-            //     }
-            // });
-            // function clearLocalData () {
-            //     ue.execCommand( "clearlocaldata" );
-            //     alert("已清空草稿箱")
-            // }
             $('input[name=imgFile]').change(function(){
                 previewImage(this);
                 $('#imghead').removeClass('hidden').show();

@@ -7,15 +7,18 @@ $scriptName = '/cron/sumArticleCount';
 $currentScriptManager = new CurrentScriptManager();
 $queryString = sprintf("SELECT `Value` FROM `data_cache` WHERE `Name` = '%s'",$scriptName);
 $result = $currentScriptManager->dstDataObj->getFirstRow($queryString);
-if(empty($result)){
+if($result['Value'] == '0'){
 	$nowTime = date('Y-m-d H:i:s');
 	$lastScriptTime = '0000-00-00 00:00:00';
 }else{
 	$lastScriptTime = $result['Value'];
 }
-$queryString = sprintf("SELECT `RequestUri`,COUNT(*) AS `ArticleCount` FROM `pagevisitlog` WHERE `VisitTime` >= '%s' AND `PageType` = 'ARTICLE' GROUP BY `RequestUri` ",date('Y-m-d H:i:s',$lastScriptTime));
+$queryString = sprintf("SELECT `RequestUri`,COUNT(*) AS `ArticleCount` FROM `pagevisitlog` WHERE `VisitTime` >= '%s' AND `PageType` = 'ARTICLE' GROUP BY `RequestUri` ",$lastScriptTime);
 $resultList = $currentScriptManager->srcDataObj->getRows($queryString,'RequestUri');
 $countListByUrl = $resultList;unset($resultList);
+if(empty($countListByUrl)){
+	die('no visit!');
+}
 $inList = array();
 foreach ($countListByUrl as $k => $v) {
 	$inList[] = "'".$v['RequestUri']."'";
@@ -33,8 +36,9 @@ foreach ($countListByUrl as $k => $v) {
 }
 $exucString .= " END WHERE `id` IN (".implode(",", $idList).")";
 $flag = $currentScriptManager->dstDataObj->query($exucString);
+$lastScriptTime = date('Y-m-d H:i:s');
 if($flag)
-	$currentScriptManager->insert_data_cache($scriptName,$lastScriptTime);
+	$currentScriptManager->update_data_cache($scriptName,$lastScriptTime);
 echo 'sum success! '.$lastScriptTime;
 class CurrentScriptManager
 {
@@ -60,7 +64,14 @@ class CurrentScriptManager
 	public function insert_data_cache($name,$value){
  	   if(empty($name) || empty($value)) return false;
  	   $updateTime = date('Y-m-d H:i:s');
- 	   $exucString = sprintf("INSERT INTO `data_cache` (`Name`,`Updatetime`,`Value`) VALUES ('%s','%s','%d')",addslashes($name),$updateTime,$value);
+ 	   $exucString = sprintf("INSERT INTO `data_cache` (`Name`,`Updatetime`,`Value`) VALUES ('%s','%s','%s')",addslashes($name),$updateTime,$value);
+ 	   $flag = $this->dstDataObj->query($exucString);
+ 	   return $flag;
+	}
+	public function update_data_cache($name,$value){
+ 	   if(empty($name) || empty($value)) return false;
+ 	   $updateTime = date('Y-m-d H:i:s');
+ 	   $exucString = sprintf("update `data_cache` SET `Updatetime` = '%s',`Value` = '%s' WHERE `Name` = '%s'", $updateTime, $value, addslashes($name));
  	   $flag = $this->dstDataObj->query($exucString);
  	   return $flag;
 	}

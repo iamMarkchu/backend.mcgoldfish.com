@@ -4,6 +4,7 @@ function ImgUpload($path){
     $upload->maxSize   =     3145728 ;// 设置附件上传大小
     $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg','md','html');// 设置附件上传类型
     $upload->savePath  =      $path;//C('IMG_SAVE_PATH'); // 设置附件上传目录
+    $upload->rootPath = "/app/site/backend.mcgoldfish.com/Public/";
     // 上传文件 
     $info   =   $upload->upload();
     if(!$info) {// 上传错误提示错误信息

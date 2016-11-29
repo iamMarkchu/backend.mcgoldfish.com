@@ -38,7 +38,7 @@ return array(
     'URL_HTML_SUFFIX'       =>  'html',
     /*图片路径*/
     //'IMG_SAVE_PATH' => '/app/site/mark-ubuntu/web/backend.mcgoldfish.com/Public',
-    'IMG_SAVE_PATH' => '/app/site/mark-ubuntu/web/backend.mcgoldfish.com/Public',
+    'IMG_SAVE_PATH' => '/app/site/backend.mcgoldfish.com/Public',
     /*按钮文字*/
     'SAVE_BUTTON'  => '<i class="icon-ok"></i>保存',
     'CANCEL_BUTTON'  => '&nbsp取消',
