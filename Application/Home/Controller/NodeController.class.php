@@ -2,15 +2,9 @@
 namespace Home\Controller;
 use Think\Controller;
 class NodeController extends CommonController {
-   	public function _before_index(){
-        if(isset($_GET['pid']))   $pid = $_GET['pid'];
-        else  $pid = 0;
-        $searchArray = session('nodeSearch');
-        $searchArray['where']['pid'] = $pid;
-        session('NodeSearch',$searchArray);
-        $this->assign('noAjax',1);
-        $this->assign('isSelect2',1);
-        //定义需要引入的page level js css
+    public function index(){
+        $this->assign('isEcharts',"1");
+        $this->display();
     }
     public function insert(){
     	$node = D('node');
