@@ -4,6 +4,9 @@ use Think\Controller;
 class ArticleController extends CommonController {
 	public function _before_index(){
         $searchArray = session('articleSearch');
+        //默认搜索条件
+        if(!isset($searchArray['where']['status'])) $searchArray['where']['status'] = 'active';
+        if(!isset($searchArray['order'])) $searchArray['order'] = 'id desc';
         $this->assign('searchArray',$searchArray);
         //定义需要引入的page level js css
         $this->assign('noAjax',1);
