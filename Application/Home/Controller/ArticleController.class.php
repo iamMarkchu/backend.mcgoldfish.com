@@ -20,7 +20,7 @@ class ArticleController extends CommonController {
         if(isset($_GET['type']) && $_GET['type'] == 'markdown') $this->assign('isMarkDown',1);
         $this->assign('allTagInfo',$allTagInfo);
         $this->assign('allCateInfo',$allCateInfo);
-        $this->assign('isSimditor', 1);
+        $this->assign('isUeditor', 1);
         $this->assign('isSelect2', 1);
     }
     public function QueryData(){
@@ -139,7 +139,7 @@ class ArticleController extends CommonController {
         $this->assign('pageMetaInfo',$pageMetaInfo);
         $this->assign('urlInfo',$urlInfo);
         //加载插件
-        $this->assign('isSimditor', 1);
+        $this->assign('isUeditor', 1);
         $this->assign('isSelect2',1);
         $this->display();
     }

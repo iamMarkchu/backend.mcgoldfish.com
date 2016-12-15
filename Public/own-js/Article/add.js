@@ -9,6 +9,7 @@
         bindEvent: function () {
             var that = this;    
             //绑定新增文章点击事件
+            var ue = UE.getEditor('container');
             $('#selOY2').select2();
             $('#tag_multi_select2').select2();
             $('#addArticleTag').modal({show:false});
@@ -152,9 +153,6 @@
                 param.top = Math.round((maxHeight - param.height) / 2);
                 return param;
             }
-            /*window.onbeforeunload = function() {
-                 return "您的编辑未保存，是否要离开本页面?";     
-            }*/
         }
     };
     $(function () {

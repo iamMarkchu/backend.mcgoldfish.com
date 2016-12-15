@@ -8,7 +8,7 @@
         currentTable: null,
         bindEvent: function () {
             var that = this;    
-            //绑定新增文章点击事件
+            var ue = UE.getEditor('container');
             $('#selOY2').select2();
             $('#tag_multi_select2').select2();
             $('#addArticleTag').modal({show:false});
