@@ -116,6 +116,7 @@ class ArticleController extends CommonController {
         $articleid = $_REQUEST['id'];
         $article = D('article');
         $result = $article->getById($articleid);
+        $result['content'] = stripslashes($result['content']);
         $category = D('category');
         $allCateInfo =$category->getAllCategory();
         $cateInfo = $category->getCategoryByIdAndType($articleid);
@@ -132,7 +133,7 @@ class ArticleController extends CommonController {
         $url = D('rewrite_url');
         $urlInfo = $url->where($where." and isJump = 'NO'")->find();
         //变量传到前台
-        $this->assign('result',stripslashes($result));
+        $this->assign('result',$result);
         $this->assign('categoryid',$cateInfo['categoryid']);
         $this->assign('allCateInfo',$allCateInfo);
         $this->assign('allTagInfo',$allTagInfo);
