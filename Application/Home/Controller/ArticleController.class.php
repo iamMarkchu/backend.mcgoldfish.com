@@ -132,7 +132,7 @@ class ArticleController extends CommonController {
         $url = D('rewrite_url');
         $urlInfo = $url->where($where." and isJump = 'NO'")->find();
         //变量传到前台
-        $this->assign('result',$result);
+        $this->assign('result',stripslashes($result));
         $this->assign('categoryid',$cateInfo['categoryid']);
         $this->assign('allCateInfo',$allCateInfo);
         $this->assign('allTagInfo',$allTagInfo);
