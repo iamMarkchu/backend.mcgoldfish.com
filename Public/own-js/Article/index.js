@@ -15,7 +15,7 @@
                             if(row.requestpath == null){
                                 return data;
                             }else{  
-                                return '<a href="http://mcgoldfish.com'+row.requestpath+'" title="查看文章">'+data+'</a>';
+                                return '<a href="http://mcgoldfish.com/article/'+row.id+'" title="查看文章">'+data+'</a>';
                             }
                         }
                     },

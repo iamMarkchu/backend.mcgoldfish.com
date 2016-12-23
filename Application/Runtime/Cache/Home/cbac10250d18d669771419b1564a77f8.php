@@ -242,14 +242,14 @@ var _hmt = _hmt || [];
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="control-group">
+                                        <!-- <div class="control-group">
                                             <label class="control-label">文章链接</label>
                                             <div class="controls">
                                                 <input type="text" placeholder="文章链接" class="m-wrap large"  name="requestPath" />
 
                                                 <span class="help-inline"><span style="color:red;">*</span>&nbsp若不填,url默认为/article/文章id.html</span>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <?php if(($isMarkDown) == "1"): ?><div class="control-group">
                                                 <label class="control-label">上传md文件</label>
                                                 <div class="controls">
@@ -259,7 +259,7 @@ var _hmt = _hmt || [];
                                         <?php if(($isMarkDown) != "1"): ?><div class="control-group">
                                                 <label class="control-label">文章内容</label>
                                                 <div class="controls">
-                                                    <script id="container" name="content" type="text/plain">这里写你的初始化内容</script>
+                                                    <script id="container" name="content" type="text/plain"></script>
                                                 </div>
                                             </div><?php endif; ?>
                                         <div class="control-group">
@@ -443,7 +443,7 @@ var _hmt = _hmt || [];
 <script src="/Public/media/js/bootstrap-modalmanager.js"></script><?php endif; ?>
 <?php if(($isDatePicker == 1)): ?><script src="/Public/media/js/bootstrap-datepicker.js"></script><?php endif; ?>
 <?php if(($isEcharts == 1)): ?><script src="http://echarts.baidu.com/build/dist/echarts.js"></script><?php endif; ?>
-<?php if(($isUeditor == 1)): ?><script src="/Public/plugins/ueditor/ueditor.config.js?12312=123"></script>
+<?php if(($isUeditor == 1)): ?><script src="/Public/plugins/ueditor/ueditor.config.js?12312=1231"></script>
 <script src="/Public/plugins/ueditor/ueditor.all.js"></script><?php endif; ?>
 <script src="/Public/media/js/jquery.1.10.12.dataTables.min.js" type="text/javascript"></script>
 <script src="/Public/own-js/base.js" type="text/javascript"></script>

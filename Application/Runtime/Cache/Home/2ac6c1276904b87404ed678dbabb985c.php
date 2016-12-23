@@ -126,9 +126,9 @@ var _hmt = _hmt || [];
                  <li>
                     <a href="<?php echo U('Category/index');?>">类别管理</a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="<?php echo U('Url/index');?>">链接管理</a>
-                </li>
+                </li> -->
                 <li>
                     <a href="<?php echo U('Comment/index');?>">评论管理</a>
                 </li>
