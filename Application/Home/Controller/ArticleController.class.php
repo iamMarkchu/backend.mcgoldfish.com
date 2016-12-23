@@ -230,6 +230,20 @@ class ArticleController extends CommonController {
                 $tagMapping->add($data);
             }
         }
+        if(isset($_POST['pagetitle'])){
+            $pageMeta = D('page_meta');
+            $where = "optdataid = {$articleid} and `status` = 'yes' and modeltype='article'";
+            $pageMetaInfo = $pageMeta->where($where)->find();
+            $pageMeta->create();
+            if(empty($pageMetaInfo)){
+                $pageMeta->optdataid = $articleid;
+                unset($pageMeta->id);
+                $pageMeta->add();
+            }else{
+                $pageMeta->id = $pageMetaInfo['id'];
+                $pageMeta->save();
+            }
+        }
         $this->success("编辑成功","index");
     }
     public function btn_Search(){
