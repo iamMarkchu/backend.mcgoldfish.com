@@ -61,12 +61,6 @@ function deleteFromCache($key){
     $flag = S($key,null);
     return $flag;
 }
-function saveUrl(){
-    if(CONTROLLER_NAME == 'Public') return false;
-    if(in_array(ACTION_NAME,array('index','add','edit'))){
-        $key = session(C('USER_AUTH_KEY'))."_oldPage";
-        return saveToMemcache($key,__ACTION__);
-    }
-}
+
 
 

@@ -1,26 +1,20 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
+use Org\Util\Rbac;
 class PublicController extends CommonController {
-    // 检查用户是否登录
-	protected function checkUser() {
-		if(!isset($_SESSION[C('USER_AUTH_KEY')])) {
-			$this->assign('jumpUrl','Public/login');
-			$this->error('没有登录');
-		}
-	}
-	// 用户登录页面
+	
 	public function login() {
-		if(!isset($_SESSION[C('USER_AUTH_KEY')])) {
+		if(!session('?'.C('USER_AUTH_KEY'))) {
 			$isRemmberInfo = cookie('saveUser');
 			if(!empty($isRemmberInfo)){
-				$this->assign('saveUser',cookie('saveUser'));
-				$this->assign('remember',1);
+				$this->assign('saveUser', cookie('saveUser'));
+				$this->assign('remember', 1);
 			}
-			$this->assign('isLogin',1);
+			$this->assign('isLogin', 1);
 			$this->display();
 		}else{
-			$oldPage = getFromMemcache(session(C('USER_AUTH_KEY'))."_oldPage");
+			//$oldPage = getFromMemcache(session(C('USER_AUTH_KEY'))."_oldPage");
 			if(!empty($oldPage))
 				$this->redirect($oldPage);
 			else
@@ -29,60 +23,47 @@ class PublicController extends CommonController {
 	}
 
 	public function index() {
-		//如果通过认证跳转到首页
 		redirect(__APP__);
 	}
-	// 登录检测
+	
 	public function checkLogin() {
-		if(empty($_POST['account'])) {
-			$this->error('帐号错误！');
-		}elseif (empty($_POST['password'])){
-			$this->error('密码必须！');
-		}elseif (empty($_POST['verify'])){
-		 	$this->error('验证码必须！');
-		}
-        //生成认证条件
-        $map            =   array();
-		// 支持使用绑定帐号登录
-		$map['account']	= $_POST['account'];
-        $map["status"]	=	array('eq','active');
-		if(!$this->check_verify($_POST['verify'])){
-			$this->error('验证码错误!');
-		}
-		$r = new \Org\Util\Rbac();
+		$map['account']	=  I('post.account');
+        $map["status"]	=  ['eq','active'];
+		//if(!$this->check_verify(I('post.verify')))  $this->error('验证码错误!');
+		$r = new Rbac;
         $authInfo = $r->authenticate($map);
-        //使用用户名、密码和状态的方式进行认证
+        
         if(empty($authInfo)) {
             $this->error('帐号不存在或已禁用！');
         }else {
-            if($authInfo['password'] != md5($_POST['password'])) {
-            	$this->error('密码错误！');
+            if($authInfo['password'] != md5($_POST['password']))    $this->error('密码错误！');
+            $needToSession = [
+            	C('USER_AUTH_KEY') => $authInfo['id'],
+            	'loginUserName' => $authInfo['nickname'],
+            	'userImage' => $authInfo['image'],
+            	'lastLoginTime' => $authInfo['last_login_time'],
+            ];
+            session([ 'name' => 'session_id', 'expire' => 86400]);
+            foreach ($needToSession as $k => $v) {
+            	session($k, $v);
             }
-            $_SESSION[C('USER_AUTH_KEY')]	=	$authInfo['id'];
-            $_SESSION['email']	=	$authInfo['email'];
-            $_SESSION['loginUserName']		=	$authInfo['nickname'];
-            $_SESSION['userImage']		=	$authInfo['image'];
-            $_SESSION['lastLoginTime']		=	$authInfo['last_login_time'];
-			$_SESSION['login_count']	=	$authInfo['login_count'];
-            if($authInfo['account']=='admin') {
-            	$_SESSION['administrator']		=	true;
-            }
-            if(isset($_POST['remember'])){
-            	$saveUser['account'] = $_POST['account'];
-            	$saveUser['password'] = $_POST['password'];
+            if($authInfo['account']=='admin')    session(C('ADMIN_AUTH_KEY'), 1);
+            if(I('post.remember')){
+            	$saveUser = [
+            		'account' => I('post.account'),
+            		'password' => I('post.password'),
+            	];
             	cookie('saveUser',$saveUser);
             } 
             //保存登录信息
-			$User	=	M('User');
-			$ip		=	get_client_ip();
-			$time	=	time();
-            $data = array();
-			$data['id']	=	$authInfo['id'];
-			$data['last_login_time']	=	$time;
-			$data['login_count']	=	array('exp','login_count+1');
-			$data['last_login_ip']	=	$ip;
-			$User->save($data);
-			// 缓存访问权限
+			$user = M('user');
+			$data = [
+				'id' => $authInfo['id'],
+				'last_login_time' => time(),
+				'login_count' => ['exp' => 'login_count+1'],
+				'last_login_ip' => get_client_ip(),
+			];
+			$user->save($data);
             $r->saveAccessList();
 			$this->success('登录成功');
 
@@ -216,5 +197,10 @@ class PublicController extends CommonController {
 			$model->addtime = date("Y-m-d H:i:s");
 			$model->add();
 		}
+	}
+	public function builderSth()
+	{
+		$test = new \Think\Build;
+		$test::buildModel('Home', 'User');
 	}
 }

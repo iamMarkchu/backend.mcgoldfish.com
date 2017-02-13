@@ -1,90 +1,70 @@
-<!-- BEGIN SEARCHBAR-->
-<div class="row-fluid">
-    <div class="span12">
-        <div class="portlet box {$Think.config.PORLET_COLOR}">
-            <div class="portlet-title">
-                <div class="caption">
-                    {$Think.config.SEARCH_AERA}
-                </div>
-                <div class="tools">
-                    <a href="javascript:;" class="collapse"></a>
-                </div>
-            </div>
-            <div class="portlet-body form" >
-                <div class="row-fluid">
-                    <!--BEGIN SEARCH-->
-                    <div class="span2">
-                        <div class="btn-group">
-                            <button class="btn {$Think.config.SEARCH_BUTTON_COLOR}" id="searchbutton">{$Think.config.SEARCH_BUTTON}</button>
-                        </div>
-                    </div>
-                    <!--END SEARCH-->
-                <div>
-            </div>
-        </div>
+<extend name="public:appv2" />
+<block name="main">
+<h3 class="page-title">用户管理</h3>
+<div class="panel panel-default">
+    <div class="panel-heading">用户列表</div>
+    <div class="panel-body">
+        <a href="{:U('/user/add')}" class="btn btn-success">{$Think.config.ADD_BUTTON}用户</a>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        account
+                    </th>
+                    <th>
+                        nickname
+                    </th>
+                    <th>
+                        last_login_time
+                        <br/>
+                        last_login_ip
+                    </th>
+                     <th>
+                        login_count
+                    </th>
+                    <th>
+                        email
+                    </th>
+                    <th>
+                        remark
+                    </th>
+                    <th>
+                        status
+                    </th>
+                    <th>
+                        operation
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <volist name="list" id="user">
+                    <tr>
+                        <td>{$user['id']}</td>
+                        <td>{$user['account']}</td>
+                        <td>{$user['nickname']}</td>
+                        <td>
+                            {$user.['last_login_time']}
+                            <br/>
+                            {$user['last_login_ip']}
+                        </td>
+                        <td>{$user['login_count']}</td>
+                        <td>{$user['email']}</td>
+                        <td>{$user['remark']}</td>
+                        <td>{$user['status']}</td>
+                        <td>
+                            <a href="{:U('user/edit', ['id' => $user['id']])}">编辑</a>
+                            <a href="{:U('user/delete', ['id' => $user['id']])}">删除</a>
+                        </td>
+                    </tr>
+                </volist>
+            </tbody>
+        </table>
+        {$show}
     </div>
 </div>
-<!-- END SEARCHBAR-->
-<!-- BEGIN CONTENT-->
-<div class="row-fluid">
-    <div class="span12">
-        <div class="portlet box {$Think.config.PORLET_COLOR}">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-list"></i>用户列表
-                </div>
-                <div class="tools">
-                    <a href="javascript:;" class="collapse"></a>
-                </div>
-            </div>
-            <div class="portlet-body">
-                <div class="row-fluid">
-                    <div class="span12">
-                         <div class="btn-group">
-                            <button class="btn green" id="addUser">{$Think.config.ADD_BUTTON}用户</button>
-                         </div>
-                    </div>
-                </div>
-                <table class="display" id="tbUserList">
-                    <thead>
-                        <tr>
-                            <th>
-                                用户标号
-                            </th>
-                            <th>
-                                账户
-                            </th>
-                            <th>
-                                昵称
-                            </th>
-                            <th>
-                                所属组别
-                            </th>
-                            <th>
-                                最后登录时间
-                                <br/>
-                                最后登录ip
-                            </th>
-                             <th>
-                                登陆次数
-                            </th>
-                            <th>
-                                邮箱
-                            </th>
-                            <th>
-                                备注
-                            </th>
-                            <th>
-                                状态
-                            </th>
-                            <th>
-                                操作
-                            </th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- END CONTENT-->
+</block>

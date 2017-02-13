@@ -1,70 +1,42 @@
-<div class="row-fluid">
-    <div class="span12">
-        <div class="portlet box {$Think.config.PORLET_COLOR}">
-            <div class="portlet-title">
-                <div class="caption">
-                    {$Think.config.ADD_BUTTON}用户
-                </div>
-                <div class="tools">
-                    <a href="javascript:;" class="collapse"></a>
-                </div>
-            </div>
-            <div class="portlet-body form">
-                <div class="row-fluid">
-                    <div class="span12">
-                        <div class="tab-pane">
-                            <!-- BEGIN FORM-->
-                            <form action="{:U('User/insert')}" method="POST" class="form-horizontal" enctype="multipart/form-data">
-                                <div class="control-group">
-                                    <label class="control-label">用户账号</label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="用户账号" class="m-wrap large"  name="account" />
-                                        <span class="help-inline">不能为空</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">用户昵称</label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="用户昵称" class="m-wrap large"  name="nickname" />
-                                        <span class="help-inline">不能为空</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">用户头像</label>
-                                    <div class="controls">
-                                        <input type="file" name="imgFile" />
-                                        <span class="help-inline"></span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">用户邮箱</label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="用户邮箱" class="m-wrap large"  name="email" />
-                                        <span class="help-inline">不能为空</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">指定用户组别</label>
-                                    <div class="controls">
-                                        <select data-placeholder="组别选择" class="chosen span3 chzn-done" tabindex="-1" id="selectrole" name="role_id" style="display: none;">
-                                            <option></option>
-                                            <volist name="allRoleInfo" id="vo">
-                                                <option value='{$vo.id}' >{$vo.name}</option>
-                                            </volist>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-actions">
-                                    <button type="submit" class="btn blue">
-                                        {$Think.config.SAVE_BUTTON}</button>
-                                    <a href="{:U('User/index')}" class="btn">{$Think.config.CANCEL_BUTTON}</a>
-                                </div>
-                            </form>
-                            <!-- END FORM-->
+<extend name="public:appv2" />
+<block name="main">
+<h3 class="page-title">添加用户</h3>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="container-fluid">
+            <div class="row">
+             <div class="col-md-6">
+                 <form action="{:U('user/insert')}" method="POST" class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label>用户账号</label>
+                        <input class="form-control" type="text" name="account" />
+                    </div>
+                    <div class="form-group">
+                        <label>用户昵称</label>
+                        <input class="form-control" type="text" name="nickname" />
+                    </div>
+                    <div class="form-group">
+                        <label>电子邮箱</label>
+                        <input class="form-control" type="email" name="email" />
+                    </div>
+                    <div class="form-group">
+                        <div class="controls">
+                            <label>组别</label>
+                            <select class="form-control" name="role_id">
+                                <volist name="allRoleInfo" id="vo">
+                                    <option value='{$vo.id}' >{$vo.name}</option>
+                                </volist>
+                            </select>
                         </div>
                     </div>
-                </div>
-            </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">{$Think.config.SAVE_BUTTON}</button>
+                        <a href="{:U('User/index')}" class="btn btn-default">{$Think.config.CANCEL_BUTTON}</a>
+                    </div>
+                </form> 
+             </div>
+         </div> 
         </div>
     </div>
 </div>
+</block>

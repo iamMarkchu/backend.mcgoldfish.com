@@ -1,119 +1,88 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
+use Common\Util\BootstrapPage;
 class UserController extends CommonController {
-   	public function _before_index(){
-        if(isset($_REQUEST['role_id'])){
-            $searchArray = session('userSearch');
-            $searchArray['where']['role_id'] = $_REQUEST['role_id'];
-            session('userSearch',$searchArray);
-            $this->assign('role_id',$_REQUEST['role_id']);
-        }
-        $role = D('role');
-        $allRoleInfo =$role->where("status='active'")->select();
-        $this->assign('allRoleInfo',$allRoleInfo);
-        $this->assign('noAjax',1);
-        $this->assign('isSelect2',1);
-        //定义需要引入的page level js css
+   	public function index()
+    {
+        $user = M('user');
+        $count = $user->count();
+        $page = new BootstrapPage($count, 5);
+        $show = $page->show();
+        $list = $user->where($maps)->order('id')->limit($page->firstRow. ','. $page->listRows)->select();
+        $this->assign('list', $list);
+        $this->assign('show', $show);
+        $this->display();
     }
-    public function _before_add(){
-        $role = D('role');
-        $allRoleInfo =$role->where("status='active'")->select();
+    public function add(){
+        $role = M('role');
+        $allRoleInfo = $role->where(['status' => 'active'])->select();
         $this->assign('allRoleInfo',$allRoleInfo);
-        $this->assign('isSelect2',1);
-    }
-    public function QueryData(){
-    	$start = $_POST['start'];
-    	$length = $_POST['length'];
-    	$searchArray = session('userSearch');
-        if(isset($searchArray['where'])) $map = $searchArray['where'];
-        if(isset($searchArray['order'])) $order = $searchArray['order'];
-    	$user = D('user');
-    	$result = $user->field("user.*,role.name")->join("role_user on user.id = role_user.user_id")->join("role on role_user.role_id = role.id")->where($map)->order($order)->limit($start,$length)->select();
-    	$count = $user->join("role_user on user.id = role_user.user_id")->where($map)->count();
-    	$jsonBack = array();
-    	$jsonBack['data'] = $result;
-    	$jsonBack['recordsFiltered'] = $count;
-    	$jsonBack['recordsTotal'] = $count;
-    	$this->ajaxReturn($jsonBack);
+        $this->display();
     }
     public function insert(){
     	$user = D('user');
-    	$user->create();
-    	$user->password = md5("123456");
-    	$user->addtime = date("Y-m-d H:i:s");
-        if(!empty($_FILES['imgFile']['name'])){
-            $path = '/user/';
-            $imgFile = ImgUpload($path);
-            $imageObj = new \Think\Image(); 
-            $abPath = C('IMG_SAVE_PATH').$imgFile['imgFile']['savepath'].$imgFile['imgFile']['savename'];
-            $imageObj->open($abPath);
-            // 按照原图的比例生成一个最大为150*150的缩略图并保存为thumb.jpg
-            $imageObj->thumb(9, 9)->save(C('IMG_SAVE_PATH').'/thumb/'.$imgFile['imgFile']['savename']);
-            $user->image = '/thumb/'.$imgFile['imgFile']['savename'];
+    	if(!$user->create())
+        {
+            $this->error($user->getError());
+        }else{
+            //默认密码
+            $user->password = md5('123456');
+            $user->addtime = date('Y-m-d H:i:s');
+            $userid = $user->add();
+            if($userid){
+                $roleUser = D('role_user');
+                if($roleUser->create())
+                {
+                    $roleUser->user_id = $userid;
+                    $roleUser->add();
+                    $this->success('添加成功','index');
+                }else{
+                    $this->error('组别指定失败，用户已创建', 'index');
+                }
+            }else{
+                $this->error('新增失败');
+            }
+            
         }
-    	$userid = $user->add();
-        if($userid){
-            $roleUser = D('role_user');
-            $roleUser->create();
-            $roleUser->user_id = $userid;
-            $roleUser->add();
-        }
-    	$this->success("添加成功","index");
     }
     public function edit(){
-        if(!isset($_REQUEST['id'])) $this->error('用户不存在!','index');
-        $userid = $_REQUEST['id'];
+        if(!I('get.id', 0, 'intval')) $this->error('用户不存在!', U('/user/index'));
+        else $userid = I('get.id', 0, 'intval');      
         $user = D('user');
         $result = $user->getById($userid);
         $role = D('role');
-        $allRoleInfo =$role->where("status='active'")->select();
-        $sql = "select * from role_user as ru left join role as r on ru.role_id = r.id where ru.user_id = {$userid}";
-        $roleInfo = $role->query($sql);
-        if(!empty($roleInfo))
-            $this->assign('roleInfo',$roleInfo[0]);    
-        //变量传到前台
+        $allRoleInfo =$role->where(['status' => 'active'])->select();
+        $roleInfo = $user->getUserRole($userid);
+
         $this->assign('result',$result);
         $this->assign('allRoleInfo',$allRoleInfo);
-        //
-        $this->assign('isSelect2',1);
+        $this->assign('roleInfo',$roleInfo[0]);
         $this->display();
     }
     public function update(){
-        if(!isset($_REQUEST['id'])) $this->error('用户不存在!','index');
-        $userid = $_REQUEST['id'];
+        if(!I('post.id', 0, 'intval')) $this->error('用户不存在!', U('/user/index'));
+        else $userid = I('post.id', 0, 'intval');      
         $user = D('user');
-        $user->create();
-        if(!empty($_FILES['imgFile']['name'])){
-            $path = '/user/';
-            $imgFile = ImgUpload($path);
-            $imageObj = new \Think\Image(); 
-            $abPath = C('IMG_SAVE_PATH').$imgFile['imgFile']['savepath'].$imgFile['imgFile']['savename'];
-            $imageObj->open($abPath);
-            // 按照原图的比例生成一个最大为150*150的缩略图并保存为thumb.jpg
-            $imageObj->thumb(20, 20)->save(C('IMG_SAVE_PATH').'/thumb/'.$imgFile['imgFile']['savename']);
-            $user->image = '/thumb/'.$imgFile['imgFile']['savename'];
+        if($user->create())
+        {
+            $user->save();
+            $roleUser = D('role_user');
+            $roleUser->where(['user_id' => $userid])->delete();
+            $roleUser->create();
+            $roleUser->user_id = $userid;
+            $roleUser->add();
+            $this->success('编辑成功', U('/user/index'));
+        }else{
+            $this->error('更新失败');
         }
-        $user->save();
-        $sql = "delete from role_user where user_id = {$userid}";
-        $user->execute($sql);
-        $roleUser = D('role_user');
-        $roleUser->create();
-        $roleUser->user_id = $userid;
-        $roleUser->add();
-        $this->success("编辑成功","/User/index");
     }
-    public function btn_Search(){
-        session('userSearch','');
-        //组成查询及排序数组
-        $searchArray = array();
-        if(isset($_POST['selectrole'])){
-            $searchArray['where']['role_id'] = $_POST['selectrole'];
-        }
-        if(isset($_POST['selectorderby'])){
-            $searchArray['order'] = $_POST['selectorderby'];
-        }
-        session('userSearch',$searchArray);
-        echo "1";
+    public function delete()
+    {
+       if(!I('get.id', 0, 'intval')) $this->error('用户不存在!', U('/user/index'));
+        else $userid = I('get.id', 0, 'intval');  
+        $user = D('user');
+        $user->delete($userid);
+        $this->success('删除成功!');
     }
 }

@@ -1,27 +1,18 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
+use Common\Util\BootstrapPage;
+
 class AuthController extends CommonController {
-   	public function _before_index(){
-        $this->assign('noAjax',1);
-        $this->assign('isSelect2',1);
-        //定义需要引入的page level js css
-    }
-    public function QueryData(){
-    	$start = $_POST['start'];
-    	$length = $_POST['length'];
-        session('roleSearch','');
-    	$searchArray = session('roleSearch');
-        if(isset($searchArray['where'])) $map = $searchArray['where'];
-        if(isset($searchArray['order'])) $order = $searchArray['order'];
-    	$article = D('role');
-    	$result = $article->where($map)->order($order)->limit($start,$length)->select();
-    	$count = $article->where($map)->count();
-    	$jsonBack = array();
-    	$jsonBack['data'] = $result;
-    	$jsonBack['recordsFiltered'] = $count;
-    	$jsonBack['recordsTotal'] = $count;
-    	$this->ajaxReturn($jsonBack);
+   	public function index(){
+        $role = M('role');
+        $count = $role->count();
+        $page = new BootstrapPage($count, 5);
+        $show = $page->show();
+        $list = $role->where($maps)->order('id')->limit($page->firstRow. ','. $page->listRows)->select();
+        $this->assign('list', $list);
+        $this->assign('show', $show);
+        $this->display();
     }
     public function insert(){
     	$role = D('role');
