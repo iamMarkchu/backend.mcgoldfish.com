@@ -1,3 +1,43 @@
+<extend name="public:appv2" />
+<block name="main">
+<h3 class="page-title">添加节点</h3>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="container-fluid">
+            <div class="row">
+             <div class="col-md-6">
+                 <form action="{:U('node/insert')}" method="POST" class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label>节点名称</label>
+                        <input class="form-control" type="text" name="name" />
+                    </div>
+                    <div class="form-group">
+                        <label>节点显示名称</label>
+                        <input class="form-control" type="text" name="title" />
+                    </div>
+                    <div class="form-group">
+                        <label>父节点</label>
+                        <input class="form-control" type="text" name="title" />
+                    </div>
+                    <div class="form-group">
+                        <label>节点排序</label>
+                        <input class="form-control" type="text" name="sort" />
+                    </div>
+                    <div class="form-group">
+                        <label>节点备注</label>
+                        <input class="form-control" type="text" name="remark" />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">{$Think.config.SAVE_BUTTON}</button>
+                        <a href="{:U('node/index')}" class="btn btn-default">{$Think.config.CANCEL_BUTTON}</a>
+                    </div>
+                </form> 
+             </div>
+         </div> 
+        </div>
+    </div>
+</div>
+</block>
 <div class="row-fluid">
     <div class="span12">
         <div class="portlet box {$Think.config.PORLET_COLOR}">

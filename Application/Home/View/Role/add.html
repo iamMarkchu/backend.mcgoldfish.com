@@ -1,0 +1,35 @@
+<extend name="public:appv2" />
+<block name="main">
+    <h3 class="page-title">添加组别</h3>
+    <div class="panel panel-default">
+        <div class="panel-body">
+                    <div class="container-fluid">
+            <div class="row">
+             <div class="col-md-6">
+                 <form action="{:U('role/insert')}" method="POST" class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label>组别名称</label>
+                        <input class="form-control" type="text" name="name" />
+                    </div>
+                    <div class="form-group">
+                        <label>状态</label>
+                        <select name="status" class="form-control">
+                            <option value="active">启用</option>
+                            <option value="inactive">禁用</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>简介</label>
+                        <input class="form-control" type="remark" name="remark" />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">{$Think.config.SAVE_BUTTON}</button>
+                        <a href="{:U('role/index')}" class="btn btn-default">{$Think.config.CANCEL_BUTTON}</a>
+                    </div>
+                </form> 
+             </div>
+         </div> 
+        </div>
+        </div>
+    </div>
+</block>

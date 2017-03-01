@@ -14,9 +14,6 @@
     <!-- Bootstrap Core CSS -->
     <link href="/Public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- MetisMenu CSS -->
-    <link href="/Public/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="/Public/dist/css/sb-admin-2.css" rel="stylesheet">
 
@@ -82,7 +79,26 @@
                                     <a href="<?php echo U('user/index');?>">用户管理</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo U('auth/index');?>">授权管理</a>
+                                    <a href="<?php echo U('role/index');?>">组别管理</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo U('Node/index');?>">节点管理</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo U('SiteConfig/index');?>">站点管理</a>
+                                </li>
+                                 
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#">站点管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?php echo U('user/index');?>">用户管理</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo U('role/index');?>">组别管理</a>
                                 </li>
                                 <li>
                                     <a href="<?php echo U('Node/index');?>">节点管理</a>
@@ -190,9 +206,6 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/Public/vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="/Public/vendor/metisMenu/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="/Public/dist/js/sb-admin-2.js"></script>

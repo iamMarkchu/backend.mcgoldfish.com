@@ -3,7 +3,7 @@ namespace Home\Controller;
 use Think\Controller;
 use Common\Util\BootstrapPage;
 
-class AuthController extends CommonController {
+class RoleController extends CommonController {
    	public function index(){
         $role = M('role');
         $count = $role->count();
@@ -14,29 +14,42 @@ class AuthController extends CommonController {
         $this->assign('show', $show);
         $this->display();
     }
+    public function add()
+    {
+        $this->display();
+    }
     public function insert(){
     	$role = D('role');
-    	$role->create();
-    	$role->addtime = date("Y-m-d H:i:s");
-        $role->pid = 0;
-    	$role->add();
-    	$this->success("添加成功","index");
+    	if(!$role->create())
+        {
+            $this->error($role->getError());
+        }else{
+            $role->addtime = date("Y-m-d H:i:s");
+            $role->pid = 0;
+            $role->add();
+            $this->success('添加成功', U('role/index'));    
+        }
     }
     public function edit(){
-        if(!isset($_REQUEST['id'])) $this->error('组别不存在!','index');
-        $roleid = $_REQUEST['id'];
+        if(!I('get.id', 0, 'intval')) $this->error('组别不存在');
+        else  $roleid = I('get.id');
+        
         $role = D('role');
-        $result = $role->getById($roleid);
-        //变量传到前台
+        $result = $role->find($roleid);
         $this->assign('result',$result);
         $this->display();
     }
     public function update(){
-        if(!isset($_REQUEST['id'])) $this->error('组别不存在!','index');
+        if(!I('post.id', 0, 'intval')) $this->error('组别不存在');
+        else  $roleid = I('post.id');
         $role = D('role');
-        $role->create();
-        $role->save();
-        $this->success("编辑成功","index");
+        if(!$role->create())
+        {
+            $this->error($role->getError());
+        }else{
+            $role->save();
+            $this->success('编辑成功', U('role/index'));    
+        }
     }
     public function delete(){
         if(!isset($_REQUEST['id'])) $this->error('组别不存在!','index');

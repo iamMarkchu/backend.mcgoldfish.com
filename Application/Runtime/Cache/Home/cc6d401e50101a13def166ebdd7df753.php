@@ -111,7 +111,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">组别列表</div>
     <div class="panel-body">
-        <a href="<?php echo U();?>" class="btn btn-success"></a>
+        <a href="<?php echo U('auth/addGroup');?>" class="btn btn-success">添加组别</a>
     </div>
     <div class="panel-body">
         <table class="table table-bordered">
@@ -156,6 +156,7 @@
                     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
             </tbody>
         </table>
+        <?php echo ($show); ?>
     </div>
 </div>
 

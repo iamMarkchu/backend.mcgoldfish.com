@@ -1,10 +1,10 @@
 <extend name="public:appv2" />
 <block name="main">
-<h3 class="page-title">权限管理</h3>
+<h3 class="page-title">组别管理</h3>
 <div class="panel panel-default">
     <div class="panel-heading">组别列表</div>
     <div class="panel-body">
-        <a href="{:U()}" class="btn btn-success"></a>
+        <a href="{:U('role/add')}" class="btn btn-success">添加组别</a>
     </div>
     <div class="panel-body">
         <table class="table table-bordered">
@@ -35,22 +35,24 @@
             <tbody>
                 <volist name="list" id="vo">
                     <tr>
-                        <td>{$vo.id}</td>
-                        <td>{$vo.name}</td>
-                        <td>{$vo.remark}</td>
+                        <td>{$vo['id']}</td>
+                        <td>{$vo['name']}</td>
+                        <td>{$vo['remark']}</td>
                         <td>
-                            {$vo.addtime}
+                            {$vo['addtime']}
                             <br/>
-                            {$vo.lastupdatetime}
+                            {$vo['lastupdatetime']}
                         </td>
-                        <td>{$vo.status}</td>
+                        <td>{$vo['status']}</td>
                         <td>
-                            <a href="{:U('/auth/viewAuth')}">查看权限</a>
+                            <a href="{:U('/role/edit', ['id' => $vo['id']])}">编辑</a>
+                            <a href="{:U('/role/viewAuth')}">查看权限</a>
                         </td>
                     </tr>
                 </volist>
             </tbody>
         </table>
+        {$show}
     </div>
 </div>
 </block>

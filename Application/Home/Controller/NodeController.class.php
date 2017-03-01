@@ -1,8 +1,16 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
+use Common\Util\BootstrapPage;
 class NodeController extends CommonController {
     public function index(){
+        $node = D('node');
+        $count = $node->count();
+        $page = new BootstrapPage($count, 5);
+        $show = $page->show();
+        $list = $node->where($maps)->order('level')->limit($page->firstRow. ','. $page->listRows)->select();
+        $this->assign('list', $list);
+        $this->assign('show', $show);
         $this->display();
     }
     public function insert(){
