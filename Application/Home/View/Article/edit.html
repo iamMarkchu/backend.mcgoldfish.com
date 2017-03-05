@@ -1,149 +1,125 @@
-<div class="row-fluid">
-    <div class="span12">
-        <div class="portlet box {$Think.config.PORLET_COLOR}">
-            <div class="portlet-title">
-                <div class="caption">
-                    {$Think.config.EDIT_BUTTON}{$conInfo.remark}
+<extend name="public:appv3" />
+<block name="main">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加文章</h3>
+        </div>
+        <form action="{:U('article/update')}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+            <div class="panel-body">
+                <input type="hidden" name="id" value="{$result.id}" />
+                <div class="form-group">
+                    <label class="col-md-2 control-label">文章标题</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control"  name="title" autocomplete="off" value="{$result.title}"/>
+                    </div>
                 </div>
-                <div class="tools">
-                    <a href="javascript:;" class="collapse"></a>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">文章封面</label>
+                    <div class="col-md-1">
+                        <span class="btn btn-success fileinput-button">
+                            <span>上传图片</span>
+                            <input type="file" name="imageFile" >
+                        </span>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="panel panel-default">
+                            <div class="panel-body" id="imagePreview">
+                                <img src="{$result.image}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="image" value="{$result.image}" />
                 </div>
-            </div>
-            <div class="portlet-body form">
-                <div class="row-fluid">
-                    <div class="span12">
-                        <!--BEGIN TABS-->
-                        <form action="{:U('Article/update')}" method="POST" class="form-horizontal updateArticleForm" enctype="multipart/form-data">
-                        <div class="tabbable tabbable-custom">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a href="#tab_1_1" data-toggle="tab">文章</a></li>
-                                <li><a href="#tab_1_2" data-toggle="tab">类别&标签</a></li>
-                                <li><a href="#tab_1_3" data-toggle="tab">标题&关键字&描述</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                    <div class="tab-pane active" id="tab_1_1">
-                                        <input type="hidden" name="id" value="{$result.id}">
-                                        <div class="control-group">
-                                            <label class="control-label">文章标题</label>
-                                            <div class="controls">
-                                                <input type="text" placeholder="文章标题" class="m-wrap large"  name="title" value="{$result.title}"/>
-                                                <span class="help-inline">不能为空</span>
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label">文章封面</label>
-                                            <div class="controls">
-                                                <input type="file" name="imgFile" />
-                                                <span class="help-inline"></span>
-                                            </div>
-                                            <div class="controls">
-                                                <img id="imghead" src="__PUBLIC__{$result.image}" <empty name="result.image">class="hidden"</empty>/>
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label">文章来源</label>
-                                            <div class="controls">
-                                                <select name="articlesource">
-                                                    <option value="原创" <eq name="$result.articlesource" value="原创">selected="true"</eq>>原创</option>
-                                                    <option value="转载" <eq name="$result.articlesource" value="转载">selected="true"</eq>>转载</option>
-                                                </select>
-                                                <span class="help-inline"></span>
-                                            </div>
-                                        </div>
-                                        <!-- <div class="control-group">
-                                            <label class="control-label">文章链接</label>
-                                            <div class="controls">
-                                                <input type="text" placeholder="文章链接" class="m-wrap large"  name="requestPath" value="{$urlInfo.requestpath}"/>
-                                                <span class="help-inline">如果不填,url默认为/article/文章id.html</span>
-                                            </div>
-                                        </div> -->
-                                         <div class="control-group">
-                                            <label class="control-label">文章内容</label>
-                                            <div class="controls">
-                                                <script id="container" name="content" type="text/plain">{$result.content}</script>
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label">维护等级</label>
-                                            <div class="controls">
-                                                <input type="text" placeholder="维护等级" class="m-wrap small" name="maintainorder" value="{$result.maintainorder}"/>
-                                                <span class="help-inline">按什么顺序排序</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="tab_1_2">
-                                       <div class="control-group">
-                                            <label class="control-label">标签选择</label>
-                                            <div class="controls">
-                                                <select multiple="multiple" id="tag_multi_select2" data-placeholder="标签选择" class="chosen span3 chzn-done" tabindex="-1"  name="tag_multi_select2[]">
-                                                    <volist name="allTagInfo" id="vo">
-                                                        <option value='{$vo.id}' <eq name="vo.selected" value="1">selected="selected"</eq>>{$vo.displayname}</option>
-                                                    </volist>
-                                                </select>
-                                                &nbsp<a href="#" id="addOneTag" class="btn red">{$Think.config.ADD_BUTTON}一个新标签</a>
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label">分类选择</label>
-                                            <div class="controls">
-                                                <select data-placeholder="分类选择" class="chosen span3 chzn-done" tabindex="-1" id="selOY2" name="categoryid" style="display: none;">
-                                                    <option></option>
-                                                    <volist name="allCateInfo" id="vo">
-                                                        <optgroup label="{$vo.displayname}">
-                                                            <volist name="vo.child" id="vovo">
-                                                                <option value='{$vovo.id}' <eq name="vovo.id" value="$categoryid">selected="selected"</eq>>{$vovo.displayname}</option>
-                                                            </volist>
-                                                        </optgroup>    
-                                                    </volist>
-                                                </select>
-                                                &nbsp<a href="#" id="addOneCategory" class="btn green">{$Think.config.ADD_BUTTON}一个新类别</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="tab_1_3">
-                                        <div class="control-group">
-                                                <label class="control-label">网页H1</label>
-                                            <div class="controls">
-                                                <input type="text" placeholder="网页H1" class="m-wrap medium" id="manager" name="pageh1" value="{$result.pageh1}"/>
-                                                <span class="help-inline">与seo有关的网页h1</span>
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                                <label class="control-label">网页title</label>
-                                            <div class="controls">
-                                                <input type="text" placeholder="pagetitle" class="m-wrap medium" id="manager" name="pagetitle" value="{$pageMetaInfo.pagetitle}"/>
-                                                <span class="help-inline">与seo有关的title</span>
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                                <label class="control-label">网页keyword</label>
-                                            <div class="controls">
-                                                <input type="text" placeholder="pagekeyword" class="m-wrap medium" name="pagekeyword" value="{$pageMetaInfo.pagekeyword}"/>
-                                                <span class="help-inline">与seo有关的keyword</span>
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                                <label class="control-label">网页description</label>
-                                            <div class="controls">
-                                                <input type="text" placeholder="pagedescription" class="m-wrap medium" name="pagedescription" value="{$pageMetaInfo.pagedescription}"/>
-                                                <span class="help-inline">与seo有关的description</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">文章来源</label>
+                    <div class="col-md-6">
+                        <select name="articlesource" class="form-control">
+                            <option value="原创">原创</option>
+                            <option value="转载">转载</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">文章内容</label>
+                    <div class="col-md-9">
+                        <textarea name="content" id="article-content" cols="30" rows="10" class="form-control">{$result.content}</textarea>
+                    </div>
+                    <label class="col-md-2 control-label" style="margin-top: 20px;">文章内容操作</label>
+                    <div class="col-md-9" style="margin-top: 20px;">
+                        <div class="btn-group">
+                            <span class="btn btn-success fileinput-button">
+                                <span>上传图片</span>
+                                <input id="fileupload" type="file" name="files">
+                            </span>
+                            <a href="javascript:;" class="btn btn-primary view-content">预览文章</a>
+                        </div>
+                        <div class="panel panel-default" style="margin-top: 20px;">
+                            <div class="panel-heading">图片</div>
+                            <div class="panel-body" id="files">
+
                             </div>
-                            <div class="form-actions">
-                                    <a class="btn blue updateArticleBtn">{$Think.config.SAVE_BUTTON}</a>
-                                    <a href="{:U('Article/index')}" class="btn">{$Think.config.CANCEL_BUTTON}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-9 col-md-offset-2" >
+                        <div class="panel panel-default">
+                            <div class="panel-heading">文章预览</div>
+                            <div class="panel-body" id="markhtml">
+
                             </div>
-                        </form>
-                        <!--END TABS-->
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">排序</label>
+                    <div class="col-md-6">
+                        <input type="text" name="maintainorder" value="99" class="form-control" value="{$result.maintainorder}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">标签选择</label>
+                    <div class="col-md-6">
+                        <select multiple="multiple" tabindex="-1"  name="tag_multi_select2[]" class="form-control">
+                            <volist name="allTagInfo" id="vo">
+                                <option value='{$vo.id}' <eq name="vo.selected" value="1">selected="selected"</eq>>{$vo.displayname}</option>
+                            </volist>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">分类选择</label>
+                    <div class="col-md-6">
+                        <select tabindex="-1" name="categoryid" class="form-control">
+                            <option></option>
+                            <volist name="allCateInfo" id="vo">
+                                <optgroup label="{$vo.displayname}" data-id="{$vo.id}">
+                                    <volist name="vo.child" id="vovo">
+                                        <option value='{$vovo.id}' <eq name="vovo.id" value="$categoryid">selected="selected"</eq>>{$vovo.displayname}</option>
+                                    </volist>
+                                </optgroup>
+                            </volist>
+                        </select>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="panel-footer">
+                <a href="{:U('article/index')}" class="btn col-md-offset-2">取消</a>
+                <button class="btn btn-success" type="submit">确定</button>
+            </div>
+        </form>
     </div>
-</div>
-<include file="Tag:modal-add" />
-<include file="Category:modal-add" />
-<include file="Public:modal-alert" />
+</block>
+<block name="pagecss">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/jquery-file-upload/css/jquery.fileupload.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/select2/4.0.3/css/select2.min.css" />
+</block>
+<block name="pagejs">
+    <script src="//cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
+    <script src="__PUBLIC__/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+    <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+    <script src="__PUBLIC__/plugins/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+    <!-- The basic File Upload plugin -->
+    <script src="__PUBLIC__/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
+    <script src="__PUBLIC__/own-js/Article/ae.js?ver={:rand(5000, 0)}"></script>
+</block>

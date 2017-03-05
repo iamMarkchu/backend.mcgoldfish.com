@@ -4,7 +4,7 @@ function ImgUpload($path){
     $upload->maxSize   =     3145728 ;// 设置附件上传大小
     $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg','md','html');// 设置附件上传类型
     $upload->savePath  =      $path;//C('IMG_SAVE_PATH'); // 设置附件上传目录
-    $upload->rootPath = "/app/site/backend.mcgoldfish.com/Public/";
+    $upload->rootPath = "./Public/";
     // 上传文件 
     $info   =   $upload->upload();
     if(!$info) {// 上传错误提示错误信息
@@ -14,15 +14,23 @@ function ImgUpload($path){
         return $info;
     }
 }
+function ImgUploadOne($path, $file){
+    $upload = new \Think\Upload();// 实例化上传类
+    $upload->maxSize   =     3145728 ;// 设置附件上传大小
+    $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg','md','html');// 设置附件上传类型
+    $upload->savePath  =      $path;//C('IMG_SAVE_PATH'); // 设置附件上传目录
+    $upload->rootPath = "./Public/";
+    // 上传文件
+    $info   =   $upload->uploadOne($file);
+    if(!$info) {
+        return false;
+    }else{
+        return $info;
+    }
+}
 function processContent($content){
     if(empty($content)) return '';
     $content = str_replace("src=\"/Public","src=\"".C('IMG_URL'),$content);
-    $content = str_replace("\n","--s--",$content);
-    //$regx = "/<pre>-z-(php|js|html|css)-z-(.*?)<\/pre>/";
-    //if(preg_match($regx,$content)){
-    //    $content = preg_replace($regx,"<pre><code class=\"$1\">$2</code></pre>",$content);
-    //}
-    $content = str_replace("--s--","\n",$content);
     return $content;
 }
 function save_log($action,$info,$isajax,$user){

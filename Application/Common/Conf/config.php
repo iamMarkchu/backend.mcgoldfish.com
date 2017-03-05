@@ -1,4 +1,5 @@
 <?php
 return array(
-	//'配置项'=>'配置值'
+	'ImageDirectoryV1' => '/Public',
+    'ImageDirectoryV2' => './Public',
 );
