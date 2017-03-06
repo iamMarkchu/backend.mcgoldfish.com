@@ -1,79 +1,74 @@
-<!-- BEGIN SEARCHBAR-->
-<div class="row-fluid">
-    <div class="span12">
-        <div class="portlet box {$Think.config.PORLET_COLOR}">
-            <div class="portlet-title">
-                <div class="caption">
-                    {$Think.config.SEARCH_AERA}
-                </div>
-                <div class="tools">
-                    <a href="javascript:;" class="collapse"></a>
-                </div>
-            </div>
-            <div class="portlet-body form" >
-                <div class="row-fluid">
-                    <!--BEGIN SEARCH-->
-                    <div class="span2" style="margin-top:10px;">
-                        <div class="btn-group">
-                            <button class="btn {$Think.config.SEARCH_BUTTON_COLOR}" id="searchbutton">{$Think.config.SEARCH_BUTTON}</button>
-                        </div>
-                    </div>
-                    <!--END SEARCH-->
-                <div>
-            </div>
+<extend name="public:appv3" />
+<block name="main">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">类别管理</h3>
         </div>
-    </div>
-</div>
-<!-- END SEARCHBAR-->
-<!-- BEGIN CONTENT-->
-<div class="row-fluid">
-    <div class="span12">
-        <div class="portlet box {$Think.config.PORLET_COLOR}">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-list"></i>{$conInfo.remark}列表
-                </div>
-                <div class="tools">
-                    <a href="javascript:;" class="collapse"></a>
-                </div>
-            </div>
-            <div class="portlet-body">
-                <div class="row-fluid">
-                    <div class="span12">
-                         <div class="btn-group">
-                            <button class="btn green" id="addCategory">{$Think.config.ADD_BUTTON}{$conInfo.remark}</button>
-                         </div>
+        <div class="panel-body">
+            <form action="" name="article-form">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="displayname">类别名字</label>
+                        <input type="text" class="form-control" name="title" value="">
                     </div>
                 </div>
-                <table class="display" id="tbCategoryList">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="order">排序规则</label>
+                        <select name="order" class="form-control">
+                            <option value=""></option>
+                            <option value="id desc"></option>
+                            <option value="displayorder">click</option>
+                            <option value="displayorder desc">click desc</option>
+                            <option value="addtime">maintainorder</option>
+                            <option value="addtime desc">maintainorder desc</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2" style="margin-top: 25px;">
+                    <div class="form-group">
+                        <a href="javascript:;" class="btn btn-success form-control">搜索</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12" style="margin-bottom: 20px;">
+                <div class="btn-group">
+                    <a href="{:U('category/add')}" class="btn btn-success">添加类别</a>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <table class="table table-condensed" id="tbartilceList">
                     <thead>
-                        <tr>
-                            <th>
-                                id
-                            </th>
-                            <th>
-                                displayname
-                            </th>
-                            <th>
-                                parentcategoryid
-                            </th>
-                            <th>
-                                addtime
-                            </th>
-                            <th>
-                                lastchangetime
-                            </th>
-                            <th>
-                                displayorder
-                            </th>
-                            <th>
-                                操作
-                            </th>
-                        </tr>
+                    <tr>
+                        <th>编号</th>
+                        <th>类别名字</th>
+                        <th>父编号</th>
+                        <th>排序</th>
+                        <th>添加时间</th>
+                        <th>最后更新时间</th>
+                        <th>操作</th>
+                    </tr>
                     </thead>
+                    <tbody>
+                        <volist name="result" id="vo">
+                            <tr>
+                                <td>{$vo['id']}</td>
+                                <td>{$vo['category_name']}</td>
+                                <td>{$vo['parent_cate_id']}</td>
+                                <td>{$vo['display_order']}</td>
+                                <td>{$vo['created_at']}</td>
+                                <td>{$vo['updated_at']}</td>
+                                <td>
+                                    <a href="{:U('category/edit', ['id' => $vo['id']])}">编辑</a>
+                                </td>
+                            </tr>
+                        </volist>
+                    </tbody>
                 </table>
+                {$show}
             </div>
         </div>
     </div>
-</div>
-<!-- END CONTENT-->
+</block>

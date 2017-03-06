@@ -12,16 +12,14 @@ class ArticleController extends CommonController {
         $this->assign('searchArray',$searchArray);
         $this->assign('$conditionArray',$conditionArray);
     }
-    public function _before_add(){
+    public function add(){
         $category = D('category');
         $tag = D('tag');
         $allCateInfo =$category->getAllCategory();
         $allTagInfo = $tag->getAllTag();
-        if(isset($_GET['type']) && $_GET['type'] == 'markdown') $this->assign('isMarkDown',1);
         $this->assign('allTagInfo',$allTagInfo);
         $this->assign('allCateInfo',$allCateInfo);
-        $this->assign('isUeditor', 1);
-        $this->assign('isSelect2', 1);
+        $this->display();
     }
     public function queryData(){
     	$start = I('post.start', 0);
@@ -52,9 +50,9 @@ class ArticleController extends CommonController {
         {
             $article->content = addslashes($_POST['content']);
         }
-        $article->addeditor = 'test';
+        $article->add_editor = 'test';
         $article->tip = C('NEW_ARTICLE_MESSAGE');
-        $article->addtime = date('Y-m-d H:i:s');
+        $article->created_at = date('Y-m-d H:i:s');
         $articleid = $article->add();
         if($articleid){
             //添加分类信息
@@ -93,7 +91,7 @@ class ArticleController extends CommonController {
             $result = $article->find($id);
             $category = D('category');
             $allCateInfo =$category->getAllCategory();
-            $cateInfo = $category->getCategoryByIdAndType($id);
+            $cateInfo = $category->getCategoryByArticleId($id);
             $tag = D('tag');
             $allTagInfo = $tag->getAllTag();
             $tagInfo = $tag->getTagByIdAndType($id);
@@ -118,19 +116,6 @@ class ArticleController extends CommonController {
             $article = D('article');
             $article->create();
             $article->save();
-            $cateogyMapping = D('category_mapping');
-            $cateogyMappingData = $cateogyMapping->where(['optdataid' => $id, 'datatype' => 'article'])->find();
-            $cateogyMapping->create();
-            if(!empty($cateogyMappingData)){
-                $cateogyMappingData['categoryid'] = I('post.categoryid');
-                $cateogyMapping->save($cateogyMappingData);
-            }else{
-                $cateogyMapping->datatype = 'article';
-                $cateogyMapping->optdataid = $id;
-                $cateogyMapping->isprimary = 'yes';
-                $cateogyMapping->addtime = date('Y-m-d H:i:s');
-                $cateogyMapping->add();
-            }
             //tag处理,删除原有标签，保存post过来的标签
             $tagMapping = D('tagMapping');
             $tagMappingData = $tagMapping->where(['optdataid' => $id, 'datatype' => 'article'])->select();

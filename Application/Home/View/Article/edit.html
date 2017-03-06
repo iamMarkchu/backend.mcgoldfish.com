@@ -90,12 +90,12 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">分类选择</label>
                     <div class="col-md-6">
-                        <select tabindex="-1" name="categoryid" class="form-control">
+                        <select tabindex="-1" name="category_id" class="form-control">
                             <option></option>
                             <volist name="allCateInfo" id="vo">
-                                <optgroup label="{$vo.displayname}" data-id="{$vo.id}">
+                                <optgroup label="{$vo.category_name}" data-id="{$vo.id}">
                                     <volist name="vo.child" id="vovo">
-                                        <option value='{$vovo.id}' <eq name="vovo.id" value="$categoryid">selected="selected"</eq>>{$vovo.displayname}</option>
+                                        <option value='{$vovo.id}' <eq name="vovo.id" value="$categoryid">selected="selected"</eq>>{$vovo.category_name}</option>
                                     </volist>
                                 </optgroup>
                             </volist>

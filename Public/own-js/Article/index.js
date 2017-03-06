@@ -30,11 +30,11 @@
                             }
                         }
                     },
-                    { "data": "clickcount"},
-                    { "data": "articlesource"},
-                    { "data": "maintainorder" },
-                    { "data": "addeditor" },
-                    { "data": "displayname",
+                    { "data": "click_count"},
+                    { "data": "source"},
+                    { "data": "display_order" },
+                    { "data": "add_editor" },
+                    { "data": "category_name",
                         "render": function(data,type,row){
                             var returnList = '';
                             if(data == null){
@@ -55,12 +55,10 @@
                             return returnList;
                         }
                     },
-                    { "data": "addtime",
+                    { "data": "created_at",
                         "render": function(data,type,row){
                             var returnString = data+"<br/>";
-                            var myDate = new Date();
-
-                            returnString += row.lastupdatetime;
+                            returnString += row.updated_at;
                             return returnString;
                         }
                     },
@@ -68,7 +66,7 @@
                         "render": function (data, type, row) {
                             var str ='<a href="/article/edit/id/'+data+'.html">编辑</a>|' ;
                             if(row.status == 'republish'){
-                                str += '<a href="/Article/publish/id/'+data+'">发布</a>|';
+                                str += '<a href="/article/publish/id/'+data+'.html">发布</a>|';
                             }
                             if(row.status != 'deleted'){
                                 str += '<a href="#" class="delete-article" data-id="'+data+'">删除</a>';

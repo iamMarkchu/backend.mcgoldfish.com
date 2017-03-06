@@ -25,18 +25,13 @@ class ArticleModel extends CommonModel {
 		if(!empty($order)){
 			$order = "order by {$order}";
 		}
-		$sql = "select * from article as a {$where} {$order} limit {$start},{$length}";
+		$sql = "SELECT a.*,c.category_name FROM `article` as a LEFT JOIN `category` as c on a.category_id = c.id {$where} {$order} limit {$start},{$length}";
 		$result = $this->query($sql);
 		//添加tag信息,category信息
 		foreach ($result as $k => $v) {
 			$sql = "select * from tag_mapping as tm left join tag as t on tm.tagid = t.id where tm.datatype = 'article' and optdataid = {$v['id']}";
 			$tmpResult = $this->query($sql);
 			$result[$k]['tag'] = $tmpResult;
-			$sql = "select * from category_mapping as cm left join category as c on cm.categoryid = c.id where cm.datatype = 'article' and optdataid = {$v['id']}";
-			$tmpResult = $this->query($sql);
-			if(!empty($tmpResult)){
-				$result[$k]['displayname'] = $tmpResult[0]['displayname'];
-			}
 		}
 		return $result;
 	}

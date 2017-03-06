@@ -1,3 +1,42 @@
+<extend name="public:appv3" />
+<block name="main">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加类别</h3>
+        </div>
+        <form action="{:U('category/insert')}" class="form-horizontal" method="post">
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">类别名字</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control"  name="category_name" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">父类别</label>
+                    <div class="col-md-6">
+                        <select name="parent_cate_id" id="" class="form-control">
+                            <option value="0">无</option>
+                            <volist name="parent_category_list" id="vo">
+                                <option value="{$vo.id}">{$vo.category_name}</option>
+                            </volist>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">排序</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control"  name="display_order" value="9"/>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <a href="{:U('category/index')}" class="btn col-md-offset-2">取消</a>
+                <button type="submit" class="btn btn-success">提交</button>
+            </div>
+        </form>
+    </div>
+</block>
 <div class="row-fluid">
     <div class="span12">
         <div class="portlet box {$Think.config.PORLET_COLOR}">

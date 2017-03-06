@@ -4,22 +4,22 @@ use Think\Model;
 class CategoryModel extends Model {
 	protected $tablePrefix = ''; 
    	public function getAllCategory(){
-        $result = $this->order('parentcategoryid')->select();
+        $result = $this->order('parent_cate_id')->select();
         $cateInfo = array();
         foreach ($result as $k => $v) {
-            if($v['parentcategoryid'] == 0){
+            if($v['parent_cate_id'] == 0){
                 $cateInfo[$v['id']] = $v;
             }else{
-                $cateInfo[$v['parentcategoryid']]['child'][] = $v;
+                $cateInfo[$v['parent_cate_id']]['child'][] = $v;
             }
         }
         return $cateInfo;
    	}
-   	public function getCategoryByIdAndType($optdataid,$datatype="article"){
-   		if(empty($optdataid)) return array();
-   		$sql = "select * from category as c left join category_mapping as cm on c.id = cm.categoryid where cm.optdataid ={$optdataid} and cm.isprimary = 'yes' and datatype = '{$datatype}';";
+   	public function getCategoryByArticleId($articleid){
+   		if(empty($articleid)) return [];
+   		$sql = "SELECT c.* FROM `article` as a LEFT JOIN `category` as c on a.category_id = c.id where a.id ={$articleid}";
    		$result = $this->query($sql);
  		if(!empty($result)) return $result[0];
- 		else return array();
+ 		else return [];
    	}
 }
