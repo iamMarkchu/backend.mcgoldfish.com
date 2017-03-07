@@ -6,7 +6,7 @@ class NodeController extends CommonController {
     public function index(){
         $node = D('node');
         $count = $node->count();
-        $page = new BootstrapPage($count, 5);
+        $page = new BootstrapPage($count, 10);
         $show = $page->show();
         $list = $node->where($maps)->order('level')->limit($page->firstRow. ','. $page->listRows)->select();
         $this->assign('list', $list);

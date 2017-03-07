@@ -17,7 +17,7 @@
                         <label for="order">排序规则</label>
                         <select name="order" class="form-control">
                             <option value=""></option>
-                            <option value="id desc"></option>
+                            <option value="id desc">id desc</option>
                             <option value="displayorder">click</option>
                             <option value="displayorder desc">click desc</option>
                             <option value="addtime">maintainorder</option>
@@ -62,6 +62,7 @@
                                 <td>{$vo['updated_at']}</td>
                                 <td>
                                     <a href="{:U('category/edit', ['id' => $vo['id']])}">编辑</a>
+                                    <a href="{:U('category/delete', ['id' => $vo['id']])}">删除</a>
                                 </td>
                             </tr>
                         </volist>

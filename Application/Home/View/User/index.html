@@ -1,44 +1,22 @@
-<extend name="public:appv2" />
+<extend name="public:appv3" />
 <block name="main">
-<h3 class="page-title">用户管理</h3>
-<div class="panel panel-default">
-    <div class="panel-heading">用户列表</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">用户管理</div>
     <div class="panel-body">
         <a href="{:U('/user/add')}" class="btn btn-success">{$Think.config.ADD_BUTTON}用户</a>
     </div>
     <div class="panel-body">
-        <table class="table table-bordered">
+        <table class="table table-condensed table-hover">
             <thead>
                 <tr>
-                    <th>
-                        ID
-                    </th>
-                    <th>
-                        account
-                    </th>
-                    <th>
-                        nickname
-                    </th>
-                    <th>
-                        last_login_time
-                        <br/>
-                        last_login_ip
-                    </th>
-                     <th>
-                        login_count
-                    </th>
-                    <th>
-                        email
-                    </th>
-                    <th>
-                        remark
-                    </th>
-                    <th>
-                        status
-                    </th>
-                    <th>
-                        operation
-                    </th>
+                    <th>编号</th>
+                    <th>账号</th>
+                    <th>用户名</th>
+                    <th>组别</th>
+                    <th>电子邮箱</th>
+                    <th>备注</th>
+                    <th>状态</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,18 +24,16 @@
                     <tr>
                         <td>{$user['id']}</td>
                         <td>{$user['account']}</td>
-                        <td>{$user['nickname']}</td>
-                        <td>
-                            {$user.['last_login_time']}
-                            <br/>
-                            {$user['last_login_ip']}
-                        </td>
-                        <td>{$user['login_count']}</td>
+                        <td>{$user['user_name']}</td>
+                        <td>{$user['group_name']|default='无'}</td>
                         <td>{$user['email']}</td>
-                        <td>{$user['remark']}</td>
+                        <td>{$user['remark']|default='无'}</td>
                         <td>{$user['status']}</td>
                         <td>
                             <a href="{:U('user/edit', ['id' => $user['id']])}">编辑</a>
+                            <a href="{:U('user/delete', ['id' => $user['id']])}">查看权限</a>
+                            <a href="{:U('user/delete', ['id' => $user['id']])}">修改权限</a>
+                            <a href="{:U('user/delete', ['id' => $user['id']])}">操作日志</a>
                             <a href="{:U('user/delete', ['id' => $user['id']])}">删除</a>
                         </td>
                     </tr>

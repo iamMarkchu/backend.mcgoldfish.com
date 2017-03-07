@@ -25,7 +25,8 @@ class CategoryController extends CommonController {
         $this->assign('parent_category_list', $parent_category_list);
         $this->display();
     }
-    public function insert(){
+    public function insert()
+    {
         $category = D('category');
         if(!$category->create())
         {
@@ -35,6 +36,45 @@ class CategoryController extends CommonController {
             $category->updated_at = date('Y-m-d H:i:s');
             $category->add();
             $this->success('添加成功', U('category/index'));
+        }
+    }
+
+    public function edit()
+    {
+        if(!I('get.id', 0)) return $this->error('类别不存在', U('category/index'));
+        $id = I('get.id');
+        $category = D('category');
+        $result = $category->find($id);
+        $parent_category_list = $category->where(['parent_cate_id' => 0])->select();
+        $this->assign('result', $result);
+        $this->assign('parent_category_list', $parent_category_list);
+        $this->display();
+    }
+    public function update()
+    {
+        if(!I('post.id', 0)) return $this->error('类别不存在', U('category/index'));
+        $id = I('post.id');
+        $category = D('category');
+        if(!$category->create())
+        {
+            $this->error($category->getDbError());
+        }else{
+            $category->updated_at = date('Y-m-d H:i:s');
+            $category->save();
+            $this->success('更新类别成功!', U('category/index'));
+        }
+    }
+
+    public function delete()
+    {
+        if(!I('get.id', 0)) return $this->error('类别不存在', U('category/index'));
+        $id = I('get.id');
+        $category = D('category');
+        if($category->delete($id))
+        {
+            $this->success('删除成功!', U('category/index'));
+        }else{
+            $this->error('删除失败!');
         }
     }
 }

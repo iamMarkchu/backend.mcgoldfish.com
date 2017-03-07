@@ -1,13 +1,14 @@
-<extend name="public:appv2" />
+<extend name="public:appv3" />
 <block name="main">
-<h3 class="page-title">节点管理</h3>
-<div class="panel panel-default">
-    <div class="panel-heading">节点列表</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">节点列表</h3>
+    </div>
     <div class="panel-body">
         <a href="{:U('/node/add')}" class="btn btn-success">{$Think.config.ADD_BUTTON}节点</a>
     </div>
     <div class="panel-body">
-        <table class="table table-bordered">
+        <table class="table table-condensed table-hover">
             <thead>
                 <tr>
                     <th>

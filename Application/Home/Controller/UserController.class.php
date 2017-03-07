@@ -1,21 +1,20 @@
 <?php
 namespace Home\Controller;
-use Think\Controller;
 use Common\Util\BootstrapPage;
 class UserController extends CommonController {
    	public function index()
     {
-        $user = M('user');
+        $user = D('user');
         $count = $user->count();
-        $page = new BootstrapPage($count, 5);
+        $page = new BootstrapPage($count, 10);
         $show = $page->show();
-        $list = $user->where($maps)->order('id')->limit($page->firstRow. ','. $page->listRows)->select();
+        $list = $user->field('user.*,role.`name` as group_name')->join('LEFT JOIN role_user ON user.id = role_user.user_id ')->join('LEFT JOIN role ON role_user.role_id = role.id ')->where($maps)->order('id')->limit($page->firstRow. ','. $page->listRows)->select();
         $this->assign('list', $list);
         $this->assign('show', $show);
         $this->display();
     }
     public function add(){
-        $role = M('role');
+        $role = D('role');
         $allRoleInfo = $role->where(['status' => 'active'])->select();
         $this->assign('allRoleInfo',$allRoleInfo);
         $this->display();
@@ -28,7 +27,8 @@ class UserController extends CommonController {
         }else{
             //默认密码
             $user->password = md5('123456');
-            $user->addtime = date('Y-m-d H:i:s');
+            $user->created_at = date('Y-m-d H:i:s');
+            $user->remark = '新用户待激活';
             $userid = $user->add();
             if($userid){
                 $roleUser = D('role_user');
