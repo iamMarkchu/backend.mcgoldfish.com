@@ -8,35 +8,52 @@ class NodeController extends CommonController {
         $count = $node->count();
         $page = new BootstrapPage($count, 10);
         $show = $page->show();
-        $list = $node->where($maps)->order('level')->limit($page->firstRow. ','. $page->listRows)->select();
+        $list = $node->where($maps)->order('level,sort')->limit($page->firstRow. ','. $page->listRows)->select();
         $this->assign('list', $list);
         $this->assign('show', $show);
         $this->display();
     }
     public function insert(){
     	$node = D('node');
-    	$node->create();
-    	$node->addtime = date("Y-m-d H:i:s");
-    	$node->add();
-    	$this->success("添加成功","index");
-    }
-    public function _before_add(){
-        $this->assign('isSelect2',1);
-    }
-    public function ajaxGetNode(){
-        $nodelist = [];
-        $nodelist = $this->getNode();
-        return $this->ajaxReturn($nodelist);
-    }
-    public function getNode($startPid=0){
-        $tmpArr = [];
-        $node = D('node');
-        $tmp = $node->field('id as value,name')->where('pid = '.$startPid)->select();
-        if(empty($tmp)) return [];
-        foreach ($tmp as $k => $v) {
-            $tmpArr[$k] = $v;
-            $tmpArr[$k]['children'] = $this->getNode($v['value']);
+    	if(!$node->create())
+        {
+            $this->error($node->getDbError());
+        }else{
+            $node->created_at = date("Y-m-d H:i:s");
+            $node->add();
+            $this->success("添加成功","index");
         }
-        return $tmpArr;
+    }
+    public function edit()
+    {
+        if(!I('get.id', 0, 'intval')) $this->error('不存在节点');
+        $id = I('get.id');
+        $node = D('node');
+        $result = $node->find($id);
+        $level = $result['level'];
+        $parent_list = $node->field(['id','name'])->where(['status'=> 'active', 'level' => $level-1])->select();
+        if(empty($parent_list)) $parent_list[] = ['id' => 0, 'name' => '无'];
+        $this->assign('result', $result);
+        $this->assign('parent_list', $parent_list);
+        $this->display();
+    }
+    public function update()
+    {
+        if(!I('post.id', 0, 'intval')) $this->error('不存在节点');
+        $id = I('post.id');
+        $node = D('node');
+        if(!$node->create())
+        {
+            $this->error($node->getDbError());
+        }else{
+            $node->save();
+            $this->success('更新节点成功!', U('node/index'));
+        }
+    }
+    public function ajaxGetParentNode(){
+        $level = I('post.level', 1, 'intval');
+        $node = D('node');
+        $list = $node->field(['id','name'])->where(['status'=> 'active', 'level' => $level-1])->select();
+        $this->ajaxReturn($list, 'JSON');
     }
 }

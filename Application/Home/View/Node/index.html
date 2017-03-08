@@ -30,6 +30,7 @@
                     <th>
                         ADDTIME | LASTUPDATETIME
                     </th>
+                    <th>STATUS</th>
                     <th>
                         OPERATION
                     </th>
@@ -44,9 +45,10 @@
                         <td>{$node['remark']}</td>
                         <td>{$node['sort']}</td>
                         <td>{$node['pid']} | {$node['level']}</td>
-                        <td>{$node['addtime']} | {$node['lastupdatetime']}</td>
+                        <td>{$node['created_at']} | {$node['updated_at']}</td>
+                        <td>{$node['status']}</td>
                         <td>
-                            <a href="{:U('user/edit', ['id' => $node['id']])}">编辑</a>
+                            <a href="{:U('node/edit', ['id' => $node['id']])}">编辑</a>
                             <a href="{:U('user/delete', ['id' => $node['id']])}">删除</a>
                         </td>
                     </tr>

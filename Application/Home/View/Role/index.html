@@ -1,13 +1,16 @@
-<extend name="public:appv2" />
+<extend name="public:appv3" />
 <block name="main">
-<h3 class="page-title">组别管理</h3>
-<div class="panel panel-default">
-    <div class="panel-heading">组别列表</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            组别管理
+        </h3>
+    </div>
     <div class="panel-body">
         <a href="{:U('role/add')}" class="btn btn-success">添加组别</a>
     </div>
     <div class="panel-body">
-        <table class="table table-bordered">
+        <table class="table table-condensed table-hover">
             <thead>
                 <tr>
                     <th>
@@ -39,9 +42,9 @@
                         <td>{$vo['name']}</td>
                         <td>{$vo['remark']}</td>
                         <td>
-                            {$vo['addtime']}
+                            {$vo['created_at']}
                             <br/>
-                            {$vo['lastupdatetime']}
+                            {$vo['updated_at']}
                         </td>
                         <td>{$vo['status']}</td>
                         <td>

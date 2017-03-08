@@ -1,6 +1,5 @@
 <?php
 namespace Home\Controller;
-use Think\Controller;
 use Common\Util\BootstrapPage;
 
 class RoleController extends CommonController {
