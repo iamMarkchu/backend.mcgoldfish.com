@@ -4,11 +4,11 @@ use Think\Controller;
 use Org\Util\Rbac;
 class CommonController extends Controller {
     public function _initialize(){
-        // Rbac::checkLogin();
-        // if(!Rbac::AccessDecision())
-        // {
-        //     $this->error('您没有权限');
-        // }
+         Rbac::checkLogin();
+         if(!Rbac::AccessDecision())
+         {
+             $this->error('您没有权限');
+         }
     }
 
     public function index(){

@@ -30,19 +30,25 @@
                 <div class="form-group">
                     <label for="" class="col-md-2 control-label">权限设置</label>
                     <div class="col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading"><input type="checkbox" name="access[]" value="1">&nbsp;Home</div>
-                            <div class="panel-body">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading"><input type="checkbox" name="access[]" value="1">&nbsp;Article</div>
-                                    <div class="panel-body">
-                                        <div class="checkbox">
-                                            <label><input type="checkbox">Index</label>
+                        <volist name="node_list" id="vo">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><input type="checkbox" name="node[]" value="{$vo.id}" <if condition="$vo['default']">checked</if>>&nbsp;{$vo.title}</div>
+                                <div class="panel-body">
+                                    <volist name="vo.child" id="vo2">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading"><input type="checkbox" name="node[]" value="{$vo2.id}" <if condition="$vo2['default']">checked</if>>&nbsp;{$vo2.title}</div>
+                                            <div class="panel-body">
+                                                <volist name="vo2.child" id="vo3">
+                                                    <div class="col-md-4">
+                                                        <input type="checkbox" name="node[]" value="{$vo3.id}" <if condition="$vo3['default']">checked</if>>&nbsp;{$vo3.title}&nbsp;
+                                                    </div>
+                                                </volist>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </volist>
                                 </div>
                             </div>
-                        </div>
+                        </volist>
                     </div>
                 </div>
             </div>

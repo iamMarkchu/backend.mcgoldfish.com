@@ -15,6 +15,9 @@ class RoleController extends CommonController {
     }
     public function add()
     {
+        $node = D('node');
+        $node_list = $node->getAllNode();
+        $this->assign('node_list', $node_list);
         $this->display();
     }
     public function insert(){
@@ -23,10 +26,26 @@ class RoleController extends CommonController {
         {
             $this->error($role->getError());
         }else{
-            $role->addtime = date("Y-m-d H:i:s");
+            $role->created_at = date("Y-m-d H:i:s");
             $role->pid = 0;
-            $role->add();
-            $this->success('添加成功', U('role/index'));    
+            $role_id = $role->add();
+            if(!empty(I('post.node')))
+            {
+                $node = I('post.node');
+                $insertData = [];
+                foreach ($node as $v)
+                {
+                    $tmp = [];
+                    $tmp['role_id'] = $role_id;
+                    $tmp['node_id'] = $v;
+                    $tmp['level'] = 0;
+                    $insertData[] = $tmp;
+                }
+
+            }
+            $access = D('access');
+            $access->addAll($insertData);
+            $this->success('添加成功', U('role/index'));
         }
     }
     public function edit(){

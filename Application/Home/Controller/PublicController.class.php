@@ -39,9 +39,7 @@ class PublicController extends CommonController {
             if($authInfo['password'] != md5($_POST['password']))    $this->error('密码错误！');
             $needToSession = [
             	C('USER_AUTH_KEY') => $authInfo['id'],
-            	'loginUserName' => $authInfo['nickname'],
-            	'userImage' => $authInfo['image'],
-            	'lastLoginTime' => $authInfo['last_login_time'],
+            	'loginUserName' => $authInfo['user_name'],
             ];
             session([ 'name' => 'session_id', 'expire' => 86400]);
             foreach ($needToSession as $k => $v) {
@@ -54,16 +52,7 @@ class PublicController extends CommonController {
             		'password' => I('post.password'),
             	];
             	cookie('saveUser',$saveUser);
-            } 
-            //保存登录信息
-			$user = M('user');
-			$data = [
-				'id' => $authInfo['id'],
-				'last_login_time' => time(),
-				'login_count' => ['exp' => 'login_count+1'],
-				'last_login_ip' => get_client_ip(),
-			];
-			$user->save($data);
+            }
             $r->saveAccessList();
 			$this->success('登录成功');
 

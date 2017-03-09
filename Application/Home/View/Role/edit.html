@@ -1,37 +1,62 @@
-<extend name="public:appv2" />
+<extend name="public:appv3" />
 <block name="main">
-    <h3 class="page-title">编辑组别</h3>
-    <div class="panel panel-default">
-        <div class="panel-body">
-                    <div class="container-fluid">
-            <div class="row">
-             <div class="col-md-6">
-                 <form action="{:U('role/update')}" method="POST" class="form-horizontal" role="form">
-                    <input type="hidden" name="id" value="{$result.id}">
-                    <div class="form-group">
-                        <label>组别名称</label>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加组别</h3>
+        </div>
+        <form action="{:U('role/update')}" method="POST" class="form-horizontal" role="form">
+            <div class="panel-body">
+                <input type="hidden" name="id" value="{$result.id}">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">组别名称</label>
+                    <div class="col-md-6">
                         <input class="form-control" type="text" name="name" value="{$result.name}" />
                     </div>
-                    <div class="form-group">
-                        <label>状态</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">状态</label>
+                    <div class="col-md-6">
                         <select name="status" class="form-control">
-                            <option value="active" <eq name="$result.status" value="active">selected="true"</eq>>启用</option>
-                            <option value="inactive" <eq name="$result.status" value="inactive">selected="true"</eq>>禁用</option>
+                            <option value="active" <eq name="$result.status" value="active">selected</eq>>启用</option>
+                            <option value="inactive" <eq name="$result.status" value="inactive">selected</eq>>禁用</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>简介</label>
-                        <input class="form-control" type="remark" name="remark" value="{$result.remark}" />
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">简介</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" name="remark" value="{$result.remark}"/>
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success">{$Think.config.SAVE_BUTTON}</button>
-                        <a href="{:U('role/index')}" class="btn btn-default">{$Think.config.CANCEL_BUTTON}</a>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-md-2 control-label">权限设置</label>
+                    <div class="col-md-6">
+                        <volist name="node_list" id="vo">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><input type="checkbox" name="node[]" value="{$vo.id}" <if condition="$vo['default']">checked</if>>&nbsp;{$vo.title}</div>
+                                <div class="panel-body">
+                                    <volist name="vo.child" id="vo2">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading"><input type="checkbox" name="node[]" value="{$vo2.id}" <if condition="$vo2['default']">checked</if>>&nbsp;{$vo2.title}</div>
+                                            <div class="panel-body">
+                                                <volist name="vo2.child" id="vo3">
+                                                    <div class="col-md-4">
+                                                        <input type="checkbox" name="node[]" value="{$vo3.id}" <if condition="$vo3['default']">checked</if>>&nbsp;{$vo3.title}&nbsp;
+                                                    </div>
+                                                </volist>
+                                            </div>
+                                        </div>
+                                    </volist>
+                                </div>
+                            </div>
+                        </volist>
                     </div>
-                </form> 
-             </div>
-         </div> 
-        </div>
-        </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <a href="{:U('role/index')}" class="btn col-md-offset-2">{$Think.config.CANCEL_BUTTON}</a>
+                <button type="submit" class="btn btn-success">{$Think.config.SAVE_BUTTON}</button>
+            </div>
+        </form>
     </div>
 </block>
-
