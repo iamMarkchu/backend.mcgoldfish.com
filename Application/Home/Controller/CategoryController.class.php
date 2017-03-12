@@ -1,29 +1,80 @@
 <?php
 namespace Home\Controller;
-use Think\Controller;
+use \Common\Util\BootstrapPage;
 class CategoryController extends CommonController {
-    public function insert(){
+    public function index()
+    {
+        $map = [];
         $category = D('category');
-        $category->create();
-        $category->addtime = date("Y-m-d H:i:s");
-        $flag = $category->add();
-        $back = $category->find($flag);
-        if($flag){
-            $requestpath = "/category/{$flag}.html";
-            $url = D('rewrite_url');
-            $urlData['requestpath'] = $requestpath;
-            $urlData['modeltype'] = "category";
-            $urlData['optdataid'] = $flag;
-            $urlData['isjump'] = "NO";
-            $urlData['status'] = "yes";
-            $url->create($urlData);
-            $flag = $url->add();
-            if(IS_AJAX){
-                $this->ajaxReturn($back);
-            }else{
-                $this->success("添加成功","index");
-            }
+        $count = $category->where($map)->count();
+        $page = new BootstrapPage($count, 10);
+        foreach($map as $k => $v) {
+            $page->parameter[$k] = urlencode($v);
         }
-        
+        $show = $page->show();
+        $result = $category->where($map)->order('created_at')->limit($page->firstRow. ','. $page->listRows)->select();
+        $this->assign('result', $result);
+        $this->assign('show', $show);
+        $this->display();
+    }
+
+    public function add()
+    {
+        $category = D('category');
+        $parent_category_list = $category->where(['parent_cate_id' => 0])->select();
+        $this->assign('parent_category_list', $parent_category_list);
+        $this->display();
+    }
+    public function insert()
+    {
+        $category = D('category');
+        if(!$category->create())
+        {
+            $this->error($category->getDbError());
+        }else{
+            $category->created_at = date('Y-m-d H:i:s');
+            $category->updated_at = date('Y-m-d H:i:s');
+            $category->add();
+            $this->success('添加成功', U('category/index'));
+        }
+    }
+
+    public function edit()
+    {
+        if(!I('get.id', 0)) return $this->error('类别不存在', U('category/index'));
+        $id = I('get.id');
+        $category = D('category');
+        $result = $category->find($id);
+        $parent_category_list = $category->where(['parent_cate_id' => 0])->select();
+        $this->assign('result', $result);
+        $this->assign('parent_category_list', $parent_category_list);
+        $this->display();
+    }
+    public function update()
+    {
+        if(!I('post.id', 0)) return $this->error('类别不存在', U('category/index'));
+        $id = I('post.id');
+        $category = D('category');
+        if(!$category->create())
+        {
+            $this->error($category->getDbError());
+        }else{
+            $category->updated_at = date('Y-m-d H:i:s');
+            $category->save();
+            $this->success('更新类别成功!', U('category/index'));
+        }
+    }
+
+    public function delete()
+    {
+        if(!I('get.id', 0)) return $this->error('类别不存在', U('category/index'));
+        $id = I('get.id');
+        $category = D('category');
+        if($category->delete($id))
+        {
+            $this->success('删除成功!', U('category/index'));
+        }else{
+            $this->error('删除失败!');
+        }
     }
 }

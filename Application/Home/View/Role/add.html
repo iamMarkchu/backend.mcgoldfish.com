@@ -1,0 +1,61 @@
+<extend name="public:appv3" />
+<block name="main">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加组别</h3>
+        </div>
+        <form action="{:U('role/insert')}" method="POST" class="form-horizontal" role="form">
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">组别名称</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" name="name" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">状态</label>
+                    <div class="col-md-6">
+                        <select name="status" class="form-control">
+                            <option value="active">启用</option>
+                            <option value="inactive">禁用</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">简介</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="remark" name="remark" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-md-2 control-label">权限设置</label>
+                    <div class="col-md-6">
+                        <volist name="node_list" id="vo">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><input type="checkbox" name="node[]" value="{$vo.id}" <if condition="$vo['default']">checked</if>>&nbsp;{$vo.title}</div>
+                                <div class="panel-body">
+                                    <volist name="vo.child" id="vo2">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading"><input type="checkbox" name="node[]" value="{$vo2.id}" <if condition="$vo2['default']">checked</if>>&nbsp;{$vo2.title}</div>
+                                            <div class="panel-body">
+                                                <volist name="vo2.child" id="vo3">
+                                                    <div class="col-md-4">
+                                                        <input type="checkbox" name="node[]" value="{$vo3.id}" <if condition="$vo3['default']">checked</if>>&nbsp;{$vo3.title}&nbsp;
+                                                    </div>
+                                                </volist>
+                                            </div>
+                                        </div>
+                                    </volist>
+                                </div>
+                            </div>
+                        </volist>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <a href="{:U('role/index')}" class="btn col-md-offset-2">{$Think.config.CANCEL_BUTTON}</a>
+                <button type="submit" class="btn btn-success">{$Think.config.SAVE_BUTTON}</button>
+            </div>
+        </form>
+    </div>
+</block>

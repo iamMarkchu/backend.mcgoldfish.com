@@ -1,81 +1,89 @@
-<div class="row-fluid">
-    <div class="span12">
-        <div class="portlet box {$Think.config.PORLET_COLOR}">
-            <div class="portlet-title">
-                <div class="caption">
-                    {$Think.config.ADD_BUTTON}{$conInfo.remark}
-                </div>
-                <div class="tools">
-                    <a href="javascript:;" class="collapse"></a>
+<extend name="public:appv3" />
+<block name="main">
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">添加节点</h3>
+    </div>
+    <form action="{:U('node/insert')}" method="POST" class="form-horizontal" role="form">
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-md-2 control-label">节点名称</label>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" name="name" />
                 </div>
             </div>
-            <div class="portlet-body form">
-                <div class="row-fluid">
-                    <div class="span12">
-                        <div class="tab-pane">
-                            <!-- BEGIN FORM-->
-                            <form action="{:U('Node/insert')}" method="POST" class="form-horizontal" enctype="multipart/form-data">
-                                <div class="control-group">
-                                    <label class="control-label">节点名称</label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="节点名称" class="m-wrap large"  name="name" />
-                                        <span class="help-inline">不能为空</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">节点显示名称</label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="节点显示名称" class="m-wrap large"  name="title" />
-                                        <span class="help-inline">不能为空</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">节点排序</label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="节点排序" class="m-wrap large"  name="sort" />
-                                        <span class="help-inline">不能为空</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">父节点</label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="父节点" class="m-wrap large"  name="pid" />
-                                        <span class="help-inline">不能为空</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">节点等级</label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="节点等级" class="m-wrap large"  name="level" />
-                                        <span class="help-inline">不能为空</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">节点状态</label>
-                                    <div class="controls">
-                                        <select name="status">
-                                            <option value="active">启用</option>
-                                            <option value="inactive">禁用</option>
-                                        </select>
-                                        <span class="help-inline"></span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">备注</label>
-                                    <div class="controls">
-                                        <textarea name="remark"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-actions">
-                                    <button type="submit" class="btn blue">{$Think.config.SAVE_BUTTON}</button>
-                                    <a href="{:U('Node/index')}" class="btn">{$Think.config.CANCEL_BUTTON}</a>
-                                </div>
-                            </form>
-                            <!-- END FORM-->
-                        </div>
-                    </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">节点显示名称</label>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" name="title" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">节点等级</label>
+                <div class="col-md-6">
+                    <select name="level" id="" class="form-control">
+                        <for start="1" end="4">
+                            <option value="{$i}">{$i}</option>
+                        </for>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">父节点</label>
+                <div class="col-md-6 pid-select">
+                    <select name="pid" class="form-control">
+                        <option value="0">无</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">节点排序</label>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" name="sort" value="9"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">节点备注</label>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" name="remark" />
                 </div>
             </div>
         </div>
-    </div>
+        <div class="panel-footer">
+            <a href="{:U('node/index')}" class="btn col-md-offset-2">取消</a>
+            <button type="submit" class="btn btn-success">确定</button>
+        </div>
+    </form>
 </div>
+</block>
+<block name="pagejs">
+    <script>
+        $(function(){
+           $('select[name=level]').change(function(){
+                var level = $(this).val();
+                $('.pid-select').empty();
+                if(level == 1)
+                {
+                    var level_one_html = '<select name="pid" class="form-control"><option value="0">无</option> </select>';
+                    $('.pid-select').append(level_one_html);
+                }else{
+                    $.ajax({
+                        url: '/node/ajaxGetParentNode',
+                        data: {level: level},
+                        type: 'post',
+                        success: function(data){
+                            var level_html = '<select name="pid" class="form-control">';
+                            for (var i=0;i<data.length;i++)
+                            {
+                                level_html += '<option value="'+data[i].id+'">'+data[i].name+'</option>';
+                            }
+                            level_html += '</select>';
+                            $('.pid-select').append(level_html);
+                        }
+                    });
+                }
+
+           });
+        });
+    </script>
+</block>

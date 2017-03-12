@@ -202,6 +202,7 @@ class Rbac {
         // Db方式权限数据
         $db     =   Db::getInstance(C('RBAC_DB_DSN'));
         $table = array('role'=>C('RBAC_ROLE_TABLE'),'user'=>C('RBAC_USER_TABLE'),'access'=>C('RBAC_ACCESS_TABLE'),'node'=>C('RBAC_NODE_TABLE'));
+        
         $sql    =   "select node.id,node.name from ".
                     $table['role']." as role,".
                     $table['user']." as user,".

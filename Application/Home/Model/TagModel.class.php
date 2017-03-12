@@ -3,7 +3,7 @@ namespace Home\Model;
 use Think\Model;
 class TagModel extends Model {
    	public function getAllTag(){
-        $result = $this->order('displayorder')->select();
+        $result = $this->order('display_order')->select();
         return $result;
    	}
    	public function getTagByIdAndType($optdataid,$datatype="article"){

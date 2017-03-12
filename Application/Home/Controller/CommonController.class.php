@@ -1,39 +1,24 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
+use Org\Util\Rbac;
 class CommonController extends Controller {
+    public function _initialize(){
+         Rbac::checkLogin();
+         if(!Rbac::AccessDecision())
+         {
+             $this->error('您没有权限');
+         }
+    }
+
     public function index(){
         $this->display();
     }
+
     public function add(){
         $this->display();
     }
-    public function _initialize(){
-        saveUrl();
-        save_log(__ACTION__,__INFO__,IS_AJAX,session('loginUserName'));
-        $r = new \Org\Util\Rbac();
-        if (C('USER_AUTH_ON' ) && !in_array(MODULE_NAME,explode(',',C('NOT_AUTH_MODULE')))) {
-            if (!$r->AccessDecision ()) {
-                if (!$_SESSION [C ( 'USER_AUTH_KEY' )]) {
-                    $this->redirect('Public/login');
-                    return;
-                    if ($this->isAjax())    $this->ajaxReturn(true, "", 301);
-                        else    redirect ( PHP_FILE . C ( 'USER_AUTH_GATEWAY' ) );
-                }
-                if (C ( 'RBAC_ERROR_PAGE' )) {
-                        redirect ( C ( 'RBAC_ERROR_PAGE' ) );
-                } else {
-                        if (C ( 'GUEST_AUTH_ON' )) $this->assign ( 'jumpUrl', PHP_FILE . C ( 'USER_AUTH_GATEWAY' ) );
-                        $this->error ( L ( '_VALID_ACCESS_' ) );
-                }
-            }
-        }
-        $map['name'] = CONTROLLER_NAME;
-        $controllerInfo = D('node')->where($map)->find();
-        $breadCrumb = array(CONTROLLER_NAME,ACTION_NAME);
-        $this->assign('breadCrumb',$breadCrumb);
-        $this->assign('conInfo',$controllerInfo);
-    }
+
     public function delete() {
         //删除指定记录
         $name=CONTROLLER_NAME;

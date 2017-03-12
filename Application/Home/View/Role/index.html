@@ -1,0 +1,61 @@
+<extend name="public:appv3" />
+<block name="main">
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            组别管理
+        </h3>
+    </div>
+    <div class="panel-body">
+        <a href="{:U('role/add')}" class="btn btn-success">添加组别</a>
+    </div>
+    <div class="panel-body">
+        <table class="table table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        组别编号
+                    </th>
+                    <th>
+                        组别名称
+                    </th>
+                    <th>
+                        简介
+                    </th>
+                    <th>
+                        创建时间
+                        <br>
+                        最后更改时间
+                    </th>
+                    <th>
+                        状态
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <volist name="list" id="vo">
+                    <tr>
+                        <td>{$vo['id']}</td>
+                        <td>{$vo['name']}</td>
+                        <td>{$vo['remark']}</td>
+                        <td>
+                            {$vo['created_at']}
+                            <br/>
+                            {$vo['updated_at']}
+                        </td>
+                        <td>{$vo['status']}</td>
+                        <td>
+                            <a href="{:U('/role/edit', ['id' => $vo['id']])}">编辑</a>
+                            <a href="{:U('/role/viewAuth')}">查看权限</a>
+                        </td>
+                    </tr>
+                </volist>
+            </tbody>
+        </table>
+        {$show}
+    </div>
+</div>
+</block>
