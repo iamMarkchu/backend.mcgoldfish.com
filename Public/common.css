@@ -1,1 +1,7 @@
-.form-panel>.panel-body>.row{margin-bottom: 10px;}
+.login-panel{
+    margin-top: 20px;
+}
+
+.form-block{
+    margin-bottom: 20px;
+}

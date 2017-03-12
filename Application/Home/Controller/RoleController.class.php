@@ -50,10 +50,23 @@ class RoleController extends CommonController {
     }
     public function edit(){
         if(!I('get.id', 0, 'intval')) $this->error('组别不存在');
-        else  $roleid = I('get.id');
+        else  $role_id = I('get.id');
         
         $role = D('role');
-        $result = $role->find($roleid);
+        $result = $role->find($role_id);
+        //获取组别所有的权限
+        $access = M('access');
+        $access_list = $access->field('node_id as nid')->where(['role_id' => $role_id])->select();
+        $access_arr = [];
+        if(!empty($access_list))
+        {
+            foreach ($access_list as $v)
+            {
+                $access_arr[] = $v['nid'];
+            }
+        }
+        $node = D('node');
+        $node_list = $node->getAllNode($access_arr);
         $this->assign('result',$result);
         $this->display();
     }

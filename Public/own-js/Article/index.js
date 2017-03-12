@@ -46,9 +46,9 @@
                             for (var i = row.tag.length - 1; i >= 0; i--) {
                                 if(i == 0)
                                 {
-                                    returnList += row.tag[i]['displayname'];
+                                    returnList += row.tag[i]['tag_name'];
                                 }else{
-                                    returnList += row.tag[i]['displayname']+"|";
+                                    returnList += row.tag[i]['tag_name']+"|";
                                 }
 
                             }

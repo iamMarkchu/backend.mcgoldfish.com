@@ -82,7 +82,7 @@
                     <div class="col-md-6">
                         <select multiple="multiple" tabindex="-1"  name="tag_multi_select2[]" class="form-control">
                             <volist name="allTagInfo" id="vo">
-                                <option value='{$vo.id}' <eq name="vo.selected" value="1">selected="selected"</eq>>{$vo.displayname}</option>
+                                <option value='{$vo.id}' <eq name="vo.selected" value="1">selected="selected"</eq>>{$vo.tag_name}</option>
                             </volist>
                         </select>
                     </div>
