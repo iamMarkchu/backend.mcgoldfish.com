@@ -5,3 +5,11 @@
 .form-block{
     margin-bottom: 20px;
 }
+
+.my-markdown-editor{
+    padding: 0;
+    border-radius: 0;
+}
+.my-markdown-editor>textarea{
+    border-radius: 0;
+}
