@@ -2,7 +2,7 @@
 namespace Home\Controller;
 use Think\Controller;
 class ArticleController extends CommonController {
-	public function _before_index(){
+	public function index(){
         $searchArray = session('articleSearch');
         $conditionArray = [
             'articleSource' => ['原创', '转载'],
@@ -10,7 +10,8 @@ class ArticleController extends CommonController {
             'order' => ['id desc', 'clickcount', 'clickcount desc', 'maintainorder', 'maintainorder desc'],
         ];
         $this->assign('searchArray',$searchArray);
-        $this->assign('$conditionArray',$conditionArray);
+        $this->assign('conditionArray',$conditionArray);
+        $this->display();
     }
     public function add(){
         $category = D('category');
@@ -45,41 +46,35 @@ class ArticleController extends CommonController {
     }
     public function insert(){
         $article = D('article');
-        $article->create();
-        if(!empty(I('post.content', '')))
+        if(!$article->create())
         {
-            $article->content = addslashes($_POST['content']);
-        }
-        $article->add_editor = 'test';
-        $article->tip = C('NEW_ARTICLE_MESSAGE');
-        $article->created_at = date('Y-m-d H:i:s');
-        $articleid = $article->add();
-        if($articleid){
-            //添加分类信息
-            $cateogyMapping = D('category_mapping');
-            $cateogyMapping->create();
-            $cateogyMapping->datatype = 'article';
-            $cateogyMapping->optdataid = $articleid;
-            $cateogyMapping->isprimary = 'yes';
-            $cateogyMapping->addtime = date('Y-m-d H:i:s');
-            $cateogyMapping->add();
-            //添加标签信息
-            if(!empty(I('post.tag_multi_select2', ''))){
-                $tagMapping = D('tagMapping');
-                $tagMapping->create();
-                foreach (I('post.tag_multi_select2') as $k => $v) {
-                    $data = [];
-                    $data['optdataid'] = $articleid;
-                    $data['datatype'] = 'article';
-                    $data['addtime'] = date('Y-m-d H:i:s');
-                    $data['tagid'] = $v;
-                    $tagMapping->add($data);
+            $this->error($article->getDbError());
+        }else{
+            if(!empty(I('post.content', '')))
+            {
+                $article->content = addslashes($_POST['content']);
+            }
+            $article->add_editor = session('?user_name')?session('user_name'):'';
+            $article->tip = C('NEW_ARTICLE_MESSAGE');
+            $article->created_at = date('Y-m-d H:i:s');
+            $articleid = $article->add();
+            if($articleid){
+                if(!empty(I('post.tag_multi_select2', ''))){
+                    $tagMapping = D('tagMapping');
+                    $tagMapping->create();
+                    foreach (I('post.tag_multi_select2') as $k => $v) {
+                        $data = [];
+                        $data['tag_id'] = $v;
+                        $data['article_id'] = $articleid;
+                        $data['created_at'] = date('Y-m-d H:i:s');
+                        $data['updated_at'] = date('Y-m-d H:i:s');
+                        $tagMapping->add($data);
+                    }
                 }
             }
+            $this->success("添加成功","index");
         }
-        $key = session(C('USER_AUTH_KEY'))."_";
-        deleteFromCache($key);
-        $this->success("添加成功","index");
+
     }
     public function edit(){
         if(!I('get.id', 0))
@@ -150,14 +145,14 @@ class ArticleController extends CommonController {
         if(!empty(I('post.title', ''))){
             $searchArray['where']['title'] = I('post.title');
         }
-        if(!empty(I('post.articleSource', ''))){
-            $searchArray['where']['articleSource'] = I('post.articleSource');
+        if(!empty(I('post.source', ''))){
+            $searchArray['where']['source'] = I('post.source');
         }
         if(!empty(I('post.status', ''))){
             $searchArray['where']['status'] = I('post.status');
         }
-        if(!empty(I('post.maintainorder'))){
-            $searchArray['order'] = I('post.maintainorder');
+        if(!empty(I('post.display_order'))){
+            $searchArray['order'] = I('post.display_order');
         }
         $flag = session('articleSearch',$searchArray);
         $this->ajaxReturn($flag);
@@ -199,52 +194,45 @@ class ArticleController extends CommonController {
         if(!empty($articleInfo)) echo "0";
             else echo "1";
     }
-    public function saveImage(){
-        if(!empty($_FILES['upload_file']['name'])){
-            $path = "/article/";
-            $imgFile = ImgUpload($path);
-            $jsonBack['success'] = true;
-            $jsonBack['msg'] = "上传成功！";
-            $jsonBack['file_path'] = "/Public". $imgFile['upload_file']['savepath']. $imgFile['upload_file']['savename'];
-            $this->ajaxReturn($jsonBack);
-        }
-    }
 
     public function uploadImage()
     {
-        if(!empty($_FILES['files']['name'])){
-            $path = '/markdown/';
-            $imgFile = ImgUploadOne($path, $_FILES['files']);
-            //缩略图
-            $image = new \Think\Image();
-            $imagePath = './Public'. $imgFile['savepath']. $imgFile['savename'];
-            $image->open($imagePath);
-            $newImagePath = '/Public'. $imgFile['savepath'].'max_w_1000_' .$imgFile['savename'];
-            $image->thumb(1000, 1000, 1)->save('.'.$newImagePath);
-        }
-        if(!empty($_FILES['imageFile']['name']))
+        if(I('get.name', 'image') == 'image')
         {
+            $key = 'imageFile';
             $path = '/article/';
-            $imgFile = ImgUploadOne($path, $_FILES['imageFile']);
+            $width = 400;
+        }else{
+            $key = 'files';
+            $path = '/markdown/';
+            $width = 1000;
+        }
+        if(!empty($_FILES[$key]['name'])){
+            $imgFile = ImgUploadOne($path, $_FILES[$key]);
             $image = new \Think\Image();
             $imagePath = C('ImageDirectoryV2'). $imgFile['savepath']. $imgFile['savename'];
             $image->open($imagePath);
-            $newImagePath = C('ImageDirectoryV1'). $imgFile['savepath']. C('ThumbPrefix'). '400_'.$imgFile['savename'];
-            $image->thumb(400, 400, 1)->save('.'.$newImagePath);
+            $newImagePath = C('ImageDirectoryV1'). $imgFile['savepath'].'max_w_'. $width.'_' .$imgFile['savename'];
+            $image->thumb($width, $width, 1)->save('.'.$newImagePath);
+            $jsonBack['success'] = true;
+            $jsonBack['msg'] = "上传成功！";
+            $jsonBack['file_path'] = $newImagePath;
+            $this->ajaxReturn($jsonBack);
+        }else{
+            $jsonBack['success'] = true;
+            $jsonBack['msg'] = "上传成功！";
+            $jsonBack['file_path'] = '';
+            $this->ajaxReturn($jsonBack);
         }
-        $jsonBack['success'] = true;
-        $jsonBack['msg'] = "上传成功！";
-        $jsonBack['file_path'] = $newImagePath;
-        $this->ajaxReturn($jsonBack);
+
     }
 
     public function viewMarkdown()
     {
         $parsedown = new \Common\Util\Parsedown();
-        //$markdownContent = htmlspecialchars(I('post.content'));
-        $htmlContent = $parsedown->text($_POST['content']);
+        $markdownContent = htmlspecialchars_decode(I('post.content'));
+        $htmlContent = $parsedown->text($markdownContent);
         $jsonBack['htmlContent'] = $htmlContent;
         $this->ajaxReturn($jsonBack);
-        $image = new \Think\Image();
     }
 }

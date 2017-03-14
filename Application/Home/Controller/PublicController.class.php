@@ -32,14 +32,13 @@ class PublicController extends CommonController {
 		//if(!$this->check_verify(I('post.verify')))  $this->error('验证码错误!');
 		$r = new Rbac;
         $authInfo = $r->authenticate($map);
-        
         if(empty($authInfo)) {
             $this->error('帐号不存在或已禁用！');
         }else {
-            if($authInfo['password'] != md5($_POST['password']))    $this->error('密码错误！');
+            if($authInfo['password'] != md5(I('post.password')))    $this->error('密码错误！');
             $needToSession = [
             	C('USER_AUTH_KEY') => $authInfo['id'],
-            	'loginUserName' => $authInfo['user_name'],
+            	'user_name' => $authInfo['user_name'],
             ];
             session([ 'name' => 'session_id', 'expire' => 86400]);
             foreach ($needToSession as $k => $v) {

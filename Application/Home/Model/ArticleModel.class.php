@@ -13,9 +13,9 @@ class ArticleModel extends CommonModel {
 				$titleOrId = $map['title'];
 				$where .= " and a.`title` LIKE '%{$titleOrId}%' ";
 			}
-			if(isset($map['articlesource'])){
-				$articlesource = $map['articlesource'];
-				$where .= " and a.articlesource = '{$articlesource}' ";
+			if(isset($map['source'])){
+				$articlesource = $map['source'];
+				$where .= " and a.source = '{$articlesource}' ";
 			}
 			if(isset($map['status'])){
 				$status = $map['status'];
@@ -29,7 +29,7 @@ class ArticleModel extends CommonModel {
 		$result = $this->query($sql);
 		//添加tag信息,category信息
 		foreach ($result as $k => $v) {
-			$sql = "select * from tag_mapping as tm left join tag as t on tm.tagid = t.id where tm.datatype = 'article' and optdataid = {$v['id']}";
+			$sql = "select * from tag_mapping as tm left join tag as t on tm.tag_id = t.id where article_id = {$v['id']}";
 			$tmpResult = $this->query($sql);
 			$result[$k]['tag'] = $tmpResult;
 		}
