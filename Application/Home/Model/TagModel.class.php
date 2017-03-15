@@ -6,9 +6,9 @@ class TagModel extends Model {
         $result = $this->order('display_order')->select();
         return $result;
    	}
-   	public function getTagByIdAndType($optdataid,$datatype="article"){
+   	public function getTagByIdAndType($articleid){
    		if(empty($optdataid)) return array();
-   		$sql = "select t.* from tag as t left join tag_mapping as tm on t.id = tm.tagid where tm.optdataid ={$optdataid} and datatype = '{$datatype}';";
+   		$sql = "select t.* from tag as t left join tag_mapping as tm on t.id = tm.tag_id where tm.article_id ={$articleid}";
    		$result = $this->query($sql);
    		$data = array();
  		if(!empty($result)){

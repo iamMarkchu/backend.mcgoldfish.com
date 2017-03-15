@@ -28,6 +28,19 @@ function ImgUploadOne($path, $file){
         return $info;
     }
 }
+function ImgUploadOne_Qiniu($path, $file){
+    $upload = new \Think\Upload(C('QINIU'));// 实例化上传类
+    $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg','md','html');// 设置附件上传类型
+    $upload->savePath  =      $path; // 设置附件上传目录
+    // 上传文件
+    $info   =   $upload->uploadOne($file);
+    if(!$info) {
+        return false;
+    }else{
+        return $info;
+    }
+}
+
 function processContent($content){
     if(empty($content)) return '';
     $content = str_replace("src=\"/Public","src=\"".C('IMG_URL'),$content);

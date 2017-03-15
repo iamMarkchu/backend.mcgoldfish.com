@@ -86,7 +86,6 @@ class ArticleController extends CommonController {
             $result = $article->find($id);
             $category = D('category');
             $allCateInfo =$category->getAllCategory();
-            $cateInfo = $category->getCategoryByArticleId($id);
             $tag = D('tag');
             $allTagInfo = $tag->getAllTag();
             $tagInfo = $tag->getTagByIdAndType($id);
@@ -94,9 +93,7 @@ class ArticleController extends CommonController {
                 if(in_array($v['id'],$tagInfo)) $allTagInfo[$k]['selected'] = '1';
                 else $allTagInfo[$k]['selected'] = '0';
             }
-            //变量传到前台
             $this->assign('result',$result);
-            $this->assign('categoryid',$cateInfo['categoryid']);
             $this->assign('allCateInfo',$allCateInfo);
             $this->assign('allTagInfo',$allTagInfo);
             $this->display();
@@ -113,25 +110,16 @@ class ArticleController extends CommonController {
             $article->save();
             //tag处理,删除原有标签，保存post过来的标签
             $tagMapping = D('tagMapping');
-            $tagMappingData = $tagMapping->where(['optdataid' => $id, 'datatype' => 'article'])->select();
-            if(!empty($tagMappingData)){
-                foreach ($tagMappingData as $k => $v) {
-                    $tagMapping->delete($v['id']);
-                }
-            }
-            if(isset($_POST['tag_multi_select2'])){
+            $tagMapping->where(['article_id' => $id])->delete();
+
+            if(!empty(I('post.tag_multi_select2', []))){
                 $tagMapping->create();
-                foreach ($_POST['tag_multi_select2'] as $k => $v) {
-                    $data = array();
-                    $data['optdataid'] = $id;
-                    $data['datatype'] = 'article';
-                    if($k == 0){
-                        $data['isprimary'] = 'yes';
-                    }else{
-                        $data['isprimary'] = 'no';
-                    }
-                    $data['addtime'] = date("Y-m-d H:i:s");
-                    $data['tagid'] = $v;
+                foreach (I('post.tag_multi_select2') as $k => $v) {
+                    $data = [];
+                    $data['article_id'] = $id;
+                    $data['created_at'] = date('Y-m-d H:i:s');
+                    $data['updated_at'] = date('Y-m-d H:i:s');
+                    $data['tag_id'] = $v;
                     $tagMapping->add($data);
                 }
             }
@@ -208,15 +196,10 @@ class ArticleController extends CommonController {
             $width = 1000;
         }
         if(!empty($_FILES[$key]['name'])){
-            $imgFile = ImgUploadOne($path, $_FILES[$key]);
-            $image = new \Think\Image();
-            $imagePath = C('ImageDirectoryV2'). $imgFile['savepath']. $imgFile['savename'];
-            $image->open($imagePath);
-            $newImagePath = C('ImageDirectoryV1'). $imgFile['savepath'].'max_w_'. $width.'_' .$imgFile['savename'];
-            $image->thumb($width, $width, 1)->save('.'.$newImagePath);
+            $imgFile = ImgUploadOne_Qiniu($path, $_FILES[$key]);
             $jsonBack['success'] = true;
             $jsonBack['msg'] = "上传成功！";
-            $jsonBack['file_path'] = $newImagePath;
+            $jsonBack['file_path'] = $imgFile['url'];
             $this->ajaxReturn($jsonBack);
         }else{
             $jsonBack['success'] = true;

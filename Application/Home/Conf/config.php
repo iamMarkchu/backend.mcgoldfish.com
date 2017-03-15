@@ -4,8 +4,8 @@ return [
     'DB_TYPE' => 'mysql',
     'DB_HOST'               =>  'localhost', 
     'DB_NAME'               =>  'chukui_base', 
-    'DB_USER'               =>  'root',      
-    'DB_PWD'                =>  'chukui',
+    'DB_USER'               =>  'homestead',
+    'DB_PWD'                =>  'secret',
 
     /** memcache setting */
     // 'MEMCACHE_SETTING'      => [
@@ -16,8 +16,16 @@ return [
     //     'expire'  =>60,
     // ],
 
-    /** layout setting */
-    'LAYOUT_ON'=>false,
+    /** qiniu */
+    'QINIU' => [
+        'driver'           => 'Qiniu',
+        'driverConfig'     => [
+            'secretKey' => 'JG9ISnGdPPu-XV9eEdmwyyeQvtTNac12BWXKMjHY',
+            'accessKey' => 'NerkCxrLuV4BvK_0LI7Q3bubApLZbxwjeDTXv_bK',
+            'domain'    => 'omu372tgu.bkt.clouddn.com',
+            'bucket'    => 'chukui',
+        ]
+    ],
 
     /* rbac setiing*/
 
