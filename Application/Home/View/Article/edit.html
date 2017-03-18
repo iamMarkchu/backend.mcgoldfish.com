@@ -42,21 +42,18 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">文章内容</label>
                     <div class="col-md-9">
-                        <textarea name="content" id="article-content" cols="30" rows="10" class="form-control">{$result.content}</textarea>
-                    </div>
-                    <label class="col-md-2 control-label" style="margin-top: 20px;">文章内容操作</label>
-                    <div class="col-md-9" style="margin-top: 20px;">
-                        <div class="btn-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="btn-group">
                             <span class="btn btn-success fileinput-button">
                                 <span>上传图片</span>
                                 <input id="fileupload" type="file" name="files">
                             </span>
-                            <a href="javascript:;" class="btn btn-primary view-content">预览文章</a>
-                        </div>
-                        <div class="panel panel-default" style="margin-top: 20px;">
-                            <div class="panel-heading">图片</div>
-                            <div class="panel-body" id="files">
-
+                                    <a href="javascript:;" class="btn btn-primary view-content">预览文章</a>
+                                </div>
+                            </div>
+                            <div class="panel-body my-markdown-editor">
+                                <textarea name="content" id="article-content" cols="30" rows="30" class="form-control">{$result.content}</textarea>
                             </div>
                         </div>
                     </div>
@@ -82,7 +79,7 @@
                     <div class="col-md-6">
                         <select multiple="multiple" tabindex="-1"  name="tag_multi_select2[]" class="form-control">
                             <volist name="allTagInfo" id="vo">
-                                <option value='{$vo.id}' <eq name="vo.selected" value="1">selected="selected"</eq>>{$vo.tag_name}</option>
+                                <option value='{$vo.id}' <eq name="$vo.selected" value="1">selected="selected"</eq>>{$vo.tag_name}</option>
                             </volist>
                         </select>
                     </div>
@@ -95,7 +92,7 @@
                             <volist name="allCateInfo" id="vo">
                                 <optgroup label="{$vo.category_name}" data-id="{$vo.id}">
                                     <volist name="vo.child" id="vovo">
-                                        <option value='{$vovo.id}' <eq name="vovo.id" value="$categoryid">selected="selected"</eq>>{$vovo.category_name}</option>
+                                        <option value="{$vovo.id}" <eq name="$vovo.id" value="$result.category_id">selected="selected"</eq>>{$vovo.category_name}</option>
                                     </volist>
                                 </optgroup>
                             </volist>
