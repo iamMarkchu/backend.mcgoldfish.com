@@ -3,7 +3,7 @@ return [
     /** mysql setting */
     'DB_TYPE' => 'mysql',
     'DB_HOST'               =>  'localhost', 
-    'DB_NAME'               =>  'chukui_base', 
+    'DB_NAME'               =>  'chukui_blog',
     'DB_USER'               =>  'root',      
     'DB_PWD'                =>  'chukui',
 

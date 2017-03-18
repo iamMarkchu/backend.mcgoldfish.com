@@ -1,4 +1,5 @@
-/Application/Runtime/*
-/Public/article
-/Public/uploads
+Application/Runtime/*
+Public/article/
+Public/uploads/
+Public/markdown/
 
