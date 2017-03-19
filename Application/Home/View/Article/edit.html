@@ -90,11 +90,7 @@
                         <select tabindex="-1" name="category_id" class="form-control">
                             <option></option>
                             <volist name="allCateInfo" id="vo">
-                                <optgroup label="{$vo.category_name}" data-id="{$vo.id}">
-                                    <volist name="vo.child" id="vovo">
-                                        <option value="{$vovo.id}" <eq name="$vovo.id" value="$result.category_id">selected="selected"</eq>>{$vovo.category_name}</option>
-                                    </volist>
-                                </optgroup>
+                                <option value="{$vo.id}" <eq name="$vo.id" value="$result.category_id">selected="selected"</eq>>{$vo.category_name}</option>
                             </volist>
                         </select>
                     </div>

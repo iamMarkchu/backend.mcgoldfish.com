@@ -20,9 +20,6 @@ class CategoryController extends CommonController {
 
     public function add()
     {
-        $category = D('category');
-        $parent_category_list = $category->where(['parent_cate_id' => 0])->select();
-        $this->assign('parent_category_list', $parent_category_list);
         $this->display();
     }
     public function insert()
@@ -45,9 +42,7 @@ class CategoryController extends CommonController {
         $id = I('get.id');
         $category = D('category');
         $result = $category->find($id);
-        $parent_category_list = $category->where(['parent_cate_id' => 0])->select();
         $this->assign('result', $result);
-        $this->assign('parent_category_list', $parent_category_list);
         $this->display();
     }
     public function update()
