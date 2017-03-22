@@ -88,7 +88,7 @@ class ArticleController extends CommonController {
             $allCateInfo =$category->getAllCategory();
             $tag = D('tag');
             $allTagInfo = $tag->getAllTag();
-            $tagInfo = $tag->getTagByIdAndType($id);
+            $tagInfo = $tag->getTagByArticleId($id);
             foreach ($allTagInfo as $k => $v) {
                 if(in_array($v['id'],$tagInfo)) $allTagInfo[$k]['selected'] = '1';
                 else $allTagInfo[$k]['selected'] = '0';
